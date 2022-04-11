@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Eureka-Server" />
+        <module name="OrderService" />
         <module name="Config-Server" />
         <module name="Request-Service" />
         <module name="Gateway" />
@@ -18,6 +19,7 @@
       <module name="Config-Server" target="11" />
       <module name="Eureka-Server" target="11" />
       <module name="Gateway" target="11" />
+      <module name="OrderService" target="11" />
       <module name="Request-Service" target="11" />
       <module name="User-Service" target="11" />
     </bytecodeTargetLevel>
@@ -27,6 +29,7 @@
       <module name="Config-Server" options="-parameters" />
       <module name="Eureka-Server" options="-parameters" />
       <module name="Gateway" options="-parameters" />
+      <module name="OrderService" options="-parameters" />
       <module name="Request-Service" options="-parameters" />
       <module name="User-Service" options="-parameters" />
     </option>
