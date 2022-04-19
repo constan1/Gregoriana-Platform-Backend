@@ -11,27 +11,27 @@
         <module name="OrderService" />
         <module name="Config-Server" />
         <module name="Request-Service" />
-        <module name="Gateway" />
         <module name="User-Service" />
+        <module name="Web-Gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Config-Server" target="11" />
       <module name="Eureka-Server" target="11" />
-      <module name="Gateway" target="11" />
       <module name="OrderService" target="11" />
       <module name="Request-Service" target="11" />
       <module name="User-Service" target="11" />
+      <module name="Web-Gateway" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Config-Server" options="-parameters" />
       <module name="Eureka-Server" options="-parameters" />
-      <module name="Gateway" options="-parameters" />
       <module name="OrderService" options="-parameters" />
       <module name="Request-Service" options="-parameters" />
       <module name="User-Service" options="-parameters" />
+      <module name="Web-Gateway" options="-parameters" />
     </option>
   </component>
 </project>

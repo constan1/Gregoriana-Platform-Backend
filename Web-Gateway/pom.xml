@@ -8,11 +8,11 @@
 		<version>2.6.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ApiGateway</groupId>
-	<artifactId>Gateway</artifactId>
+	<groupId>com.WebGateway</groupId>
+	<artifactId>WebGateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Gateway</name>
-	<description>Api Gateway</description>
+	<description>Api Web Gateway</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2021.0.1</spring-cloud.version>

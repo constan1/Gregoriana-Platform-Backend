@@ -4,11 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Config-Server/Config-Server.iml" filepath="$PROJECT_DIR$/Config-Server/Config-Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/Eureka-Server/Eureka-Server.iml" filepath="$PROJECT_DIR$/Eureka-Server/Eureka-Server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Gateway/Gateway.iml" filepath="$PROJECT_DIR$/Gateway/Gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Gregoriana-Platform-Backend.iml" filepath="$PROJECT_DIR$/.idea/Gregoriana-Platform-Backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/OrderService/OrderService.iml" filepath="$PROJECT_DIR$/OrderService/OrderService.iml" />
       <module fileurl="file://$PROJECT_DIR$/Request-Service/Request-Service.iml" filepath="$PROJECT_DIR$/Request-Service/Request-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/User-Service/User-Service.iml" filepath="$PROJECT_DIR$/User-Service/User-Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Web-Gateway/Web-Gateway.iml" filepath="$PROJECT_DIR$/Web-Gateway/Web-Gateway.iml" />
     </modules>
   </component>
 </project>
