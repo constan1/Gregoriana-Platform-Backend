@@ -8,11 +8,11 @@
 		<version>2.6.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.WebGateway</groupId>
-	<artifactId>WebGateway</artifactId>
+	<groupId>com.MobileGateway</groupId>
+	<artifactId>MobileGateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>WebGateway</name>
-	<description>Api Web Gateway</description>
+	<name>MobileGateway</name>
+	<description>Mobile Gateway</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>Hoxton.SR10</spring-cloud.version>
@@ -25,10 +25,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
