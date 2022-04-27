@@ -1,6 +1,8 @@
-package com.GregorianaUserService.User.Service.Model;
+package com.GregorianaUserService.User.Service.Model.Clients;
 
 
+import com.GregorianaUserService.User.Service.Model.Address;
+import com.GregorianaUserService.User.Service.Model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name="Retail_Client")
 @Table
 @Getter
 @Setter
@@ -27,6 +29,14 @@ public class RetailClient {
 
     @Column(name="Last_Name")
     private String LastName;
+
+    @OneToOne
+    private User user;
+
+    @OneToOne
+    private Address address;
+
+
 
 
 

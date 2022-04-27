@@ -13,7 +13,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name="_User")
+@Table(name="User_")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,7 +32,7 @@ public class User {
 
 
     @OneToOne
-    private Roles role_;
+    private Roles role;
 
     @Column(name="user_email")
     private String email;

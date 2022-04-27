@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="_Roles")
+@Table(name="Roles_")
 @Getter
 @Setter
 @AllArgsConstructor

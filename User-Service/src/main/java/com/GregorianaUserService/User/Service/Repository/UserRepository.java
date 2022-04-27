@@ -23,6 +23,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Modifying
     @Transactional
-    @Query("Update User u set u.role_ =:userRole where u.auth_id =:authID")
+    @Query("Update User u set u.role =:userRole where u.auth_id =:authID")
     void setUserRole(@Param("userRole")Roles role, @Param("authID") String authID);
 }
