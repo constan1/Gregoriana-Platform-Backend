@@ -38,13 +38,13 @@ public class TransporterClient {
     @Column(name="Profile_Photo_Url")
     private String photo_url;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Vehicle selected_vehicle;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Address address;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL)

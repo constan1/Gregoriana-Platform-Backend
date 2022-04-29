@@ -2,11 +2,16 @@ package com.GregorianaUserService.User.Service.Resource;
 
 
 
+import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
+import com.GregorianaUserService.User.Service.Model.TransporterVehicleDTO;
 import com.GregorianaUserService.User.Service.Model.User;
-import com.GregorianaUserService.User.Service.Service.UserService;
+import com.GregorianaUserService.User.Service.Service.TransporterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/user")
@@ -16,22 +21,39 @@ public class UserResource {
 
 
 
-    private final UserService userService;
+    private final TransporterService transporterService;
 
 
-    @PostMapping
+
+    @PostMapping("/transporterClient")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createUser(@RequestBody User user_){
-        userService.Save_To_UserTable(user_);
+    public void createTransporterClient(@RequestBody TransporterClient transporterClient){
+
+        transporterService.Save_TransporterClient(transporterClient);
+
     }
 
 
-    @PutMapping
+
+    @GetMapping("/transporterInfo")
     @ResponseStatus(HttpStatus.OK)
-    public void update_set_userRole(@RequestBody User user_){
+    public  TransporterClient  getTransporter(@RequestBody User user_){
+
+        return transporterService.getTransporter(user_.getAuth_id());
+    }
+
+    @PutMapping("/transporterInfo/updateVehicles")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateTransportersVehicles(@RequestBody TransporterVehicleDTO transporterClientDTO){
 
 
-        userService.setUserRole(user_.getRole(),user_.getAuth_id());
+        TransporterClient transporterClient_ = new TransporterClient();
+
+        transporterClient_.setTotal_vehicles(transporterClientDTO.getTransporterclient());
+
+        transporterClient_.setUser(transporterClientDTO.getUser());
+
+        transporterService.updateVehicles(transporterClient_.getTotal_vehicles(),transporterClient_.getUser().getAuth_id());
 
     }
 

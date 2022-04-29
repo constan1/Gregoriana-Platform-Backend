@@ -51,8 +51,4 @@ public class Vehicle {
     @Column(name="Photo")
     private String photo_url;
 
-    @OneToOne
-    private Address address;
-
-
 }
