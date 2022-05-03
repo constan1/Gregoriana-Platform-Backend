@@ -2,22 +2,18 @@ package com.GregorianaUserService.User.Service.Model;
 
 
 import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
-import lombok.*;
-
-import javax.persistence.CascadeType;
-import javax.persistence.OneToOne;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TransporterVehicleDTO {
-
-
+public class TransporterAddressDTO {
 
     private TransporterClient transporterClient;
-    private Vehicle vehicle;
 
-
+    private Address address;
 }

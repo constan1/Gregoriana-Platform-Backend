@@ -1,5 +1,6 @@
 package com.GregorianaUserService.User.Service.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity(name="Address_")
 @Table
 @Getter
@@ -17,8 +19,7 @@ public class Address {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Column(name="Country")
     private String country;
@@ -34,12 +35,5 @@ public class Address {
 
     @Column(name="postal_code")
     private String postal_code;
-
-    @Column(name="Address_lat")
-    private Long address_lat;
-
-    @Column(name="Address_long")
-    private Long address_long;
-
 
 }

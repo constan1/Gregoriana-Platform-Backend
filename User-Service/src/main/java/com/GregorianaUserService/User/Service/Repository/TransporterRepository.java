@@ -1,6 +1,8 @@
 package com.GregorianaUserService.User.Service.Repository;
 
+import com.GregorianaUserService.User.Service.Model.Address;
 import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
+import com.GregorianaUserService.User.Service.Model.User;
 import com.GregorianaUserService.User.Service.Model.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,12 +18,27 @@ import java.util.List;
 @Repository
 public interface TransporterRepository extends JpaRepository<TransporterClient,Long> {
 
-    @Query("select t from Transporter_Client t where t.user.auth_id =:authID")
+    @Query("select t from Transporter_Client t where t.auth_id=:authID")
     TransporterClient getTransporter(@Param("authID") String authID);
+
 
 
     @Modifying
     @Transactional
-    @Query("Update Transporter_Client t set t.total_vehicles =:totalVehicles where t.user.auth_id =:authID")
-    void updateVehicles(@Param("totalVehicles") List<Vehicle> Vehicles, @Param("authID") String authID);
+    @Query("update Transporter_Client t set t.photo_url =:photoUrl where t.auth_id =:authID")
+    void updatePhotoUrl(@Param("photoUrl") String photoUrl, @Param("authID") String authId);
+
+
+    @Modifying
+    @Transactional
+    @Query("update Transporter_Client t set t.verified =:verified where t.auth_id =:authID")
+    void updateVerified(@Param("verified") Boolean verified, @Param("authID") String authId);
+
+    @Modifying
+    @Transactional
+    @Query("update Transporter_Client t set t.phone =:phone where t.auth_id =:authID")
+    void updatePhone(@Param("phone") Long phone, @Param("authID") String authID);
+
+
+
 }

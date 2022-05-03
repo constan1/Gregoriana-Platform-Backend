@@ -20,8 +20,7 @@ public class RetailClient {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
 
     @Column(name="First_Name")

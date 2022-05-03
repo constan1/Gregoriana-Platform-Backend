@@ -23,11 +23,10 @@ public class TransporterClient {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String auth_id;
 
     @Column(name="Full_Name")
-    private String fullname;
+    private String fullName;
 
     @Column(name="Phone")
     private Long phone;
@@ -38,17 +37,14 @@ public class TransporterClient {
     @Column(name="Profile_Photo_Url")
     private String photo_url;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    private Vehicle selected_vehicle;
-
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     private Address address;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.MERGE,fetch = FetchType.LAZY)
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Vehicle> total_vehicles;
+    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+    private Vehicle vehicle;
 
 
 

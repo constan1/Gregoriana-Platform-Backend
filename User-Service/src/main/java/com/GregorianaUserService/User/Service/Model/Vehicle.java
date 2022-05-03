@@ -1,6 +1,7 @@
 package com.GregorianaUserService.User.Service.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity(name="Vehicle_")
 @Table
 @Getter
@@ -20,8 +23,7 @@ public class Vehicle {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
 
     @Column(name="Type")
@@ -48,7 +50,13 @@ public class Vehicle {
     @Column(name="License_Plate")
     private String license_plate;
 
-    @Column(name="Photo")
-    private String photo_url;
+    @Column(name="Ownership_Paper_Url")
+    private String ownership_paper;
+
+    @OneToOne(cascade=CascadeType.MERGE)
+    private VehiclePhotos photos_;
+
+
+
 
 }
