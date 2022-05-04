@@ -17,6 +17,8 @@ public interface RetailClientRepository extends JpaRepository<RetailClient,Strin
     RetailClient selectRetailClient(@Param("authID") String authID);
 
 
+
+
     @Modifying(clearAutomatically = true)
     @Transactional
     @Query("update Retail_Client r set r.profile_photo_url =:photoUrl where r.id =:authID")

@@ -1,6 +1,7 @@
 package com.GregorianaUserService.User.Service.Repository;
 
 
+import com.GregorianaUserService.User.Service.Model.Address;
 import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,23 +16,23 @@ import javax.transaction.Transactional;
 @Repository
 public interface TransporterRepository extends JpaRepository<TransporterClient,String> {
 
-    @Query("select t from Transporter_Client t where t.auth_id=:authID")
+    @Query("select t from Transporter_Client t where t.id=:authID")
     TransporterClient getTransporter(@Param("authID") String authID);
 
     @Modifying(clearAutomatically = true)
     @Transactional
-    @Query("update Transporter_Client t set t.photo_url =:photoUrl where t.auth_id =:authID")
+    @Query("update Transporter_Client t set t.photo_url =:photoUrl where t.id =:authID")
     void updatePhotoUrl(@Param("photoUrl") String photoUrl, @Param("authID") String authId);
 
 
     @Modifying(clearAutomatically = true)
     @Transactional
-    @Query("update Transporter_Client t set t.verified =:verified where t.auth_id =:authID")
+    @Query("update Transporter_Client t set t.verified =:verified where t.id =:authID")
     void updateVerified(@Param("verified") Boolean verified, @Param("authID") String authId);
 
     @Modifying
     @Transactional
-    @Query("update Transporter_Client t set t.phone =:phone where t.auth_id =:authID")
+    @Query("update Transporter_Client t set t.phone =:phone where t.id =:authID")
     void updatePhone(@Param("phone") Long phone, @Param("authID") String authID);
 
 
@@ -56,6 +57,8 @@ public interface TransporterRepository extends JpaRepository<TransporterClient,S
                        @Param("license_plate") String license_plate, @Param("ownership") String ownership,
                        @Param("first_url") String first_url, @Param("second_url") String second_url,
                        @Param("third_url") String third_url, @Param("authID") String authID);
+
+
 
 
 

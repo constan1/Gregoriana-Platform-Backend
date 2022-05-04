@@ -39,27 +39,15 @@ public class UserTransporterResource {
     @ResponseStatus(HttpStatus.OK)
     public void updateTransportersVehicles(@RequestBody TransporterVehicleDTO transporterVehicleDTO){
 
-        transporterService.updateVehicle(transporterVehicleDTO.getVehicle().getType(),
-                transporterVehicleDTO.getVehicle().getMake(),
-                transporterVehicleDTO.getVehicle().getYear(),
-                transporterVehicleDTO.getVehicle().getCondition(),
-                transporterVehicleDTO.getVehicle().getDescription(),
-                transporterVehicleDTO.getVehicle().getCapacity(),
-                transporterVehicleDTO.getVehicle().getLoad(),
-                transporterVehicleDTO.getVehicle().getLicense_plate(),
-                transporterVehicleDTO.getVehicle().getOwnership_paper(),
-                transporterVehicleDTO.getVehicle().getFirst_photo_url(),
-                transporterVehicleDTO.getVehicle().getSecond_photo_url(),
-                transporterVehicleDTO.getVehicle().getThird_photo_url(),
-                transporterVehicleDTO.getAuthID());
+        transporterService.updateVehicle(transporterVehicleDTO.getVehicle(),transporterVehicleDTO.getAuthID());
     }
 
     @PutMapping("/client/updateAddress")
     @ResponseStatus(HttpStatus.OK)
     public void updateTransporterAddress(@RequestBody AddressDTO transporterAddressDTO){
 
-        transporterService.updateAddress(transporterAddressDTO.getAddress().getCountry(), transporterAddressDTO.getAddress().getStreet_address(),
-                transporterAddressDTO.getAddress().getCity(),transporterAddressDTO.getAddress().getProvince(), transporterAddressDTO.getAddress().getPostal_code(),transporterAddressDTO.getAuthID());
+        transporterService.updateAddress(transporterAddressDTO.getAddress(),transporterAddressDTO.getAuthID());
+
     }
 
     @PutMapping("/client/updatePhotoUrl")
@@ -82,6 +70,7 @@ public class UserTransporterResource {
     public void updateTransporterPhone(@RequestBody PhoneDTO phoneDTO){
         transporterService.updatePhone(phoneDTO.getPhone(),phoneDTO.getAuthID());
     }
+
 
 
 

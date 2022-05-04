@@ -38,6 +38,7 @@ public class TransporterClient {
     private String photo_url;
 
     @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "address_")
     private Address address;
 
     @OneToOne(cascade=CascadeType.MERGE)

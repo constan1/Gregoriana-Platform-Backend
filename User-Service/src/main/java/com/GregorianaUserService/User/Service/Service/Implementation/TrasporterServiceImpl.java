@@ -1,6 +1,8 @@
 package com.GregorianaUserService.User.Service.Service.Implementation;
 
+import com.GregorianaUserService.User.Service.Model.Address;
 import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
+import com.GregorianaUserService.User.Service.Model.Vehicle;
 import com.GregorianaUserService.User.Service.Repository.TransporterRepository;
 import com.GregorianaUserService.User.Service.Service.Services.TransporterService;
 import lombok.RequiredArgsConstructor;
@@ -44,23 +46,21 @@ public class TrasporterServiceImpl implements TransporterService {
     }
 
     @Override
-    public void updateAddress(String country, String street_address,
-                              String city, String province,
-                              String postal_Code, String AuthID)
-    {
-        transporterRepository.updateAddress(country,street_address,city,province,postal_Code, AuthID);
+    public void updateAddress(Address address, String authID) {
+        transporterRepository.updateAddress(address.getCountry(),address.getStreet_address(), address.getCity(),
+                address.getProvince(),address.getPostal_code(),authID);
     }
 
     @Override
-    public void updateVehicle(String type, String make, Integer year,
-                              Integer condition, String description,
-                              Integer capacity, String load,
-                              String license_plate, String ownership,
-                              String first_url, String second_url,
-                              String third_url, String authID)
-    {
-        transporterRepository.updateVehicle(type,make,year,condition,description,capacity,load,license_plate,ownership,
-                first_url,second_url,third_url,authID);
+    public void updateVehicle(Vehicle vehicle, String authID) {
+
+        transporterRepository.updateVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getYear(),vehicle.getCondition(),
+                vehicle.getDescription(),vehicle.getCapacity(),vehicle.getLoad(),vehicle.getLicense_plate(),
+                vehicle.getOwnership_paper(),vehicle.getFirst_photo_url(),vehicle.getSecond_photo_url(),
+                vehicle.getThird_photo_url(),authID);
+
+
+
     }
 
 

@@ -27,11 +27,13 @@ public class UserRetailClientResource {
         retailClientService.save_Retail_Client(retailClient);
     }
 
+
     @GetMapping("/client")
     @ResponseStatus(HttpStatus.OK)
     public RetailClient getRetailClient(@RequestBody ClientDTO clientDTO){
         return retailClientService.getRetailClient(clientDTO.getAuthID());
     }
+
 
     @PutMapping("/client/updateAddress")
     @ResponseStatus(HttpStatus.OK)
@@ -47,9 +49,8 @@ public class UserRetailClientResource {
     @PutMapping("/client/updatePhone")
     @ResponseStatus(HttpStatus.OK)
     public void updatePhone(@RequestBody PhoneDTO phoneDTO){
+
         retailClientService.updatePhone(phoneDTO.getPhone(),phoneDTO.getAuthID());
-
-
     }
 
     @PutMapping("/client/updatePhotoUrl")
