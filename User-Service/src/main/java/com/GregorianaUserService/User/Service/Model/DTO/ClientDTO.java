@@ -1,4 +1,4 @@
-package com.GregorianaUserService.User.Service.Model;
+package com.GregorianaUserService.User.Service.Model.DTO;
 
 
 import lombok.AllArgsConstructor;
@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PhoneDTO {
-
+public class ClientDTO {
 
     private String authID;
-    private Long phone;
-
 }

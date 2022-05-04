@@ -1,7 +1,8 @@
-package com.GregorianaUserService.User.Service.Model;
+package com.GregorianaUserService.User.Service.Model.DTO;
 
 
 import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
+import com.GregorianaUserService.User.Service.Model.Vehicle;
 import lombok.*;
 
 import javax.persistence.CascadeType;
@@ -16,7 +17,7 @@ public class TransporterVehicleDTO {
 
 
 
-    private TransporterClient transporterClient;
+    private String authID;
     private Vehicle vehicle;
 
 

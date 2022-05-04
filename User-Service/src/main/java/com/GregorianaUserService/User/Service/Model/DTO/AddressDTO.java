@@ -1,6 +1,7 @@
-package com.GregorianaUserService.User.Service.Model;
+package com.GregorianaUserService.User.Service.Model.DTO;
 
 
+import com.GregorianaUserService.User.Service.Model.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class VerifiedDTO {
+public class AddressDTO {
 
     private String authID;
-    private Boolean verified;
+
+    private Address address;
 }

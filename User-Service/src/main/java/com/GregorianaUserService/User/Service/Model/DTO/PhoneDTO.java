@@ -1,5 +1,4 @@
-
-package com.GregorianaUserService.User.Service.Model;
+package com.GregorianaUserService.User.Service.Model.DTO;
 
 
 import lombok.AllArgsConstructor;
@@ -11,10 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PhotoDTO {
+public class PhoneDTO {
 
 
     private String authID;
-    private String photoUrl;
+    private Long phone;
 
 }

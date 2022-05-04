@@ -23,7 +23,7 @@ public class TransporterClient {
 
     @Id
     @Column(name = "id")
-    private String auth_id;
+    private String id;
 
     @Column(name="Full_Name")
     private String fullName;
@@ -37,13 +37,13 @@ public class TransporterClient {
     @Column(name="Profile_Photo_Url")
     private String photo_url;
 
-    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToOne(cascade=CascadeType.ALL)
     private Address address;
 
-    @OneToOne(cascade=CascadeType.MERGE,fetch = FetchType.LAZY)
+    @OneToOne(cascade=CascadeType.MERGE)
     private User user;
 
-    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToOne(cascade=CascadeType.ALL)
     private Vehicle vehicle;
 
 

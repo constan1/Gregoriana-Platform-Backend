@@ -53,8 +53,15 @@ public class Vehicle {
     @Column(name="Ownership_Paper_Url")
     private String ownership_paper;
 
-    @OneToOne(cascade=CascadeType.MERGE)
-    private VehiclePhotos photos_;
+    @Column(name = "first_photo")
+    private String first_photo_url;
+
+    @Column(name="second_photo")
+    private String second_photo_url;
+
+    @Column(name="third_photo")
+    private String third_photo_url;
+
 
 
 

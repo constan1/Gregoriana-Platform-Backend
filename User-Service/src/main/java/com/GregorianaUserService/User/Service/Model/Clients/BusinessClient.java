@@ -22,20 +22,19 @@ public class BusinessClient {
     @Column(name = "id")
     private String id;
 
-
-    @Column(name="Cname")
-    private String name;
+    @Column(name="Company_name")
+    private String company_name;
 
     @Column(name="Phone")
     private Long phone_num;
 
     @Column(name="Photo_Url")
-    private String url;
+    private String profile_photo_url;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.MERGE)
     private User user;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Address address;
 
 }

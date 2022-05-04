@@ -29,10 +29,16 @@ public class RetailClient {
     @Column(name="Last_Name")
     private String LastName;
 
-    @OneToOne
+    @Column(name="profile_photo")
+    private String profile_photo_url;
+
+    @Column(name="phone")
+    private Long phone;
+
+    @OneToOne(cascade=CascadeType.MERGE)
     private User user;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Address address;
 
 

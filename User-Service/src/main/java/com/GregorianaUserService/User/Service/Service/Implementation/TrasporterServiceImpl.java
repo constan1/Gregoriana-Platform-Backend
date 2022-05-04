@@ -1,16 +1,10 @@
-package com.GregorianaUserService.User.Service.Service;
+package com.GregorianaUserService.User.Service.Service.Implementation;
 
-import com.GregorianaUserService.User.Service.Model.Address;
 import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
-import com.GregorianaUserService.User.Service.Model.User;
-import com.GregorianaUserService.User.Service.Model.Vehicle;
 import com.GregorianaUserService.User.Service.Repository.TransporterRepository;
+import com.GregorianaUserService.User.Service.Service.Services.TransporterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -34,11 +28,6 @@ public class TrasporterServiceImpl implements TransporterService {
     }
 
     @Override
-    public void save_or_update_Address(TransporterClient transporterClient) {
-        transporterRepository.save(transporterClient);
-    }
-
-    @Override
     public void updatePhotoUrl(String photoUrl, String authId) {
         transporterRepository.updatePhotoUrl(photoUrl,authId);
     }
@@ -55,8 +44,23 @@ public class TrasporterServiceImpl implements TransporterService {
     }
 
     @Override
-    public void save_or_update_vehicle(TransporterClient transporterClient) {
-        transporterRepository.save(transporterClient);
+    public void updateAddress(String country, String street_address,
+                              String city, String province,
+                              String postal_Code, String AuthID)
+    {
+        transporterRepository.updateAddress(country,street_address,city,province,postal_Code, AuthID);
+    }
+
+    @Override
+    public void updateVehicle(String type, String make, Integer year,
+                              Integer condition, String description,
+                              Integer capacity, String load,
+                              String license_plate, String ownership,
+                              String first_url, String second_url,
+                              String third_url, String authID)
+    {
+        transporterRepository.updateVehicle(type,make,year,condition,description,capacity,load,license_plate,ownership,
+                first_url,second_url,third_url,authID);
     }
 
 
