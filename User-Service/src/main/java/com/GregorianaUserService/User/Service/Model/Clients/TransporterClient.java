@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
+
 
 @Entity(name="Transporter_Client")
 @Table
@@ -18,7 +19,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransporterClient {
+public class TransporterClient implements Serializable {
 
 
     @Id
@@ -38,7 +39,6 @@ public class TransporterClient {
     private String photo_url;
 
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "address_")
     private Address address;
 
     @OneToOne(cascade=CascadeType.MERGE)

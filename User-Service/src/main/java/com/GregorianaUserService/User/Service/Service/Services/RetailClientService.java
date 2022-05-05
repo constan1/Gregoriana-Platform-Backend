@@ -1,5 +1,6 @@
 package com.GregorianaUserService.User.Service.Service.Services;
 
+import com.GregorianaUserService.User.Service.Model.Address;
 import com.GregorianaUserService.User.Service.Model.Clients.RetailClient;
 
 public interface RetailClientService {
@@ -8,11 +9,10 @@ public interface RetailClientService {
 
     void updatePhone(Long phone,String authID);
 
-    void updateAddress(String country, String street_address,  String city,
-                       String province, String postal_Code, String authID);
+    void updateAddress(Address address, String authID) throws Exception;
 
-    void save_Retail_Client(RetailClient retailClient);
+    void save_Retail_Client(RetailClient retailClient) throws Exception;
 
-    RetailClient getRetailClient(String authID);
+    RetailClient getRetailClient(String authID) throws Exception;
 
 }

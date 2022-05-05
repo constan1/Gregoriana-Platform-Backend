@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface TransporterService {
 
-    TransporterClient getTransporter(String authID);
+    TransporterClient getTransporter(String authID) throws Exception;
 
-    void Save_TransporterClient(TransporterClient transporterClient);
+    void Save_TransporterClient(TransporterClient transporterClient) throws Exception;
 
     void updatePhotoUrl( String photoUrl,String authId);
 
@@ -19,9 +19,10 @@ public interface TransporterService {
 
     void updatePhone(Long phone,String authID);
 
-    void updateAddress(Address address, String authID);
+    void updateAddress(Address address, String authID) throws Exception;
 
 
-    void updateVehicle(Vehicle vehicle, String authID);
+    void updateVehicle(Vehicle vehicle, String authID) throws Exception;
+
 
 }

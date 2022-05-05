@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity(name="Business_Client")
 @Table
@@ -16,7 +17,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BusinessClient {
+public class BusinessClient implements Serializable {
 
     @Id
     @Column(name = "id")

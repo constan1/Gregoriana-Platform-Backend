@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
@@ -17,7 +18,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Vehicle {
+public class Vehicle implements Serializable {
 
 
 

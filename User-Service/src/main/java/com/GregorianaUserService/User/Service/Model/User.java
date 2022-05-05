@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.management.relation.Role;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
@@ -19,7 +20,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements Serializable {
 
     @Id
     @Column(name="id")

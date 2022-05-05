@@ -8,6 +8,8 @@ import com.GregorianaUserService.User.Service.Model.DTO.PhoneDTO;
 import com.GregorianaUserService.User.Service.Model.DTO.PhotoDTO;
 import com.GregorianaUserService.User.Service.Service.Services.BusinessClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,37 +22,38 @@ public class UserBusinessResource {
 
     private final BusinessClientService businessClientService;
 
+
+    @CacheEvict(value="Business_profile", allEntries = true,beforeInvocation = true)
     @PostMapping("/client")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createBusinessClient(@RequestBody BusinessClient businessClient){
+    public void createBusinessClient(@RequestBody BusinessClient businessClient) throws Exception {
 
         businessClientService.save_Business_Client(businessClient);
     }
 
+    @Cacheable("Business_profile")
     @GetMapping("/client")
     @ResponseStatus(HttpStatus.OK)
-    public BusinessClient getBusinessClient(@RequestBody ClientDTO clientDTO){
+    public BusinessClient getBusinessClient(@RequestBody ClientDTO clientDTO) throws Exception {
         return businessClientService.getBusinessClient(clientDTO.getAuthID());
     }
 
+    @CacheEvict(value="Business_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updateAddress")
     @ResponseStatus(HttpStatus.OK)
-    public void updateAddress(@RequestBody AddressDTO addressDTO){
-        businessClientService.updateAddress(addressDTO.getAddress().getCountry(),
-                addressDTO.getAddress().getStreet_address(),
-                addressDTO.getAddress().getCity(),
-                addressDTO.getAddress().getProvince(),
-                addressDTO.getAddress().getPostal_code(),
-                addressDTO.getAuthID()
-                );
+    public void updateAddress(@RequestBody AddressDTO addressDTO) throws Exception {
+        businessClientService.updateAddress(addressDTO.getAddress(),addressDTO.getAuthID());
     }
 
+    @CacheEvict(value="Business_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updatePhotoUrl")
     @ResponseStatus(HttpStatus.OK)
     public void updatePhoto(@RequestBody PhotoDTO photoDTO){
         businessClientService.updatePhotoUrl(photoDTO.getPhotoUrl(), photoDTO.getAuthID());
     }
 
+
+    @CacheEvict(value="Business_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updatePhone")
     @ResponseStatus(HttpStatus.OK)
     public void updatePhone(@RequestBody PhoneDTO phoneDTO){

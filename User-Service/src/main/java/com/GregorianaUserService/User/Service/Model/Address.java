@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity(name="Address_")
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+public class Address implements Serializable {
 
     @Id
     @Column(name = "id")

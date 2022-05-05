@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "keyValue",
+      "type": "java.lang.String",
+      "description": "key encryption."
+    }
+  ] }
