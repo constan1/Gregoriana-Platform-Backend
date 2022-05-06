@@ -1,6 +1,8 @@
 package com.GregorianaUserService.User.Service.AES;
 
+import com.GregorianaUserService.User.Service.configuration.vaultConfiguration;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -8,8 +10,10 @@ import java.security.Key;
 
 public class AES {
 
+
+
     private static final String ALGORITHM = "AES";
-    private static final byte[] keyValue= "7566355151371252".getBytes();
+    private static final byte[] keyValue= vaultConfiguration.getKeyValue().getBytes();
 
     public static Key generateKey() throws Exception {
         return new SecretKeySpec(keyValue,ALGORITHM);

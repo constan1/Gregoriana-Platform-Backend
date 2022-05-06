@@ -1,9 +1,9 @@
 package com.GregorianaUserService.User.Service.Model.Clients;
 
 
-import com.GregorianaUserService.User.Service.Model.Address;
-import com.GregorianaUserService.User.Service.Model.User;
-import com.GregorianaUserService.User.Service.Model.Vehicle;
+import com.GregorianaUserService.User.Service.Model.Clients.Address.TransporterAddress;
+import com.GregorianaUserService.User.Service.Model.User.User;
+import com.GregorianaUserService.User.Service.Model.Vehicles.Vehicle;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +24,11 @@ public class TransporterClient implements Serializable {
 
     @Id
     @Column(name = "id")
-    private String id;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name="authID")
+    private String authID;
 
     @Column(name="Full_Name")
     private String fullName;
@@ -39,9 +43,9 @@ public class TransporterClient implements Serializable {
     private String photo_url;
 
     @OneToOne(cascade=CascadeType.ALL)
-    private Address address;
+    private TransporterAddress address;
 
-    @OneToOne(cascade=CascadeType.MERGE)
+    @OneToOne(cascade=CascadeType.ALL)
     private User user;
 
     @OneToOne(cascade=CascadeType.ALL)

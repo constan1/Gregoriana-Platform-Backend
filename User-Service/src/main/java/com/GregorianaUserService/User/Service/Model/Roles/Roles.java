@@ -1,4 +1,4 @@
-package com.GregorianaUserService.User.Service.Model;
+package com.GregorianaUserService.User.Service.Model.Roles;
 
 
 import lombok.AllArgsConstructor;

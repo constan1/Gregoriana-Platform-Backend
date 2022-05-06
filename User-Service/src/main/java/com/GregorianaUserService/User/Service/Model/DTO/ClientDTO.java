@@ -13,4 +13,6 @@ import lombok.NoArgsConstructor;
 public class ClientDTO {
 
     private String authID;
+
+    private String email;
 }

@@ -14,6 +14,7 @@ public class PhoneDTO {
 
 
     private String authID;
+    private Long id;
     private Long phone;
 
 }

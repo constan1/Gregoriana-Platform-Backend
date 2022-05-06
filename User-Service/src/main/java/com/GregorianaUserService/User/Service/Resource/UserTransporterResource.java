@@ -1,19 +1,16 @@
 package com.GregorianaUserService.User.Service.Resource;
 
 
-
-import com.GregorianaUserService.User.Service.AES.AES;
 import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
 import com.GregorianaUserService.User.Service.Model.DTO.*;
+import com.GregorianaUserService.User.Service.Model.DTO.AddressDTO.TransporterAddressDTO;
 import com.GregorianaUserService.User.Service.Service.Services.TransporterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
 
 
 @RestController
@@ -39,9 +36,7 @@ public class UserTransporterResource {
     @ResponseStatus(HttpStatus.OK)
     public  TransporterClient  getTransporter(@RequestBody ClientDTO clientDTO) throws Exception {
 
-
-        System.out.println("Not Cached");
-        return transporterService.getTransporter(clientDTO.getAuthID());
+        return transporterService.getTransporter(clientDTO.getEmail(),clientDTO.getAuthID());
 
     }
 
@@ -56,9 +51,10 @@ public class UserTransporterResource {
     @CacheEvict(value="transporter_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updateAddress")
     @ResponseStatus(HttpStatus.OK)
-    public void updateTransporterAddress(@RequestBody AddressDTO transporterAddressDTO) throws Exception {
+    public void updateTransporterAddress(@RequestBody TransporterAddressDTO transporterAddressDTO) throws Exception {
 
-        transporterService.updateAddress(transporterAddressDTO.getAddress(),transporterAddressDTO.getAuthID());
+        transporterService.updateAddress(transporterAddressDTO
+                .getAddress(),transporterAddressDTO.getAuthID());
 
     }
     @CacheEvict(value="transporter_profile", allEntries = true,beforeInvocation = true)

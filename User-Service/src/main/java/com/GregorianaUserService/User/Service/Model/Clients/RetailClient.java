@@ -1,8 +1,8 @@
 package com.GregorianaUserService.User.Service.Model.Clients;
 
 
-import com.GregorianaUserService.User.Service.Model.Address;
-import com.GregorianaUserService.User.Service.Model.User;
+import com.GregorianaUserService.User.Service.Model.Clients.Address.CustomerAddress;
+import com.GregorianaUserService.User.Service.Model.User.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +21,11 @@ public class RetailClient implements Serializable {
 
     @Id
     @Column(name = "id")
-    private String id;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(name="authID")
+    private String authID;
 
     @Column(name="First_Name")
     private String FirstName;
@@ -36,11 +39,11 @@ public class RetailClient implements Serializable {
     @Column(name="phone")
     private Long phone;
 
-    @OneToOne(cascade=CascadeType.MERGE)
+    @OneToOne(cascade=CascadeType.ALL)
     private User user;
 
     @OneToOne(cascade=CascadeType.ALL)
-    private Address address;
+    private CustomerAddress address;
 
 
 

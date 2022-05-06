@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PhotoDTO {
     private String authID;
+    private Long id;
     private String photoUrl;
 
 }

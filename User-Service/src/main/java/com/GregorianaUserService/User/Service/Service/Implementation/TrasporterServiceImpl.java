@@ -2,9 +2,9 @@
 package com.GregorianaUserService.User.Service.Service.Implementation;
 
 import com.GregorianaUserService.User.Service.AES.AES;
-import com.GregorianaUserService.User.Service.Model.Address;
+import com.GregorianaUserService.User.Service.Model.Clients.Address.TransporterAddress;
 import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
-import com.GregorianaUserService.User.Service.Model.Vehicle;
+import com.GregorianaUserService.User.Service.Model.Vehicles.Vehicle;
 import com.GregorianaUserService.User.Service.Repository.TransporterRepository;
 import com.GregorianaUserService.User.Service.Service.Services.TransporterService;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +21,16 @@ public class TrasporterServiceImpl implements TransporterService {
 
 
     @Override
-    public  TransporterClient  getTransporter(String authID) throws Exception {
+    public  TransporterClient  getTransporter(String email, String authID) throws Exception {
 
 
         Key key = AES.generateKey();
 
-       TransporterClient transporterClient =  transporterRepository.getTransporter(authID);
+
+        String encryptedEmailToDatabase = AES.encrypt(email,key);
+
+
+       TransporterClient transporterClient =  transporterRepository.getTransporter(encryptedEmailToDatabase, authID);
 
 
         if(transporterClient.getVehicle().getOwnership_paper() != null){
@@ -58,22 +62,22 @@ public class TrasporterServiceImpl implements TransporterService {
 
     @Override
     public void updatePhotoUrl(String photoUrl, String authId) {
-        transporterRepository.updatePhotoUrl(photoUrl,authId);
+        transporterRepository.updatePhotoUrl(photoUrl, authId);
     }
 
     @Override
-    public void updateVerified(Boolean verified, String authId) {
-        transporterRepository.updateVerified(verified,authId);
+    public void updateVerified(Boolean verified,  String authId) {
+        transporterRepository.updateVerified(verified, authId);
     }
 
     @Override
-    public void updatePhone(Long phone, String authID) {
+    public void updatePhone(Long phone,String authID) {
 
-        transporterRepository.updatePhone(phone,authID);
+        transporterRepository.updatePhone(phone, authID);
     }
 
     @Override
-    public void updateAddress(Address address, String authID) throws Exception {
+    public void updateAddress(TransporterAddress address, String authID) throws Exception {
 
 
         Key key = AES.generateKey();

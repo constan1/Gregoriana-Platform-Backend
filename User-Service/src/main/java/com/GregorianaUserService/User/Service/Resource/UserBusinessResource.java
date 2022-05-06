@@ -2,7 +2,7 @@ package com.GregorianaUserService.User.Service.Resource;
 
 
 import com.GregorianaUserService.User.Service.Model.Clients.BusinessClient;
-import com.GregorianaUserService.User.Service.Model.DTO.AddressDTO;
+import com.GregorianaUserService.User.Service.Model.DTO.AddressDTO.BusinessAddressDTO;
 import com.GregorianaUserService.User.Service.Model.DTO.ClientDTO;
 import com.GregorianaUserService.User.Service.Model.DTO.PhoneDTO;
 import com.GregorianaUserService.User.Service.Model.DTO.PhotoDTO;
@@ -35,13 +35,13 @@ public class UserBusinessResource {
     @GetMapping("/client")
     @ResponseStatus(HttpStatus.OK)
     public BusinessClient getBusinessClient(@RequestBody ClientDTO clientDTO) throws Exception {
-        return businessClientService.getBusinessClient(clientDTO.getAuthID());
+        return businessClientService.getBusinessClient(clientDTO.getEmail(),clientDTO.getAuthID());
     }
 
     @CacheEvict(value="Business_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updateAddress")
     @ResponseStatus(HttpStatus.OK)
-    public void updateAddress(@RequestBody AddressDTO addressDTO) throws Exception {
+    public void updateAddress(@RequestBody BusinessAddressDTO addressDTO) throws Exception {
         businessClientService.updateAddress(addressDTO.getAddress(),addressDTO.getAuthID());
     }
 

@@ -1,17 +1,15 @@
-package com.GregorianaUserService.User.Service.Model;
+package com.GregorianaUserService.User.Service.Model.User;
 
 
+import com.GregorianaUserService.User.Service.Model.Roles.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.micrometer.core.lang.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
@@ -23,8 +21,9 @@ import java.util.Date;
 public class User implements Serializable {
 
     @Id
-    @Column(name="id")
-    private String id;
+    @Column(name = "id")
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToOne
     private Roles role;

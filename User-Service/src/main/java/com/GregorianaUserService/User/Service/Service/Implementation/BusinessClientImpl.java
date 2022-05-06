@@ -1,7 +1,7 @@
 package com.GregorianaUserService.User.Service.Service.Implementation;
 
 import com.GregorianaUserService.User.Service.AES.AES;
-import com.GregorianaUserService.User.Service.Model.Address;
+import com.GregorianaUserService.User.Service.Model.Clients.Address.BusinessAddress;
 import com.GregorianaUserService.User.Service.Model.Clients.BusinessClient;
 import com.GregorianaUserService.User.Service.Repository.BusinessClientRepository;
 import com.GregorianaUserService.User.Service.Service.Services.BusinessClientService;
@@ -28,11 +28,11 @@ public class BusinessClientImpl implements BusinessClientService {
     @Override
     public void updatePhone(Long phone, String authID) {
 
-        businessClientRepository.updatePhone(phone,authID);
+        businessClientRepository.updatePhone( phone,authID);
     }
 
     @Override
-    public void updateAddress(Address address, String authID) throws Exception{
+    public void updateAddress (BusinessAddress address,String authID) throws Exception{
 
 
         Key key = AES.generateKey();
@@ -48,7 +48,6 @@ public class BusinessClientImpl implements BusinessClientService {
     public void save_Business_Client(BusinessClient businessClient) throws Exception {
         Key key = AES.generateKey();
 
-
         String encryptedEmail = AES.encrypt(businessClient.getUser().getEmail(),key);
 
         businessClient.getUser().setEmail(encryptedEmail);
@@ -57,12 +56,13 @@ public class BusinessClientImpl implements BusinessClientService {
     }
 
     @Override
-    public BusinessClient getBusinessClient(String authID) throws Exception {
+    public BusinessClient getBusinessClient(String email, String authID) throws Exception {
 
         Key key = AES.generateKey();
 
+        String emailEncryptedToDatabase = AES.encrypt(email,key);
 
-        BusinessClient businessClient =  businessClientRepository.selectBusinessClient(authID);
+        BusinessClient businessClient =  businessClientRepository.selectBusinessClient(emailEncryptedToDatabase, authID);
 
         if(businessClient.getAddress().getStreet_address()!=null){
             businessClient.getAddress().setStreet_address(AES.decrypt(businessClient.getAddress().getStreet_address(),key));
@@ -70,6 +70,8 @@ public class BusinessClientImpl implements BusinessClientService {
         if(businessClient.getAddress().getPostal_code() !=null){
             businessClient.getAddress().setPostal_code(AES.decrypt(businessClient.getAddress().getPostal_code(),key));
         }
+
+
         businessClient.getUser().setEmail(AES.decrypt(businessClient.getUser().getEmail(),key));
 
         return businessClient;

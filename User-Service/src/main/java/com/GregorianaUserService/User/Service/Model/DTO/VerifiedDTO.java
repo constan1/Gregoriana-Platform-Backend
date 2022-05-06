@@ -13,5 +13,6 @@ import lombok.NoArgsConstructor;
 public class VerifiedDTO {
 
     private String authID;
+    private Long id;
     private Boolean verified;
 }

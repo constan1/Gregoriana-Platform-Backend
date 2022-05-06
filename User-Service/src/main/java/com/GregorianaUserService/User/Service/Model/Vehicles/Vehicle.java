@@ -1,4 +1,4 @@
-package com.GregorianaUserService.User.Service.Model;
+package com.GregorianaUserService.User.Service.Model.Vehicles;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -24,8 +24,11 @@ public class Vehicle implements Serializable {
 
     @Id
     @Column(name = "id")
-    private String id;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(name="authID")
+    private String authID;
 
     @Column(name="Type")
     private String type;

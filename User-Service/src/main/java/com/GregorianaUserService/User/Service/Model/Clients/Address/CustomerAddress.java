@@ -1,6 +1,6 @@
-package com.GregorianaUserService.User.Service.Model;
+package com.GregorianaUserService.User.Service.Model.Clients.Address;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,18 +9,22 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
-@Entity(name="Address_")
+
+@Entity(name="Customer_Address")
 @Table
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address implements Serializable {
+public class CustomerAddress implements Serializable {
 
     @Id
     @Column(name = "id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name="authID")
+    private String authID;
 
     @Column(name="Country")
     private String country;
@@ -36,5 +40,4 @@ public class Address implements Serializable {
 
     @Column(name="postal_code")
     private String postal_code;
-
 }

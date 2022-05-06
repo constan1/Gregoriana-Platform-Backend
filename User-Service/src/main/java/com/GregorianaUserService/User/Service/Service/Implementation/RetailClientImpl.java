@@ -1,7 +1,7 @@
 package com.GregorianaUserService.User.Service.Service.Implementation;
 
 import com.GregorianaUserService.User.Service.AES.AES;
-import com.GregorianaUserService.User.Service.Model.Address;
+import com.GregorianaUserService.User.Service.Model.Clients.Address.CustomerAddress;
 import com.GregorianaUserService.User.Service.Model.Clients.RetailClient;
 import com.GregorianaUserService.User.Service.Repository.RetailClientRepository;
 import com.GregorianaUserService.User.Service.Service.Services.RetailClientService;
@@ -22,17 +22,17 @@ public class RetailClientImpl implements RetailClientService {
     @Override
     public void updatePhotoUrl(String photoUrl, String authId) {
 
-        retailClientRepository.updatePhotoUrl(photoUrl,authId);
+        retailClientRepository.updatePhotoUrl(photoUrl, authId);
     }
 
     @Override
-    public void updatePhone(Long phone, String authID) {
+    public void updatePhone(Long phone,  String authID) {
 
         retailClientRepository.updatePhone(phone, authID);
     }
 
     @Override
-    public void updateAddress(Address address, String authID) throws Exception  {
+    public void updateAddress(CustomerAddress address, String authID) throws Exception  {
 
         Key key = AES.generateKey();
 
@@ -55,11 +55,15 @@ public class RetailClientImpl implements RetailClientService {
     }
 
     @Override
-    public RetailClient getRetailClient(String authID) throws Exception {
+    public RetailClient getRetailClient(String email, String authID) throws Exception {
 
         Key key = AES.generateKey();
 
-        RetailClient retailClient = retailClientRepository.selectRetailClient(authID);
+
+        String encryptedEmailToDatabase = AES.encrypt(email,key);
+
+
+        RetailClient retailClient = retailClientRepository.selectRetailClient(encryptedEmailToDatabase, authID);
 
         if(retailClient.getAddress().getStreet_address()!= null){
             retailClient.getAddress().setStreet_address(AES.decrypt(retailClient.getAddress().getStreet_address(), key));

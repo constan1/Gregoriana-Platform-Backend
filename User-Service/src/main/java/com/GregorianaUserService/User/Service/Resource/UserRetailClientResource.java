@@ -2,7 +2,7 @@ package com.GregorianaUserService.User.Service.Resource;
 
 
 import com.GregorianaUserService.User.Service.Model.Clients.RetailClient;
-import com.GregorianaUserService.User.Service.Model.DTO.AddressDTO;
+import com.GregorianaUserService.User.Service.Model.DTO.AddressDTO.CustomerAddressDTO;
 import com.GregorianaUserService.User.Service.Model.DTO.ClientDTO;
 import com.GregorianaUserService.User.Service.Model.DTO.PhoneDTO;
 import com.GregorianaUserService.User.Service.Model.DTO.PhotoDTO;
@@ -33,13 +33,13 @@ public class UserRetailClientResource {
     @GetMapping("/client")
     @ResponseStatus(HttpStatus.OK)
     public RetailClient getRetailClient(@RequestBody ClientDTO clientDTO) throws Exception {
-        return retailClientService.getRetailClient(clientDTO.getAuthID());
+        return retailClientService.getRetailClient(clientDTO.getEmail(),clientDTO.getAuthID());
     }
 
     @CacheEvict(value="Retail_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updateAddress")
     @ResponseStatus(HttpStatus.OK)
-    public void updateAddress(@RequestBody AddressDTO retailClientAddress) throws Exception {
+    public void updateAddress(@RequestBody CustomerAddressDTO retailClientAddress) throws Exception {
         retailClientService.updateAddress(retailClientAddress.getAddress(),retailClientAddress.getAuthID());
     }
 
