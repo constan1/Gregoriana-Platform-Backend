@@ -13,8 +13,8 @@ import javax.transaction.Transactional;
 @Repository
 public interface RetailClientRepository extends JpaRepository<RetailClient,String> {
 
-    @Query("select r from Retail_Client r where r.user.email =:email and r.authID =:authID")
-    RetailClient selectRetailClient(@Param("email")String email,@Param("authID") String authID);
+    @Query("select r from Retail_Client r where r.authID =:authID")
+    RetailClient selectRetailClient(@Param("authID") String authID);
 
 
 

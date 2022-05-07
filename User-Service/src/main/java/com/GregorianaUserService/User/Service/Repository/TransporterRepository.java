@@ -15,8 +15,8 @@ import javax.transaction.Transactional;
 @Repository
 public interface TransporterRepository extends JpaRepository<TransporterClient,String> {
 
-    @Query("select t from Transporter_Client t where t.user.email =:email and t.authID =:authID")
-    TransporterClient getTransporter(@Param("email") String email,@Param("authID") String authID);
+    @Query("select t from Transporter_Client t where t.authID =:authID")
+    TransporterClient getTransporter(@Param("authID") String authID);
 
     @Modifying(clearAutomatically = true)
     @Transactional

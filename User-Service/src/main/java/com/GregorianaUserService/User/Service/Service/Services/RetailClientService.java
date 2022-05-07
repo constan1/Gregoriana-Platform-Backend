@@ -13,6 +13,6 @@ public interface RetailClientService {
 
     void save_Retail_Client(RetailClient retailClient) throws Exception;
 
-    RetailClient getRetailClient(String email, String authID) throws Exception;
+    RetailClient getRetailClient( String authID) throws Exception;
 
 }

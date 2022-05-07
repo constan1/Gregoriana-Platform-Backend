@@ -11,8 +11,8 @@ import javax.transaction.Transactional;
 public interface BusinessClientRepository extends JpaRepository<BusinessClient, String> {
 
 
-    @Query("select b from Business_Client b where b.user.email =:email and b.authID =:authID")
-    BusinessClient selectBusinessClient(@Param("email")String email, @Param("authID") String authID);
+    @Query("select b from Business_Client b where b.authID =:authID")
+    BusinessClient selectBusinessClient(@Param("authID") String authID);
 
 
     @Modifying(clearAutomatically = true)

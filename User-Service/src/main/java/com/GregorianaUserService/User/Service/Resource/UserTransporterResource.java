@@ -36,7 +36,7 @@ public class UserTransporterResource {
     @ResponseStatus(HttpStatus.OK)
     public  TransporterClient  getTransporter(@RequestBody ClientDTO clientDTO) throws Exception {
 
-        return transporterService.getTransporter(clientDTO.getEmail(),clientDTO.getAuthID());
+        return transporterService.getTransporter(clientDTO.getAuthID());
 
     }
 

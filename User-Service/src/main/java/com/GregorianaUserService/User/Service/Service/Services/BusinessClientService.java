@@ -14,7 +14,7 @@ public interface BusinessClientService {
 
     void save_Business_Client(BusinessClient businessClient) throws Exception;
 
-    BusinessClient getBusinessClient(String email, String authID) throws Exception;
+    BusinessClient getBusinessClient( String authID) throws Exception;
 
 
 }

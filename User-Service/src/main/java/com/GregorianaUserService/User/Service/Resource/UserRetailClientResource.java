@@ -33,7 +33,7 @@ public class UserRetailClientResource {
     @GetMapping("/client")
     @ResponseStatus(HttpStatus.OK)
     public RetailClient getRetailClient(@RequestBody ClientDTO clientDTO) throws Exception {
-        return retailClientService.getRetailClient(clientDTO.getEmail(),clientDTO.getAuthID());
+        return retailClientService.getRetailClient(clientDTO.getAuthID());
     }
 
     @CacheEvict(value="Retail_profile", allEntries = true,beforeInvocation = true)

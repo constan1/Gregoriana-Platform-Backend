@@ -35,7 +35,7 @@ public class UserBusinessResource {
     @GetMapping("/client")
     @ResponseStatus(HttpStatus.OK)
     public BusinessClient getBusinessClient(@RequestBody ClientDTO clientDTO) throws Exception {
-        return businessClientService.getBusinessClient(clientDTO.getEmail(),clientDTO.getAuthID());
+        return businessClientService.getBusinessClient(clientDTO.getAuthID());
     }
 
     @CacheEvict(value="Business_profile", allEntries = true,beforeInvocation = true)

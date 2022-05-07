@@ -1,7 +1,7 @@
 
 package com.GregorianaUserService.User.Service.Service.Implementation;
 
-import com.GregorianaUserService.User.Service.AES.AES;
+import com.GregorianaUserService.User.Service.AES.PBK2;
 import com.GregorianaUserService.User.Service.Model.Clients.Address.TransporterAddress;
 import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
 import com.GregorianaUserService.User.Service.Model.Vehicles.Vehicle;
@@ -9,8 +9,6 @@ import com.GregorianaUserService.User.Service.Repository.TransporterRepository;
 import com.GregorianaUserService.User.Service.Service.Services.TransporterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.security.Key;
 
 
 @RequiredArgsConstructor
@@ -21,29 +19,24 @@ public class TrasporterServiceImpl implements TransporterService {
 
 
     @Override
-    public  TransporterClient  getTransporter(String email, String authID) throws Exception {
+    public  TransporterClient  getTransporter(String authID) throws Exception {
 
 
-        Key key = AES.generateKey();
 
-
-        String encryptedEmailToDatabase = AES.encrypt(email,key);
-
-
-       TransporterClient transporterClient =  transporterRepository.getTransporter(encryptedEmailToDatabase, authID);
+       TransporterClient transporterClient =  transporterRepository.getTransporter(authID);
 
 
         if(transporterClient.getVehicle().getOwnership_paper() != null){
-            transporterClient.getVehicle().setOwnership_paper(AES.decrypt(transporterClient.getVehicle().getOwnership_paper(),key));
+            transporterClient.getVehicle().setOwnership_paper(PBK2.decrypt(transporterClient.getVehicle().getOwnership_paper()));
         }
         if(transporterClient.getAddress().getStreet_address() != null){
-            transporterClient.getAddress().setStreet_address(AES.decrypt(transporterClient.getAddress().getStreet_address(),key));
+            transporterClient.getAddress().setStreet_address(PBK2.decrypt(transporterClient.getAddress().getStreet_address()));
         }
         if(transporterClient.getAddress().getPostal_code() !=null){
-            transporterClient.getAddress().setPostal_code(AES.decrypt(transporterClient.getAddress().getPostal_code(),key));
+            transporterClient.getAddress().setPostal_code(PBK2.decrypt(transporterClient.getAddress().getPostal_code()));
         }
 
-       transporterClient.getUser().setEmail(AES.decrypt(transporterClient.getUser().getEmail(),key));
+       transporterClient.getUser().setEmail(PBK2.decrypt(transporterClient.getUser().getEmail()));
 
         return transporterClient;
     }
@@ -52,10 +45,9 @@ public class TrasporterServiceImpl implements TransporterService {
 
     @Override
     public void Save_TransporterClient(TransporterClient transporterClient) throws Exception {
-        Key key = AES.generateKey();
 
+        String encryptedEmail = PBK2.encrypt(transporterClient.getUser().getEmail());
 
-        String encryptedEmail = AES.encrypt(transporterClient.getUser().getEmail(),key);
         transporterClient.getUser().setEmail(encryptedEmail);
         transporterRepository.save(transporterClient);
     }
@@ -80,10 +72,9 @@ public class TrasporterServiceImpl implements TransporterService {
     public void updateAddress(TransporterAddress address, String authID) throws Exception {
 
 
-        Key key = AES.generateKey();
 
-        String encryptedStreet = AES.encrypt(address.getStreet_address(),key);
-        String enryptPostalCode= AES.encrypt(address.getPostal_code(),key);
+        String encryptedStreet = PBK2.encrypt(address.getStreet_address());
+        String enryptPostalCode = PBK2.encrypt(address.getPostal_code());
 
 
         transporterRepository.updateAddress(address.getCountry(),encryptedStreet, address.getCity(),
@@ -93,9 +84,8 @@ public class TrasporterServiceImpl implements TransporterService {
     @Override
     public void updateVehicle(Vehicle vehicle, String authID) throws Exception {
 
-        Key key = AES.generateKey();
 
-        String encryptedDriversLicense = AES.encrypt(vehicle.getOwnership_paper(),key);
+        String encryptedDriversLicense = PBK2.encrypt(vehicle.getOwnership_paper());
 
         transporterRepository.updateVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getYear(),vehicle.getCondition(),
                 vehicle.getDescription(),vehicle.getCapacity(),vehicle.getLoad(),vehicle.getLicense_plate(),
