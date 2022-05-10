@@ -35,8 +35,6 @@ public class TrasporterServiceImpl implements TransporterService {
             transporterClient.getAddress().setPostal_code(PBK2.decrypt(transporterClient.getAddress().getPostal_code()));
         }
 
-       transporterClient.getUser().setEmail(PBK2.decrypt(transporterClient.getUser().getEmail()));
-
         return transporterClient;
     }
 
@@ -45,9 +43,6 @@ public class TrasporterServiceImpl implements TransporterService {
     @Override
     public void Save_TransporterClient(TransporterClient transporterClient) throws Exception {
 
-        String encryptedEmail = PBK2.encrypt(transporterClient.getUser().getEmail());
-
-        transporterClient.getUser().setEmail(encryptedEmail);
         transporterRepository.save(transporterClient);
     }
 

@@ -44,10 +44,6 @@ public class BusinessClientImpl implements BusinessClientService {
     public void save_Business_Client(BusinessClient businessClient) throws Exception {
 
 
-        String encryptedEmail = PBK2.encrypt(businessClient.getUser().getEmail());
-
-        businessClient.getUser().setEmail(encryptedEmail);
-
         businessClientRepository.save(businessClient);
     }
 
@@ -59,15 +55,19 @@ public class BusinessClientImpl implements BusinessClientService {
 
         BusinessClient businessClient =  businessClientRepository.selectBusinessClient(authID);
 
-        if(businessClient.getAddress().getStreet_address()!=null){
-            businessClient.getAddress().setStreet_address(PBK2.decrypt(businessClient.getAddress().getStreet_address()));
-        }
-        if(businessClient.getAddress().getPostal_code() !=null){
-            businessClient.getAddress().setPostal_code(PBK2.decrypt(businessClient.getAddress().getPostal_code()));
-        }
+        if(businessClient != null) {
 
 
-        businessClient.getUser().setEmail(PBK2.decrypt(businessClient.getUser().getEmail()));
+            if (businessClient.getAddress().getStreet_address() != null) {
+                businessClient.getAddress().setStreet_address(PBK2.decrypt(businessClient.getAddress().getStreet_address()));
+            }
+            if(businessClient.getAddress().getPostal_code() !=null){
+                businessClient.getAddress().setPostal_code(PBK2.decrypt(businessClient.getAddress().getPostal_code()));
+            }
+
+        } else {
+            return null;
+        }
 
         return businessClient;
 

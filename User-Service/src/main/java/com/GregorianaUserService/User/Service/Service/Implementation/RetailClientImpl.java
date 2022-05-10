@@ -44,10 +44,6 @@ public class RetailClientImpl implements RetailClientService {
     @Override
     public void save_Retail_Client(RetailClient retailClient) throws Exception {
 
-
-        String encryptedEmail = PBK2.encrypt(retailClient.getUser().getEmail());
-
-        retailClient.getUser().setEmail(encryptedEmail);
         retailClientRepository.save(retailClient);
     }
 
@@ -59,14 +55,18 @@ public class RetailClientImpl implements RetailClientService {
 
         RetailClient retailClient = retailClientRepository.selectRetailClient(authID);
 
-        if(retailClient.getAddress().getStreet_address()!= null){
-            retailClient.getAddress().setStreet_address(PBK2.decrypt(retailClient.getAddress().getStreet_address()));
-        }
-        if(retailClient.getAddress().getPostal_code() !=null){
-            retailClient.getAddress().setPostal_code(PBK2.decrypt(retailClient.getAddress().getPostal_code()));
-        }
-        retailClient.getUser().setEmail(PBK2.decrypt(retailClient.getUser().getEmail()));
+        if(retailClient != null) {
 
+            if (retailClient.getAddress().getStreet_address() != null) {
+                retailClient.getAddress().setStreet_address(PBK2.decrypt(retailClient.getAddress().getStreet_address()));
+            }
+            if (retailClient.getAddress().getPostal_code() != null) {
+                retailClient.getAddress().setPostal_code(PBK2.decrypt(retailClient.getAddress().getPostal_code()));
+            }
+        }
+        else {
+            return null;
+        }
         return retailClient;
     }
 }
