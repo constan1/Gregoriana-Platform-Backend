@@ -40,13 +40,6 @@ public class UserTransporterResource {
 
     }
 
-    @CacheEvict(value="transporter_profile", allEntries = true,beforeInvocation = true)
-    @PutMapping("/client/updateVehicle")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateTransportersVehicles(@RequestBody TransporterVehicleDTO transporterVehicleDTO) throws Exception {
-
-        transporterService.updateVehicle(transporterVehicleDTO.getVehicle(),transporterVehicleDTO.getAuthID());
-    }
 
     @CacheEvict(value="transporter_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updateAddress")
@@ -76,6 +69,13 @@ public class UserTransporterResource {
     @ResponseStatus(HttpStatus.OK)
     public void updateTransporterPhone(@RequestBody PhoneDTO phoneDTO){
         transporterService.updatePhone(phoneDTO.getPhone(),phoneDTO.getAuthID());
+    }
+
+    @CacheEvict(value="transporter_profile", allEntries = true,beforeInvocation = true)
+    @PutMapping("/client/updateDriversLicense")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateDriversLicense(@RequestBody LicenseDTO license) throws Exception {
+        transporterService.updateLicensePhoto(license.getDrivers_license().getDrivers_photo_url(),license.getAuthID());
     }
 
 

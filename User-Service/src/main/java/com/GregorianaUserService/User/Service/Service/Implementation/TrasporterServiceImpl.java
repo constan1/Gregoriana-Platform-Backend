@@ -4,7 +4,6 @@ package com.GregorianaUserService.User.Service.Service.Implementation;
 import com.GregorianaUserService.User.Service.AES.PBK2;
 import com.GregorianaUserService.User.Service.Model.Clients.Address.TransporterAddress;
 import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
-import com.GregorianaUserService.User.Service.Model.Vehicles.Vehicle;
 import com.GregorianaUserService.User.Service.Repository.TransporterRepository;
 import com.GregorianaUserService.User.Service.Service.Services.TransporterService;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +24,10 @@ public class TrasporterServiceImpl implements TransporterService {
 
        TransporterClient transporterClient =  transporterRepository.getTransporter(authID);
 
+       if(transporterClient.getDrivers_license().getDrivers_photo_url() !=null){
+           transporterClient.getDrivers_license().setDrivers_photo_url(PBK2.decrypt(transporterClient.getDrivers_license().getDrivers_photo_url()));
+       }
 
-        if(transporterClient.getVehicle().getOwnership_paper() != null){
-            transporterClient.getVehicle().setOwnership_paper(PBK2.decrypt(transporterClient.getVehicle().getOwnership_paper()));
-        }
         if(transporterClient.getAddress().getStreet_address() != null){
             transporterClient.getAddress().setStreet_address(PBK2.decrypt(transporterClient.getAddress().getStreet_address()));
         }
@@ -82,19 +81,14 @@ public class TrasporterServiceImpl implements TransporterService {
     }
 
     @Override
-    public void updateVehicle(Vehicle vehicle, String authID) throws Exception {
+    public void updateLicensePhoto(String url, String authID) throws Exception {
 
 
-        String encryptedDriversLicense = PBK2.encrypt(vehicle.getOwnership_paper());
+        String encryptedDriversLicense = PBK2.encrypt(url);
 
-        transporterRepository.updateVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getYear(),vehicle.getCondition(),
-                vehicle.getDescription(),vehicle.getCapacity(),vehicle.getLoad(),vehicle.getLicense_plate(),
-                encryptedDriversLicense,vehicle.getFirst_photo_url(),vehicle.getSecond_photo_url(),
-                vehicle.getThird_photo_url(),authID);
-
-
-
+        transporterRepository.updateLicensePhoto(encryptedDriversLicense, authID);
     }
+
 
 
 }

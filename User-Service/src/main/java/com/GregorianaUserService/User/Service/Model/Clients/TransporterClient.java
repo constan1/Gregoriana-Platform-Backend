@@ -1,9 +1,9 @@
 package com.GregorianaUserService.User.Service.Model.Clients;
 
 
+import com.GregorianaUserService.User.Service.Documents.License;
 import com.GregorianaUserService.User.Service.Model.Clients.Address.TransporterAddress;
 import com.GregorianaUserService.User.Service.Model.User.User;
-import com.GregorianaUserService.User.Service.Model.Vehicles.Vehicle;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,8 +48,8 @@ public class TransporterClient implements Serializable {
     @OneToOne(cascade=CascadeType.ALL)
     private User user;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    private Vehicle vehicle;
+    @OneToOne(cascade = CascadeType.ALL)
+    private License drivers_license;
 
 
 

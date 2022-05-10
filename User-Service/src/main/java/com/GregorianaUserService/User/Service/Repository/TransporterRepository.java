@@ -47,18 +47,11 @@ public interface TransporterRepository extends JpaRepository<TransporterClient,S
                       @Param("authID") String authID);
 
 
+
     @Modifying(clearAutomatically = true)
     @Transactional
-    @Query("update Vehicle_ v set v.type =:type, v.make =:make, v.year =:year, v.condition =:condition, " +
-            "v.description =:description, v.capacity =:capacity, v.load =:load, v.license_plate =:license_plate," +
-            "v.ownership_paper =:ownership, v.first_photo_url =:first_url," +
-            "v.second_photo_url =:second_url, v.third_photo_url =:third_url where v.authID =:authID")
-    void updateVehicle(@Param("type") String type, @Param("make") String make, @Param("year") Integer year,
-                       @Param("condition") Integer condition,  @Param("description") String description,
-                       @Param("capacity") Integer capacity, @Param("load") String load,
-                       @Param("license_plate") String license_plate, @Param("ownership") String ownership,
-                       @Param("first_url") String first_url, @Param("second_url") String second_url,
-                       @Param("third_url") String third_url, @Param("authID") String authID);
+    @Query("update Documents_Drivers_License d set d.drivers_photo_url =:driversPhoto where d.authID =:authID")
+    void updateLicensePhoto(@Param("driversPhoto") String photo_url,@Param("authID") String authID);
 
 
 
