@@ -32,11 +32,11 @@ public class UserTransporterResource {
     }
 
     @Cacheable("transporter_profile")
-    @GetMapping("/client")
+    @RequestMapping(value = "/client/{authID}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public  TransporterClient  getTransporter(@RequestBody ClientDTO clientDTO) throws Exception {
+    public  TransporterClient  getTransporter(@PathVariable("authID") String authID) throws Exception {
 
-        return transporterService.getTransporter(clientDTO.getAuthID());
+        return transporterService.getTransporter(authID);
 
     }
 

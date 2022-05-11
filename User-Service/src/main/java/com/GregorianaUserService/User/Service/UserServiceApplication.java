@@ -1,6 +1,6 @@
 package com.GregorianaUserService.User.Service;
 
-import com.GregorianaUserService.User.Service.configuration.vaultConfiguration;
+import com.GregorianaUserService.User.Service.config.vaultConfiguration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

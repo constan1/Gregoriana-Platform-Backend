@@ -32,10 +32,10 @@ public class UserBusinessResource {
     }
 
     @Cacheable("Business_profile")
-    @GetMapping("/client")
+    @RequestMapping(value = "/client/{authID}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public BusinessClient getBusinessClient(@RequestBody ClientDTO clientDTO) throws Exception {
-        return businessClientService.getBusinessClient(clientDTO.getAuthID());
+    public BusinessClient getBusinessClient(@PathVariable(name ="authID") String authID) throws Exception {
+        return businessClientService.getBusinessClient(authID);
     }
 
     @CacheEvict(value="Business_profile", allEntries = true,beforeInvocation = true)

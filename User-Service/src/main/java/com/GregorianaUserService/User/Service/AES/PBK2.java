@@ -1,6 +1,6 @@
 package com.GregorianaUserService.User.Service.AES;
 
-import com.GregorianaUserService.User.Service.configuration.vaultConfiguration;
+import com.GregorianaUserService.User.Service.config.vaultConfiguration;
 import org.apache.commons.codec.binary.Base64;
 
 import java.nio.ByteBuffer;

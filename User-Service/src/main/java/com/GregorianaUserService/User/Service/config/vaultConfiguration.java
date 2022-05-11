@@ -1,4 +1,4 @@
-package com.GregorianaUserService.User.Service.configuration;
+package com.GregorianaUserService.User.Service.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -30,10 +30,10 @@ public class UserRetailClientResource {
     }
 
     @Cacheable("Retail_profile")
-    @GetMapping("/client")
+    @RequestMapping(value = "/client/{authID}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public RetailClient getRetailClient(@RequestBody ClientDTO clientDTO) throws Exception {
-        return retailClientService.getRetailClient(clientDTO.getAuthID());
+    public RetailClient getRetailClient(@PathVariable(name ="authID") String authID) throws Exception {
+        return retailClientService.getRetailClient(authID);
     }
 
     @CacheEvict(value="Retail_profile", allEntries = true,beforeInvocation = true)

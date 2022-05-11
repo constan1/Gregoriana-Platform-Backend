@@ -24,16 +24,23 @@ public class TrasporterServiceImpl implements TransporterService {
 
        TransporterClient transporterClient =  transporterRepository.getTransporter(authID);
 
-       if(transporterClient.getDrivers_license().getDrivers_photo_url() !=null){
-           transporterClient.getDrivers_license().setDrivers_photo_url(PBK2.decrypt(transporterClient.getDrivers_license().getDrivers_photo_url()));
-       }
+       if(transporterClient !=null) {
 
-        if(transporterClient.getAddress().getStreet_address() != null){
-            transporterClient.getAddress().setStreet_address(PBK2.decrypt(transporterClient.getAddress().getStreet_address()));
-        }
-        if(transporterClient.getAddress().getPostal_code() !=null){
-            transporterClient.getAddress().setPostal_code(PBK2.decrypt(transporterClient.getAddress().getPostal_code()));
-        }
+
+           if (transporterClient.getDrivers_license().getDrivers_photo_url() != null) {
+               transporterClient.getDrivers_license().setDrivers_photo_url(PBK2.decrypt(transporterClient.getDrivers_license().getDrivers_photo_url()));
+           }
+
+           if (transporterClient.getAddress().getStreet_address() != null) {
+               transporterClient.getAddress().setStreet_address(PBK2.decrypt(transporterClient.getAddress().getStreet_address()));
+           }
+           if (transporterClient.getAddress().getPostal_code() != null) {
+               transporterClient.getAddress().setPostal_code(PBK2.decrypt(transporterClient.getAddress().getPostal_code()));
+           }
+       }
+       else {
+           return null;
+       }
 
         return transporterClient;
     }
