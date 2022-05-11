@@ -15,5 +15,4 @@ public interface CustomerRepository extends JpaRepository<TransportRequests,Long
     @Query("select t from Transport_Requests t where t.authID =:authID")
     List<TransportRequests> getRequestForClient(@Param("authID")String authID);
 
-
 }

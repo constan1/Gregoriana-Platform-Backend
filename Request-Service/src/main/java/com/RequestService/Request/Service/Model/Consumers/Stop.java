@@ -26,10 +26,10 @@ public class Stop {
     private String fromAddressTitle;
 
     @Column(name = "From_Address_Lat")
-    private Long fromAddressLat;
+    private Float fromAddressLat;
 
     @Column(name ="From_Address_Long")
-    private Long fromAddressLong;
+    private Float fromAddressLong;
 
     @Column(name = "notes_Description")
     private String notesDescription;

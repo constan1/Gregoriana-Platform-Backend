@@ -1,4 +1,7 @@
 package com.RequestService.Request.Service.Repository;
 
-public interface TransporterRepository {
+import com.RequestService.Request.Service.Model.Transporters.PublicRequests;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TransporterRepository extends JpaRepository<PublicRequests,Long> {
 }

@@ -24,8 +24,8 @@ public class DropOffs {
     private String dropAddressTitle;
 
     @Column(name ="drop_Address_Lat")
-    private Long dropAddressLat;
+    private Float dropAddressLat;
 
     @Column(name ="drop_Address_Long")
-    private Long dropAddressLong;
+    private Float dropAddressLong;
 }

@@ -1,6 +1,7 @@
 package com.RequestService.Request.Service.Service.Services;
 
 import com.RequestService.Request.Service.Model.Consumers.TransportRequests;
+import com.RequestService.Request.Service.Model.Transporters.PublicRequests;
 import org.springframework.data.repository.query.Param;
 
 import java.security.NoSuchAlgorithmException;
@@ -10,7 +11,7 @@ public interface CustomerService {
 
     List<TransportRequests> getRequestForClient(@Param("authID") String authID);
 
-    List<TransportRequests> getRequestsForMarket();
+    List<PublicRequests> getRequestsForMarket();
 
     void createRequest(TransportRequests transportRequests) throws NoSuchAlgorithmException;
 
