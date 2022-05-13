@@ -2,6 +2,7 @@ package com.RequestService.Request.Service.Model.Transporters;
 
 import com.RequestService.Request.Service.Model.Consumers.AddOn;
 import com.RequestService.Request.Service.Model.Consumers.Stop;
+import io.azam.ulidj.ULID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity(name="Public_Requests")
 @Table
@@ -23,11 +25,12 @@ public class PublicRequests {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Column(name= "TrackingNumber")
+    private String trackingNumber;
+
     @Column(name="title")
     private String title;
-
-    @Column(name="tracking_Number")
-    private String trackingNumber;
 
     @Column(name="date_Stamp")
     private Date dateStamp;
@@ -37,9 +40,6 @@ public class PublicRequests {
 
     @Column(name="desired_arrival_time")
     private String desired_time_arrival;
-
-    @Column(name="request_Status")
-    private String status;
 
     @OneToOne(cascade = CascadeType.ALL)
     private AddOn addOn;

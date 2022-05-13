@@ -1,4 +1,4 @@
-package com.RequestService.Request.Service.Hash;
+package com.RequestService.Request.Service.QuantumEntropy;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

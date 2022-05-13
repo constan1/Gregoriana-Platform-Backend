@@ -15,23 +15,23 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransportListing implements Serializable {
+public class TransportListing {
+
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String email;
 
-    @Column(name="authID")
-    private String authID;
+    @Column(name= "phoneNumber")
+    private Long phoneNumber;
 
-    @OneToOne( cascade =  CascadeType.ALL)
+    @OneToOne( cascade = CascadeType.ALL)
     private Vehicle vehicle;
 
-    @Column(name="Base_Rate")
+    @Column(name="baseRate")
     private Integer baseRate;
 
-    @Column(name="Description")
+    @Column(name="description",length = 140)
     private String description;
 
 

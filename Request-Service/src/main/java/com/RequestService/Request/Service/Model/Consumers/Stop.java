@@ -31,13 +31,13 @@ public class Stop {
     @Column(name ="From_Address_Long")
     private Float fromAddressLong;
 
-    @Column(name = "notes_Description")
+    @Column(name = "notes_Description",length = 300)
     private String notesDescription;
 
     @Column(name ="photoUrl")
     private String photoUrl;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     private List<DropOffs> dropOffs;
 
 
