@@ -1,4 +1,4 @@
-package com.RequestService.Request.Service.Model.Consumers;
+package com.RequestService.Request.Service.Model.Consumers.privateRequest;
 
 
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity(name="AddOn")
-@Table
+@Table(name = "Addon")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,4 +26,5 @@ public class AddOn {
 
     @Column(name = "Exclusive")
     private Boolean exclusive;
+
 }

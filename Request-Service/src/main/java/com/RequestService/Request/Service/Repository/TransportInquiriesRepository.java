@@ -21,6 +21,9 @@ public interface TransportInquiriesRepository extends JpaRepository<TransportInq
     @Query("delete from Transporters_Inquiries d where d.referenceTrackingNumber =:trackingNum")
     void deleteTransportInquiriesFromTrackingNum(@Param("trackingNum")String trackingNumber);
 
+    @Query("select i from Transporters_Inquiries i where i.referenceTrackingNumber =:trackingNumber")
+    TransportInquiries getTrackingInquiry(@Param("trackingNumber")String trackingNumber);
+
 
 
 

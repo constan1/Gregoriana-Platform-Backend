@@ -1,7 +1,7 @@
 package com.RequestService.Request.Service.Repository;
 
 
-import com.RequestService.Request.Service.Model.Consumers.TransportRequests;
+import com.RequestService.Request.Service.Model.Consumers.privateRequest.TransportRequests;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,10 +17,12 @@ public interface CustomerRepository extends JpaRepository<TransportRequests,Long
     @Query("select t from Transport_Requests t where t.authID =:authID")
     List<TransportRequests> getRequestForClient(@Param("authID")String authID);
 
-    @Modifying
-    @Transactional
-    @Query("delete from Transport_Requests  t where t.id =:id")
-    void deleteTransportRequest(@Param("id") Long id);
+    @Query("select t from Transport_Requests t where t.trackingNumber =:trackingNum")
+     TransportRequests getTransportRequestByTrackingNumber(@Param("trackingNum") String trackNum);
+
+    @Query("select t from Transport_Requests t where t.status =:pending")
+    List<TransportRequests> getRequestForMarket(@Param("pending")String pending);
+
 
     @Modifying(clearAutomatically = true)
     @Transactional

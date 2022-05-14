@@ -21,4 +21,7 @@ public interface ConsumerInquiryRepository extends JpaRepository<ConsumersInquir
     @Query("delete from Consumers_Inquiries d where d.trackingNumber =:trackingNumber")
     void deleteConsumerInquiryByTrNum(@Param("trackingNumber") String trackingNum);
 
+    @Query("select c from Consumers_Inquiries c where c.trackingNumber =:trackingNumber")
+    ConsumersInquiries getConsumerInquiry(@Param("trackingNumber") String trackingNumber);
+
 }

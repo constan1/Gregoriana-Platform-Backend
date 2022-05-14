@@ -1,4 +1,4 @@
-package com.RequestService.Request.Service.Model.Consumers;
+package com.RequestService.Request.Service.Model.Consumers.privateRequest;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,4 +28,6 @@ public class DropOffs {
 
     @Column(name ="drop_Address_Long")
     private Float dropAddressLong;
+
+
 }

@@ -10,7 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity(name="Consumers_Inquiries")
-@Table
+@Table(name ="consumerInquiries")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,8 +26,6 @@ public class ConsumersInquiries {
     private String trackingNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private TransportListing inquirers;
-
-
+    private TransportListing transportListing;
 
 }

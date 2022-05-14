@@ -1,5 +1,6 @@
-package com.RequestService.Request.Service.Model.Consumers;
+package com.RequestService.Request.Service.Model.Consumers.privateRequest;
 
+import com.RequestService.Request.Service.Model.Consumers.privateRequest.DropOffs;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity(name="Stops")
-@Table
+@Table(name="stop")
 @Getter
 @Setter
 @AllArgsConstructor

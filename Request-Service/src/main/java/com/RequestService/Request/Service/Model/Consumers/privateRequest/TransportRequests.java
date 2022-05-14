@@ -1,6 +1,8 @@
-package com.RequestService.Request.Service.Model.Consumers;
+package com.RequestService.Request.Service.Model.Consumers.privateRequest;
 
 
+import com.RequestService.Request.Service.Model.Consumers.privateRequest.AddOn;
+import com.RequestService.Request.Service.Model.Consumers.privateRequest.Stop;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,10 +10,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity(name="Transport_Requests")
-@Table
+@Table(name = "TransportRequests")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -35,7 +36,8 @@ public class TransportRequests {
     @Column(name="date_Stamp")
     private Date dateStamp;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name ="stop_id")
     private Stop stops;
 
     @Column(name="desired_arrival_time")
@@ -44,8 +46,8 @@ public class TransportRequests {
     @Column(name="request_Status")
     private String status;
 
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name ="addOn")
     private AddOn addOn;
 
 

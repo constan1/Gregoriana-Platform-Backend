@@ -2,9 +2,8 @@ package com.RequestService.Request.Service.Resource;
 
 
 import com.RequestService.Request.Service.Model.Consumers.ConsumersInquiries;
-import com.RequestService.Request.Service.Model.Consumers.TransportRequests;
+import com.RequestService.Request.Service.Model.Consumers.privateRequest.TransportRequests;
 import com.RequestService.Request.Service.Model.DTO.RequestStatusDTO;
-import com.RequestService.Request.Service.Model.Transporters.PublicRequests;
 import com.RequestService.Request.Service.Model.Transporters.RequestHistory;
 import com.RequestService.Request.Service.Model.Transporters.TransportInquiries;
 import com.RequestService.Request.Service.Model.Transporters.TransportListing;
@@ -40,8 +39,8 @@ public class CustomerResource {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    private List<PublicRequests> getRequestsForMarket(){
-        return customerService.getRequestsForMarket();
+    private List<TransportRequests> getRequestsForMarket(){
+        return customerService.getRequestForMarket("pending");
     }
 
     @PostMapping("/consumerInquiries")
@@ -93,21 +92,17 @@ public class CustomerResource {
 
     @GetMapping("/PublicRequest/{trackingNumber}")
     @ResponseStatus(HttpStatus.OK)
-    private PublicRequests getPublicRequest(@PathVariable("trackingNumber") String trackingNumber){
-       return customerService.selectedPublicRequest(trackingNumber);
+    private TransportRequests getPublicRequest(@PathVariable("trackingNumber") String trackingNumber){
+       return customerService.getTransportRequestByTrackingNumber(trackingNumber);
     }
 
-    @DeleteMapping("/deleteTransportRequest/{id}")
+    @DeleteMapping("/deleteTransportRequest/{trackingNum}")
     @ResponseStatus(HttpStatus.OK)
-    private void deleteTransportRequest(@PathVariable("id") Long id){
-        customerService.deleteTransportRequest(id);
+    private void deleteTransportRequest(@PathVariable("trackingNum") String trackingNum){
+        customerService.deleteTransportRequest(trackingNum);
     }
 
-    @DeleteMapping("/deleteTransportInquiry{trackingNumber}")
-    @ResponseStatus(HttpStatus.OK)
-    private void deleteTransportInquiry(@PathVariable("trackingNumber") String trackingNumber){
-        customerService.deleteTransportInquiriesFromTrackingNum(trackingNumber);
-    }
+
 
     @PutMapping("/updateRequestStatus")
     @ResponseStatus(HttpStatus.OK)

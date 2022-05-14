@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity(name="Transport_Listing")
-@Table
+@Table(name="transportListing")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,6 +25,7 @@ public class TransportListing {
     private Long phoneNumber;
 
     @OneToOne( cascade = CascadeType.ALL)
+    @JoinColumn(name ="vehicle_id")
     private Vehicle vehicle;
 
     @Column(name="baseRate")
@@ -33,7 +33,6 @@ public class TransportListing {
 
     @Column(name="description",length = 140)
     private String description;
-
 
 
 }

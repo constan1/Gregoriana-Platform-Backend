@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity(name="Transporters_Inquiries")
-@Table
+@Table(name = "transportInquiries")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,6 +26,7 @@ public class TransportInquiries {
 
     @Column(name= "TrackingNumber")
     private String referenceTrackingNumber;
+
 
 
 }
