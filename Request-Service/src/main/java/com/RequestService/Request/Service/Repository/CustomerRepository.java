@@ -24,6 +24,7 @@ public interface CustomerRepository extends JpaRepository<TransportRequests,Long
     List<TransportRequests> getRequestForMarket(@Param("pending")String pending);
 
 
+
     @Modifying(clearAutomatically = true)
     @Transactional
     @Query("update Transport_Requests t set t.status =:status where t.trackingNumber =:trackingNum")

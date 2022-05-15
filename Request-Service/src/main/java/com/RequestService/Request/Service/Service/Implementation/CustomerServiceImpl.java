@@ -3,6 +3,7 @@ package com.RequestService.Request.Service.Service.Implementation;
 
 import com.RequestService.Request.Service.Model.Consumers.ConsumersInquiries;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.TransportRequests;
+import com.RequestService.Request.Service.Model.DTO.InquiriesDTO;
 import com.RequestService.Request.Service.Model.Transporters.RequestHistory;
 import com.RequestService.Request.Service.Model.Transporters.TransportInquiries;
 import com.RequestService.Request.Service.Model.Transporters.TransportListing;
@@ -12,7 +13,7 @@ import com.RequestService.Request.Service.Service.Services.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.security.NoSuchAlgorithmException;
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -47,32 +48,49 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public void deleteTransportListing(String email) {
+
+        Optional<TransportListing> transportListing_ = Optional.ofNullable(transporterListingRepository.getTransportersListing(email));
+
+        transportListing_.ifPresent(transporterListingRepository::delete);
+    }
+
+    @Override
     public void createRequest(TransportRequests transportRequests) {
 
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        Date date = new Date(ts.getTime());
-        transportRequests.setDateStamp(date);
-        transportRequests.setTrackingNumber(entropy.getEntropy_());
-        transportRequests.setStatus("pending");
+       String entropyTrNum= entropy.getEntropy_();
 
-        //Check if tracking number exists before creating the request.
+        Optional<TransportRequests>  transportRequestsNum = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(entropyTrNum));
 
-        customerRepository.save(transportRequests);
+        if(transportRequestsNum.isEmpty()) {
 
+            Timestamp ts = new Timestamp(System.currentTimeMillis());
+            Date date = new Date(ts.getTime());
+            transportRequests.setDateStamp(date);
+            transportRequests.setTrackingNumber(entropyTrNum);
+            transportRequests.setStatus("pending");
+            customerRepository.save(transportRequests);
+        }
     }
 
     @Override
     public void createTransportListing(TransportListing transportListing) {
 
-
         transporterListingRepository.save(transportListing);
     }
 
     @Override
-    public void creatConsumerInquiry(ConsumersInquiries consumersInquiries) {
+    public void creatConsumerInquiry(InquiriesDTO inquiriesDTO) {
 
+        Optional<TransportListing> TransportListing = Optional.ofNullable(transporterListingRepository.getTransportersListing(inquiriesDTO.getEmail()));
 
-        consumerInquiryRepository.save(consumersInquiries);
+        if(TransportListing.isPresent()){
+            ConsumersInquiries consumersInquiries = new ConsumersInquiries();
+            consumersInquiries.setTrackingNumber(inquiriesDTO.getTrackingNum());
+            consumersInquiries.setTransportListing(TransportListing.get());
+
+            consumerInquiryRepository.save(consumersInquiries);
+        }
     }
 
     @Override
@@ -107,19 +125,23 @@ public class CustomerServiceImpl implements CustomerService {
         Optional<TransportRequests>  transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackNum));
         Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.getConsumerInquiry(trackNum));
 
-
         transportRequests.ifPresent(customerRepository::delete);
 
         if(consumersInquiries.isPresent()){
             consumerInquiryRepository.deleteConsumerInquiryByTrNum(trackNum);
         }
-
-
     }
 
     @Override
     public void updateRequestStatus(String trackingNumber, String status) {
-        customerRepository.updateRequestStatus(trackingNumber,status);
+        //check whether request exists before updating status.
+
+        Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackingNumber));
+
+        if(transportRequests.isPresent()){
+            customerRepository.updateRequestStatus(trackingNumber,status);
+        }
+
     }
 
     @Override
@@ -127,6 +149,8 @@ public class CustomerServiceImpl implements CustomerService {
 
         Optional<TransportInquiries> transportInquiries = Optional.ofNullable(transportInquiriesRepository.getTrackingInquiry(requestHistory.getTransportRequests().getTrackingNumber()));
         Optional<TransportRequests>  transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(requestHistory.getTransportRequests().getTrackingNumber()));
+        Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.getConsumerInquiry(requestHistory.getTransportRequests().getTrackingNumber()));
+
 
         //After customer signs for items.
 
@@ -136,8 +160,9 @@ public class CustomerServiceImpl implements CustomerService {
         requestHistory.setDateOfCompletion(date);
 
         if(transportInquiries.isPresent()){
+            transportRequests.ifPresent(customerRepository::delete); transportRequests.ifPresent(customerRepository::delete);
             transportInquiriesRepository.deleteTransportInquiriesFromTrackingNum(requestHistory.getTransportRequests().getTrackingNumber());
-            transportRequests.ifPresent(customerRepository::delete);
+            consumersInquiries.ifPresent(consumerInquiryRepository::delete);
             requestDeliveredRepository.save(requestHistory);
         }
 

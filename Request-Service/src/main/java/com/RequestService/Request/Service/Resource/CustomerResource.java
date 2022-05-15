@@ -3,6 +3,7 @@ package com.RequestService.Request.Service.Resource;
 
 import com.RequestService.Request.Service.Model.Consumers.ConsumersInquiries;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.TransportRequests;
+import com.RequestService.Request.Service.Model.DTO.InquiriesDTO;
 import com.RequestService.Request.Service.Model.DTO.RequestStatusDTO;
 import com.RequestService.Request.Service.Model.Transporters.RequestHistory;
 import com.RequestService.Request.Service.Model.Transporters.TransportInquiries;
@@ -45,9 +46,9 @@ public class CustomerResource {
 
     @PostMapping("/consumerInquiries")
     @ResponseStatus(HttpStatus.OK)
-    private void createInquiries(@RequestBody ConsumersInquiries consumersInquiries){
+    private void createInquiries(@RequestBody InquiriesDTO inquiriesDTO){
 
-        customerService.creatConsumerInquiry(consumersInquiries);
+        customerService.creatConsumerInquiry(inquiriesDTO);
 
     }
 
@@ -90,6 +91,12 @@ public class CustomerResource {
         return customerService.getTransportersPersonalListing(email);
     }
 
+    @DeleteMapping("/removeTransportListing/{emailID}")
+    @ResponseStatus(HttpStatus.OK)
+    private void deleteTransportListing(@PathVariable("emailID") String emailID){
+        customerService.deleteTransportListing(emailID);
+    }
+
     @GetMapping("/PublicRequest/{trackingNumber}")
     @ResponseStatus(HttpStatus.OK)
     private TransportRequests getPublicRequest(@PathVariable("trackingNumber") String trackingNumber){
@@ -115,6 +122,8 @@ public class CustomerResource {
     private void requestCompleted(@RequestBody RequestHistory requestHistory){
         customerService.createRequestHistory(requestHistory);
     }
+
+
 
 
 }
