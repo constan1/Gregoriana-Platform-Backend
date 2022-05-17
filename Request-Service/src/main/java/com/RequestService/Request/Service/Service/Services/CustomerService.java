@@ -6,22 +6,20 @@ import com.RequestService.Request.Service.Model.DTO.InquiriesDTO;
 import com.RequestService.Request.Service.Model.Transporters.RequestHistory;
 import com.RequestService.Request.Service.Model.Transporters.TransportInquiries;
 import com.RequestService.Request.Service.Model.Transporters.TransportListing;
-import org.springframework.data.repository.query.Param;
-
-import java.security.NoSuchAlgorithmException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import java.util.List;
 
 public interface CustomerService {
 
     List<TransportRequests> getRequestForClient(String authID);
 
-    void createRequest(TransportRequests transportRequests) throws NoSuchAlgorithmException;
+    String createRequest(TransportRequests transportRequests) throws ObjectOptimisticLockingFailureException;
 
-    void createTransportListing(TransportListing transportListing);
+    String createTransportListing(TransportListing transportListing);
 
-    void creatConsumerInquiry(InquiriesDTO inquiriesDTO);
+    String creatConsumerInquiry(InquiriesDTO inquiriesDTO);
 
-    void transporterActiveInquiry(TransportInquiries transportInquiries);
+    String transporterActiveInquiry(TransportInquiries transportInquiries);
 
     List<ConsumersInquiries> getAllInquiriesForTrackingNumber(String trackingNumber);
 
@@ -31,17 +29,17 @@ public interface CustomerService {
 
     TransportListing getTransportersPersonalListing(String email);
 
-    void deleteTransportRequest(String trackNum);
+    String deleteTransportRequest(String trackNum);
 
-    void updateRequestStatus( String trackingNumber ,String status);
+    String updateRequestStatus( String trackingNumber ,String status);
 
-    void createRequestHistory(RequestHistory requestHistory);
+    String createRequestHistory(RequestHistory requestHistory)throws ObjectOptimisticLockingFailureException ;
 
     TransportRequests getTransportRequestByTrackingNumber(String trackNum);
 
     List<TransportRequests> getRequestForMarket(String pending);
 
-    void deleteTransportListing(String email);
+    String deleteTransportListing(String email)throws ObjectOptimisticLockingFailureException;
 
     
 }

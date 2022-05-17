@@ -25,7 +25,13 @@ public class ConsumersInquiries {
     @Column(name="trackingNumber")
     private String trackingNumber;
 
+    @Column(name ="dateCreated")
+    private String dateTimeStamp;
+
     @OneToOne(cascade = CascadeType.ALL)
     private TransportListing transportListing;
+
+    @Version
+    private Long version;
 
 }

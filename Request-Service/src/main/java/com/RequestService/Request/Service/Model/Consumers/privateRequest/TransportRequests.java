@@ -50,6 +50,9 @@ public class TransportRequests {
     @JoinColumn(name ="addOn")
     private AddOn addOn;
 
+    @Version
+    private Long version;
+
 
 
 

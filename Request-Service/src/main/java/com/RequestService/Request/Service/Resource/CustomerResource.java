@@ -33,9 +33,9 @@ public class CustomerResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private void requestCreated(@RequestBody TransportRequests request) throws NoSuchAlgorithmException {
+    private String requestCreated(@RequestBody TransportRequests request) throws NoSuchAlgorithmException {
 
-        customerService.createRequest(request);
+        return customerService.createRequest(request);
     }
 
     @GetMapping
@@ -46,23 +46,23 @@ public class CustomerResource {
 
     @PostMapping("/consumerInquiries")
     @ResponseStatus(HttpStatus.OK)
-    private void createInquiries(@RequestBody InquiriesDTO inquiriesDTO){
+    private String createInquiries(@RequestBody InquiriesDTO inquiriesDTO){
 
-        customerService.creatConsumerInquiry(inquiriesDTO);
+        return customerService.creatConsumerInquiry(inquiriesDTO);
 
     }
 
     @PostMapping("/transporterActiveInquiries")
     @ResponseStatus(HttpStatus.OK)
-    private void createTransporterActiveInquiries(@RequestBody TransportInquiries transportInquiries)
+    private String createTransporterActiveInquiries(@RequestBody TransportInquiries transportInquiries)
     {
-        customerService.transporterActiveInquiry(transportInquiries);
+        return customerService.transporterActiveInquiry(transportInquiries);
     }
 
     @PostMapping("/createTransportListing")
     @ResponseStatus(HttpStatus.OK)
-    private void createTransportListing(@RequestBody TransportListing transportListing){
-        customerService.createTransportListing(transportListing);
+    private String createTransportListing(@RequestBody TransportListing transportListing){
+        return customerService.createTransportListing(transportListing);
     }
 
     @GetMapping("/consumersInquiries/{trackingNumber}")
@@ -93,8 +93,8 @@ public class CustomerResource {
 
     @DeleteMapping("/removeTransportListing/{emailID}")
     @ResponseStatus(HttpStatus.OK)
-    private void deleteTransportListing(@PathVariable("emailID") String emailID){
-        customerService.deleteTransportListing(emailID);
+    private String deleteTransportListing(@PathVariable("emailID") String emailID){
+        return customerService.deleteTransportListing(emailID);
     }
 
     @GetMapping("/PublicRequest/{trackingNumber}")
@@ -105,22 +105,22 @@ public class CustomerResource {
 
     @DeleteMapping("/deleteTransportRequest/{trackingNum}")
     @ResponseStatus(HttpStatus.OK)
-    private void deleteTransportRequest(@PathVariable("trackingNum") String trackingNum){
-        customerService.deleteTransportRequest(trackingNum);
+    private String deleteTransportRequest(@PathVariable("trackingNum") String trackingNum){
+        return customerService.deleteTransportRequest(trackingNum);
     }
 
 
 
     @PutMapping("/updateRequestStatus")
     @ResponseStatus(HttpStatus.OK)
-    private void updateRequestStatus(@RequestBody RequestStatusDTO requestStatusDTO){
-        customerService.updateRequestStatus(requestStatusDTO.getTrackingNumber(),requestStatusDTO.getStatus());
+    private String updateRequestStatus(@RequestBody RequestStatusDTO requestStatusDTO){
+        return customerService.updateRequestStatus(requestStatusDTO.getTrackingNumber(),requestStatusDTO.getStatus());
     }
 
     @PostMapping("/requestCompleted")
     @ResponseStatus(HttpStatus.OK)
-    private void requestCompleted(@RequestBody RequestHistory requestHistory){
-        customerService.createRequestHistory(requestHistory);
+    private String requestCompleted(@RequestBody RequestHistory requestHistory){
+       return  customerService.createRequestHistory(requestHistory);
     }
 
 

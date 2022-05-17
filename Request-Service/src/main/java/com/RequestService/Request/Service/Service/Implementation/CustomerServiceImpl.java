@@ -11,12 +11,14 @@ import com.RequestService.Request.Service.QuantumEntropy.entropy;
 import com.RequestService.Request.Service.Repository.*;
 import com.RequestService.Request.Service.Service.Services.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -39,6 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public TransportRequests getTransportRequestByTrackingNumber(String trackNum) {
+
         return customerRepository.getTransportRequestByTrackingNumber(trackNum);
     }
 
@@ -48,54 +51,110 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteTransportListing(String email) {
+    public String deleteTransportListing(String email) throws ObjectOptimisticLockingFailureException{
 
-        Optional<TransportListing> transportListing_ = Optional.ofNullable(transporterListingRepository.getTransportersListing(email));
+        //Optimistic locking
 
-        transportListing_.ifPresent(transporterListingRepository::delete);
-    }
+        try {
 
-    @Override
-    public void createRequest(TransportRequests transportRequests) {
+            Optional<TransportListing> transportListing_ = Optional.ofNullable(transporterListingRepository.getTransportersListing(email));
 
-       String entropyTrNum= entropy.getEntropy_();
+            transportListing_.ifPresent(transporterListingRepository::delete);
 
-        Optional<TransportRequests>  transportRequestsNum = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(entropyTrNum));
 
-        if(transportRequestsNum.isEmpty()) {
-
-            Timestamp ts = new Timestamp(System.currentTimeMillis());
-            Date date = new Date(ts.getTime());
-            transportRequests.setDateStamp(date);
-            transportRequests.setTrackingNumber(entropyTrNum);
-            transportRequests.setStatus("pending");
-            customerRepository.save(transportRequests);
+        }catch (Exception e){
+            return e.getMessage();
         }
+
+        return "Success";
     }
 
     @Override
-    public void createTransportListing(TransportListing transportListing) {
+    public String createRequest(TransportRequests transportRequests) throws ObjectOptimisticLockingFailureException{
 
-        transporterListingRepository.save(transportListing);
-    }
 
-    @Override
-    public void creatConsumerInquiry(InquiriesDTO inquiriesDTO) {
+        try {
 
-        Optional<TransportListing> TransportListing = Optional.ofNullable(transporterListingRepository.getTransportersListing(inquiriesDTO.getEmail()));
 
-        if(TransportListing.isPresent()){
-            ConsumersInquiries consumersInquiries = new ConsumersInquiries();
-            consumersInquiries.setTrackingNumber(inquiriesDTO.getTrackingNum());
-            consumersInquiries.setTransportListing(TransportListing.get());
+            String entropyTrNum = entropy.getEntropy_();
 
-            consumerInquiryRepository.save(consumersInquiries);
+            Optional<TransportRequests> transportRequestsNum = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(entropyTrNum));
+
+            if (transportRequestsNum.isEmpty()) {
+
+                Timestamp ts = new Timestamp(System.currentTimeMillis());
+                Date date = new Date(ts.getTime());
+                transportRequests.setDateStamp(date);
+                transportRequests.setTrackingNumber(entropyTrNum);
+                transportRequests.setStatus("pending");
+                customerRepository.save(transportRequests);
+            }
+        } catch (Exception e){
+            return e.getMessage();
         }
+
+        return "Success";
     }
 
     @Override
-    public void transporterActiveInquiry(TransportInquiries transportInquiries) {
-        transportInquiriesRepository.save(transportInquiries);
+    public String createTransportListing(TransportListing transportListing)throws ObjectOptimisticLockingFailureException {
+
+        try {
+
+
+            transporterListingRepository.save(transportListing);
+        } catch (Exception e){
+            return e.getMessage();
+        }
+
+        return "Success";
+    }
+
+    @Override
+    public String creatConsumerInquiry(InquiriesDTO inquiriesDTO) throws ObjectOptimisticLockingFailureException{
+
+
+        try {
+
+            Optional<TransportListing> TransportListing = Optional.ofNullable(transporterListingRepository.getTransportersListing(inquiriesDTO.getEmail()));
+
+            Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(inquiriesDTO.getTrackingNum()));
+
+            //check whether request hasn't been updated to "active"
+            if (TransportListing.isPresent() && transportRequests.isPresent()) {
+                if (Objects.equals(transportRequests.get().getStatus(), "pending")) {
+                    ConsumersInquiries consumersInquiries = new ConsumersInquiries();
+                    consumersInquiries.setTrackingNumber(inquiriesDTO.getTrackingNum());
+                    consumersInquiries.setTransportListing(TransportListing.get());
+                    consumerInquiryRepository.save(consumersInquiries);
+                }
+            }
+            else {
+                return "Failed To Create Customer Inquiry";
+            }
+        }catch (Exception e){
+            return e.getMessage();
+        }
+        return "Success";
+    }
+
+    @Override
+    public String transporterActiveInquiry(TransportInquiries transportInquiries) throws ObjectOptimisticLockingFailureException{
+
+        try {
+            Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(transportInquiries.getReferenceTrackingNumber()));
+
+            Optional<TransportListing> transportListing_ = Optional.ofNullable(transporterListingRepository.getTransportersListing(transportInquiries.getEmail()));
+
+
+            if (transportRequests.isPresent() && transportListing_.isPresent()) {
+                customerRepository.updateRequestStatus(transportInquiries.getReferenceTrackingNumber(), "Active");
+                transportInquiriesRepository.save(transportInquiries);
+            }
+        } catch (Exception e){
+            return e.getMessage();
+        }
+        return "Success";
     }
 
     @Override
@@ -120,52 +179,77 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteTransportRequest(String trackNum) {
+    public String  deleteTransportRequest(String trackNum) throws ObjectOptimisticLockingFailureException{
 
-        Optional<TransportRequests>  transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackNum));
-        Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.getConsumerInquiry(trackNum));
 
-        transportRequests.ifPresent(customerRepository::delete);
+        //Optimistic locking
 
-        if(consumersInquiries.isPresent()){
-            consumerInquiryRepository.deleteConsumerInquiryByTrNum(trackNum);
+        try {
+            Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackNum));
+            Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.getConsumerInquiry(trackNum));
+
+            transportRequests.ifPresent(customerRepository::delete);
+
+            if (consumersInquiries.isPresent()) {
+                consumerInquiryRepository.deleteConsumerInquiryByTrNum(trackNum);
+            }
+        } catch (Exception e){
+            return e.getMessage();
         }
+
+        return "Success";
     }
 
     @Override
-    public void updateRequestStatus(String trackingNumber, String status) {
+    public String updateRequestStatus(String trackingNumber, String status) throws ObjectOptimisticLockingFailureException{
         //check whether request exists before updating status.
 
-        Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackingNumber));
 
-        if(transportRequests.isPresent()){
-            customerRepository.updateRequestStatus(trackingNumber,status);
+        try {
+            Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackingNumber));
+
+            if (transportRequests.isPresent()) {
+                customerRepository.updateRequestStatus(trackingNumber, status);
+            }
+        } catch (Exception e){
+            return e.getMessage();
         }
+
+        return "Success";
 
     }
 
     @Override
-    public void createRequestHistory(RequestHistory requestHistory) {
-
-        Optional<TransportInquiries> transportInquiries = Optional.ofNullable(transportInquiriesRepository.getTrackingInquiry(requestHistory.getTransportRequests().getTrackingNumber()));
-        Optional<TransportRequests>  transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(requestHistory.getTransportRequests().getTrackingNumber()));
-        Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.getConsumerInquiry(requestHistory.getTransportRequests().getTrackingNumber()));
+    public String createRequestHistory(RequestHistory requestHistory) throws ObjectOptimisticLockingFailureException {
 
 
-        //After customer signs for items.
+        try {
 
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        Date date = new Date(ts.getTime());
+            Optional<TransportInquiries> transportInquiries = Optional.ofNullable(transportInquiriesRepository.getTrackingInquiry(requestHistory.getTransportRequests().getTrackingNumber()));
+            Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(requestHistory.getTransportRequests().getTrackingNumber()));
+            Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.getConsumerInquiry(requestHistory.getTransportRequests().getTrackingNumber()));
 
-        requestHistory.setDateOfCompletion(date);
 
-        if(transportInquiries.isPresent()){
-            transportRequests.ifPresent(customerRepository::delete); transportRequests.ifPresent(customerRepository::delete);
-            transportInquiriesRepository.deleteTransportInquiriesFromTrackingNum(requestHistory.getTransportRequests().getTrackingNumber());
-            consumersInquiries.ifPresent(consumerInquiryRepository::delete);
-            requestDeliveredRepository.save(requestHistory);
+            //After customer signs for items.
+
+            //Optimistic Locking
+
+            Timestamp ts = new Timestamp(System.currentTimeMillis());
+            Date date = new Date(ts.getTime());
+
+            requestHistory.setDateOfCompletion(date);
+
+            if (transportInquiries.isPresent()) {
+                transportRequests.ifPresent(customerRepository::delete);
+                transportInquiriesRepository.deleteTransportInquiriesFromTrackingNum(requestHistory.getTransportRequests().getTrackingNumber());
+                consumersInquiries.ifPresent(consumerInquiryRepository::delete);
+                requestDeliveredRepository.save(requestHistory);
+            }
+        }catch (Exception e){
+
+            return e.getMessage();
         }
-
+       return "Success";
     }
 
 

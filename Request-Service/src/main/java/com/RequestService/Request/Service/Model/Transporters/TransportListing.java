@@ -35,4 +35,8 @@ public class TransportListing {
     private String description;
 
 
+    @Version
+    private Long version;
+
+
 }
