@@ -146,9 +146,12 @@ public class CustomerServiceImpl implements CustomerService {
             //check whether request hasn't been updated to "active"
             if (TransportListing.isPresent() && transportRequests.isPresent()) {
                 if (Objects.equals(transportRequests.get().getStatus(), "pending") && consumersInquiries_.isEmpty()) {
+                    Timestamp ts = new Timestamp(System.currentTimeMillis());
+                    Date date = new Date(ts.getTime());
                     ConsumersInquiries consumersInquiries = new ConsumersInquiries();
                     consumersInquiries.setTrackingNumber(inquiriesDTO.getTrackingNum());
                     consumersInquiries.setTransportListing(TransportListing.get());
+                    consumersInquiries.setDateTimeStamp(date);
                     consumerInquiryRepository.save(consumersInquiries);
                 }
                 else {

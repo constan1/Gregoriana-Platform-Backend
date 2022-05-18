@@ -9,6 +9,7 @@ import lombok.Setter;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity(name="Consumers_Inquiries")
 @Table(name ="consumerInquiries")
@@ -27,7 +28,7 @@ public class ConsumersInquiries {
     private String trackingNumber;
 
     @Column(name ="dateCreated")
-    private String dateTimeStamp;
+    private Date dateTimeStamp;
 
     @OneToOne(cascade = CascadeType.ALL)
     private TransportListing transportListing;
