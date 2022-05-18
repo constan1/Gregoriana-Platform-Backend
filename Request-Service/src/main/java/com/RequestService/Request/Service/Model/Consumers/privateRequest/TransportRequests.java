@@ -7,12 +7,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.OptimisticLockType;
+import org.hibernate.annotations.OptimisticLocking;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name="Transport_Requests")
 @Table(name = "TransportRequests")
+@OptimisticLocking(type = OptimisticLockType.DIRTY)
+@DynamicUpdate
 @Getter
 @Setter
 @AllArgsConstructor
@@ -49,9 +54,6 @@ public class TransportRequests {
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name ="addOn")
     private AddOn addOn;
-
-    @Version
-    private Long version;
 
 
 

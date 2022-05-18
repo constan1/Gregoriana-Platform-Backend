@@ -3,7 +3,6 @@ package com.RequestService.Request.Service.Service.Services;
 import com.RequestService.Request.Service.Model.Consumers.ConsumersInquiries;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.TransportRequests;
 import com.RequestService.Request.Service.Model.DTO.InquiriesDTO;
-import com.RequestService.Request.Service.Model.Transporters.RequestHistory;
 import com.RequestService.Request.Service.Model.Transporters.TransportInquiries;
 import com.RequestService.Request.Service.Model.Transporters.TransportListing;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
@@ -33,7 +32,7 @@ public interface CustomerService {
 
     String updateRequestStatus( String trackingNumber ,String status);
 
-    String createRequestHistory(RequestHistory requestHistory)throws ObjectOptimisticLockingFailureException ;
+    String createRequestHistory(String trackingNumber, String signatureUrl)throws ObjectOptimisticLockingFailureException ;
 
     TransportRequests getTransportRequestByTrackingNumber(String trackNum);
 

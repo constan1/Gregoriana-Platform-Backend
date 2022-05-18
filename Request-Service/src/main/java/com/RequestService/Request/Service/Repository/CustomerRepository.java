@@ -3,11 +3,13 @@ package com.RequestService.Request.Service.Repository;
 
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.TransportRequests;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.LockModeType;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -19,6 +21,8 @@ public interface CustomerRepository extends JpaRepository<TransportRequests,Long
 
     @Query("select t from Transport_Requests t where t.trackingNumber =:trackingNum")
      TransportRequests getTransportRequestByTrackingNumber(@Param("trackingNum") String trackNum);
+
+
 
     @Query("select t from Transport_Requests t where t.status =:pending")
     List<TransportRequests> getRequestForMarket(@Param("pending")String pending);

@@ -4,7 +4,7 @@ package com.RequestService.Request.Service.Service.Implementation;
 import com.RequestService.Request.Service.Model.Consumers.ConsumersInquiries;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.TransportRequests;
 import com.RequestService.Request.Service.Model.DTO.InquiriesDTO;
-import com.RequestService.Request.Service.Model.Transporters.RequestHistory;
+import com.RequestService.Request.Service.Model.LoggingService.RequestHistory;
 import com.RequestService.Request.Service.Model.Transporters.TransportInquiries;
 import com.RequestService.Request.Service.Model.Transporters.TransportListing;
 import com.RequestService.Request.Service.QuantumEntropy.entropy;
@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final TransporterListingRepository transporterListingRepository;
     private final ConsumerInquiryRepository consumerInquiryRepository;
     private final TransportInquiriesRepository transportInquiriesRepository;
-    private final RequestDeliveredRepository requestDeliveredRepository;
+
 
 
     @Override
@@ -59,14 +59,24 @@ public class CustomerServiceImpl implements CustomerService {
 
             Optional<TransportListing> transportListing_ = Optional.ofNullable(transporterListingRepository.getTransportersListing(email));
 
-            transportListing_.ifPresent(transporterListingRepository::delete);
+            if(transportListing_.isPresent()){
+
+                consumerInquiryRepository.deleteConsumersInquiriesByEmail(email);
+                transporterListingRepository.delete(transportListing_.get());
+
+                return "Your listing has been deleted as well as your inquiries.Customers will not see your listing on any " +
+                        "active or pending orders";
+
+            }
+            else {
+                return "Failed: This listing has already been deleted or does not exist";
+            }
 
 
         }catch (Exception e){
             return e.getMessage();
         }
 
-        return "Success";
     }
 
     @Override
@@ -101,13 +111,22 @@ public class CustomerServiceImpl implements CustomerService {
 
         try {
 
+            Optional<TransportListing> transportListing_ = Optional.ofNullable(transporterListingRepository.getTransportersListing(transportListing.getEmail()));
 
-            transporterListingRepository.save(transportListing);
+            if(transportListing_.isEmpty()){
+                transporterListingRepository.save(transportListing);
+                return "Success";
+            }
+
+            else {
+                return "Transport Listing already exists.";
+            }
+
+
         } catch (Exception e){
             return e.getMessage();
         }
 
-        return "Success";
     }
 
     @Override
@@ -120,13 +139,20 @@ public class CustomerServiceImpl implements CustomerService {
 
             Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(inquiriesDTO.getTrackingNum()));
 
+            Optional<ConsumersInquiries> consumersInquiries_ = Optional.ofNullable(consumerInquiryRepository.checkConsumerInquiry(inquiriesDTO.getTrackingNum(),inquiriesDTO.getEmail()));
+
+
+
             //check whether request hasn't been updated to "active"
             if (TransportListing.isPresent() && transportRequests.isPresent()) {
-                if (Objects.equals(transportRequests.get().getStatus(), "pending")) {
+                if (Objects.equals(transportRequests.get().getStatus(), "pending") && consumersInquiries_.isEmpty()) {
                     ConsumersInquiries consumersInquiries = new ConsumersInquiries();
                     consumersInquiries.setTrackingNumber(inquiriesDTO.getTrackingNum());
                     consumersInquiries.setTransportListing(TransportListing.get());
                     consumerInquiryRepository.save(consumersInquiries);
+                }
+                else {
+                    return "Error: This request is already active or you have already inquired on it.";
                 }
             }
             else {
@@ -147,14 +173,17 @@ public class CustomerServiceImpl implements CustomerService {
             Optional<TransportListing> transportListing_ = Optional.ofNullable(transporterListingRepository.getTransportersListing(transportInquiries.getEmail()));
 
 
-            if (transportRequests.isPresent() && transportListing_.isPresent()) {
+            if (transportRequests.isPresent() && transportListing_.isPresent() && Objects.equals(transportRequests.get().getStatus(), "pending")) {
                 customerRepository.updateRequestStatus(transportInquiries.getReferenceTrackingNumber(), "Active");
                 transportInquiriesRepository.save(transportInquiries);
+                return "Order active: Transporter notified";
+            }
+            else {
+                return "Order Not Activated. Either the request or listing is no long available or the order is already active";
             }
         } catch (Exception e){
             return e.getMessage();
         }
-        return "Success";
     }
 
     @Override
@@ -220,36 +249,49 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String createRequestHistory(RequestHistory requestHistory) throws ObjectOptimisticLockingFailureException {
+    public String createRequestHistory(String trackingNumber, String signatureUrl) throws ObjectOptimisticLockingFailureException {
 
 
         try {
 
-            Optional<TransportInquiries> transportInquiries = Optional.ofNullable(transportInquiriesRepository.getTrackingInquiry(requestHistory.getTransportRequests().getTrackingNumber()));
-            Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(requestHistory.getTransportRequests().getTrackingNumber()));
-            Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.getConsumerInquiry(requestHistory.getTransportRequests().getTrackingNumber()));
+            Optional<TransportInquiries> transportInquiries = Optional.ofNullable(transportInquiriesRepository.getTrackingInquiry(trackingNumber));
+            Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackingNumber));
+            Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.getConsumerInquiry(trackingNumber));
 
 
             //After customer signs for items.
 
             //Optimistic Locking
 
-            Timestamp ts = new Timestamp(System.currentTimeMillis());
-            Date date = new Date(ts.getTime());
+            if (transportInquiries.isPresent() && transportRequests.isPresent() && consumersInquiries.isPresent()) {
 
-            requestHistory.setDateOfCompletion(date);
+                Timestamp ts = new Timestamp(System.currentTimeMillis());
+                Date date = new Date(ts.getTime());
 
-            if (transportInquiries.isPresent()) {
-                transportRequests.ifPresent(customerRepository::delete);
-                transportInquiriesRepository.deleteTransportInquiriesFromTrackingNum(requestHistory.getTransportRequests().getTrackingNumber());
-                consumersInquiries.ifPresent(consumerInquiryRepository::delete);
-                requestDeliveredRepository.save(requestHistory);
+                RequestHistory requestHistory = new RequestHistory();
+
+                requestHistory.setDateOfCompletion(date);
+                requestHistory.setTransportRequests(transportRequests.get());
+                requestHistory.setSignatureUrl(signatureUrl);
+
+                customerRepository.delete(transportRequests.get());
+                transportInquiriesRepository.deleteTransportInquiriesFromTrackingNum(trackingNumber);
+                consumerInquiryRepository.delete(consumersInquiries.get());
+
+
+                // Pass the Request-History entity to Logging-Service - Circuit Breakers.
+
+                //Send this entity to the logging-service;
+
+                return "Success: Request Persisted";
+            }
+            else{
+                return "Error: Transaction history not persisted";
             }
         }catch (Exception e){
 
             return e.getMessage();
         }
-       return "Success";
     }
 
 

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import javax.persistence.*;
 
 @Entity(name="Consumers_Inquiries")
@@ -31,7 +32,6 @@ public class ConsumersInquiries {
     @OneToOne(cascade = CascadeType.ALL)
     private TransportListing transportListing;
 
-    @Version
-    private Long version;
+
 
 }

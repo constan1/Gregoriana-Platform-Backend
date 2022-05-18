@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface TransporterListingRepository extends JpaRepository<TransportListing,String> {
 
     @Query("select i from Transport_Listing  i where i.email =:email")
-    TransportListing getTransportersListing(@Param("email") String email);
+    TransportListing getTransportersListing(@Param("email") String email_);
 
 }

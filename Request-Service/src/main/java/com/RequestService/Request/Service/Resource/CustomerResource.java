@@ -4,8 +4,9 @@ package com.RequestService.Request.Service.Resource;
 import com.RequestService.Request.Service.Model.Consumers.ConsumersInquiries;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.TransportRequests;
 import com.RequestService.Request.Service.Model.DTO.InquiriesDTO;
+import com.RequestService.Request.Service.Model.DTO.RequestCompletedDTO;
 import com.RequestService.Request.Service.Model.DTO.RequestStatusDTO;
-import com.RequestService.Request.Service.Model.Transporters.RequestHistory;
+import com.RequestService.Request.Service.Model.LoggingService.RequestHistory;
 import com.RequestService.Request.Service.Model.Transporters.TransportInquiries;
 import com.RequestService.Request.Service.Model.Transporters.TransportListing;
 import com.RequestService.Request.Service.Service.Services.CustomerService;
@@ -119,8 +120,8 @@ public class CustomerResource {
 
     @PostMapping("/requestCompleted")
     @ResponseStatus(HttpStatus.OK)
-    private String requestCompleted(@RequestBody RequestHistory requestHistory){
-       return  customerService.createRequestHistory(requestHistory);
+    private String requestCompleted(@RequestBody RequestCompletedDTO requestHistory){
+       return  customerService.createRequestHistory(requestHistory.getTrackingNumber(), requestHistory.getSignatureUrl());
     }
 
 
