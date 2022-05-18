@@ -175,14 +175,16 @@ public class CustomerServiceImpl implements CustomerService {
 
             Optional<TransportListing> transportListing_ = Optional.ofNullable(transporterListingRepository.getTransportersListing(transportInquiries.getEmail()));
 
+            Optional<TransportInquiries> transportInquiries1 = Optional.ofNullable(transportInquiriesRepository.getTrackingInquiry(transportInquiries.getReferenceTrackingNumber()));
+            //check whether this inquiry already exists
 
-            if (transportRequests.isPresent() && transportListing_.isPresent() && Objects.equals(transportRequests.get().getStatus(), "pending")) {
+            if (transportRequests.isPresent() && transportListing_.isPresent() && Objects.equals(transportRequests.get().getStatus(), "pending") && transportInquiries1.isEmpty()) {
                 customerRepository.updateRequestStatus(transportInquiries.getReferenceTrackingNumber(), "Active");
                 transportInquiriesRepository.save(transportInquiries);
                 return "Order active: Transporter notified";
             }
             else {
-                return "Order Not Activated. Either the request or listing is no long available or the order is already active";
+                return "Order Not Activated:";
             }
         } catch (Exception e){
             return e.getMessage();
@@ -199,6 +201,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         return transportInquiriesRepository.getAllTransportInquiries(email);
     }
+
 
     @Override
     public List<TransportListing> getAllTransportListings() {

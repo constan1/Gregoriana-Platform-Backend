@@ -6,7 +6,6 @@ import com.RequestService.Request.Service.Model.Consumers.privateRequest.Transpo
 import com.RequestService.Request.Service.Model.DTO.InquiriesDTO;
 import com.RequestService.Request.Service.Model.DTO.RequestCompletedDTO;
 import com.RequestService.Request.Service.Model.DTO.RequestStatusDTO;
-import com.RequestService.Request.Service.Model.LoggingService.RequestHistory;
 import com.RequestService.Request.Service.Model.Transporters.TransportInquiries;
 import com.RequestService.Request.Service.Model.Transporters.TransportListing;
 import com.RequestService.Request.Service.Service.Services.CustomerService;

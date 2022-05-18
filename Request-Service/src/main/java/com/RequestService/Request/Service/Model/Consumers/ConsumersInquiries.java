@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.OptimisticLockType;
+import org.hibernate.annotations.OptimisticLocking;
 
 
 import javax.persistence.*;
@@ -13,6 +16,8 @@ import java.util.Date;
 
 @Entity(name="Consumers_Inquiries")
 @Table(name ="consumerInquiries")
+@OptimisticLocking(type = OptimisticLockType.DIRTY)
+@DynamicUpdate
 @Getter
 @Setter
 @AllArgsConstructor

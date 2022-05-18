@@ -40,5 +40,7 @@ public interface CustomerService {
 
     String deleteTransportListing(String email)throws ObjectOptimisticLockingFailureException;
 
+
+
     
 }
