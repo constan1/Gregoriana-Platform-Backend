@@ -17,34 +17,34 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/request")
+@RequestMapping("/v1")
 @RequiredArgsConstructor
 public class CustomerResource {
 
     private final CustomerService customerService;
 
 
-    @GetMapping("/customersRequest/{authID}")
+    @GetMapping("/customer-request/customersRequest/{authID}")
     @ResponseStatus(HttpStatus.OK)
     private List<TransportRequests> getAllCustomersRequest(@PathVariable(name="authID") String authID){
 
         return customerService.getRequestForClient(authID);
     }
 
-    @PostMapping
+    @PostMapping("/customer-request/create")
     @ResponseStatus(HttpStatus.CREATED)
     private String requestCreated(@RequestBody TransportRequests request) throws NoSuchAlgorithmException {
 
         return customerService.createRequest(request);
     }
 
-    @GetMapping
+    @GetMapping("/transporter-request/getAllRequests")
     @ResponseStatus(HttpStatus.OK)
     private List<TransportRequests> getRequestsForMarket(){
         return customerService.getRequestForMarket("pending");
     }
 
-    @PostMapping("/consumerInquiries")
+    @PostMapping("/transporter-request/consumerInquiries")
     @ResponseStatus(HttpStatus.OK)
     private String createInquiries(@RequestBody InquiriesDTO inquiriesDTO){
 
@@ -52,58 +52,64 @@ public class CustomerResource {
 
     }
 
-    @PostMapping("/transporterActiveInquiries")
+    @PostMapping("/transporter-request/transporterActiveInquiries")
     @ResponseStatus(HttpStatus.OK)
     private String createTransporterActiveInquiries(@RequestBody TransportInquiries transportInquiries)
     {
         return customerService.transporterActiveInquiry(transportInquiries);
     }
 
-    @PostMapping("/createTransportListing")
+    @PostMapping("/transporter-request/createTransportListing")
     @ResponseStatus(HttpStatus.OK)
     private String createTransportListing(@RequestBody TransportListing transportListing){
         return customerService.createTransportListing(transportListing);
     }
 
-    @GetMapping("/consumersInquiries/{trackingNumber}")
+    @GetMapping("/customer-request/consumersInquiries/{trackingNumber}")
     @ResponseStatus(HttpStatus.OK)
     private List<ConsumersInquiries> getAllInquiries(@PathVariable("trackingNumber") String trackingNumber){
 
         return customerService.getAllInquiriesForTrackingNumber(trackingNumber);
     }
 
-    @GetMapping("/TransportInquiries/{emailID}")
+    @GetMapping("/transporter-request/TransportInquiries/{emailID}")
     @ResponseStatus(HttpStatus.OK)
     private List<TransportInquiries> getTransportInquiries(@PathVariable("emailID") String email){
 
         return customerService.getAllTransportInquiries(email);
     }
 
-    @GetMapping("/TransportListings")
+    @GetMapping("/customer-request/TransportListings")
     @ResponseStatus(HttpStatus.OK)
     private List<TransportListing> getAllTransportListing(){
         return customerService.getAllTransportListings();
     }
 
-    @GetMapping("/TransportListing/{emailID}")
+    @GetMapping("/customer-request/TransportListing/{emailID}")
     @ResponseStatus(HttpStatus.OK)
-    private TransportListing getTransportListing(@PathVariable("emailID") String email){
+    private TransportListing getTransportListingPublic(@PathVariable("emailID") String email){
         return customerService.getTransportersPersonalListing(email);
     }
 
-    @DeleteMapping("/removeTransportListing/{emailID}")
+    @GetMapping("/transporter-request/TransportListing/{emailID}")
+    @ResponseStatus(HttpStatus.OK)
+    private TransportListing getTransportListingPrivate(@PathVariable("emailID") String email){
+        return customerService.getTransportersPersonalListing(email);
+    }
+
+    @DeleteMapping("/transporter-request/removeTransportListing/{emailID}")
     @ResponseStatus(HttpStatus.OK)
     private String deleteTransportListing(@PathVariable("emailID") String emailID){
         return customerService.deleteTransportListing(emailID);
     }
 
-    @GetMapping("/PublicRequest/{trackingNumber}")
+    @GetMapping("/transporter-request/PublicRequest/{trackingNumber}")
     @ResponseStatus(HttpStatus.OK)
     private TransportRequests getPublicRequest(@PathVariable("trackingNumber") String trackingNumber){
        return customerService.getTransportRequestByTrackingNumber(trackingNumber);
     }
 
-    @DeleteMapping("/deleteTransportRequest/{trackingNum}")
+    @DeleteMapping("/customer-request/deleteTransportRequest/{trackingNum}")
     @ResponseStatus(HttpStatus.OK)
     private String deleteTransportRequest(@PathVariable("trackingNum") String trackingNum){
         return customerService.deleteTransportRequest(trackingNum);
@@ -111,13 +117,13 @@ public class CustomerResource {
 
 
 
-    @PutMapping("/updateRequestStatus")
+    @PutMapping("/customer-request/updateRequestStatus")
     @ResponseStatus(HttpStatus.OK)
     private String updateRequestStatus(@RequestBody RequestStatusDTO requestStatusDTO){
         return customerService.updateRequestStatus(requestStatusDTO.getTrackingNumber(),requestStatusDTO.getStatus());
     }
 
-    @PostMapping("/requestCompleted")
+    @PostMapping("/customer-request/requestCompleted")
     @ResponseStatus(HttpStatus.OK)
     private String requestCompleted(@RequestBody RequestCompletedDTO requestHistory){
        return  customerService.createRequestHistory(requestHistory.getTrackingNumber(), requestHistory.getSignatureUrl());

@@ -6,10 +6,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TransporterListingRepository extends JpaRepository<TransportListing,String> {
 
-    @Query("select i from Transport_Listing  i where i.email =:email")
+    @Query("select i from Transport_Listing  i left join fetch i.vehicle where i.email =:email")
     TransportListing getTransportersListing(@Param("email") String email_);
+
+    @Query("select i from Transport_Listing i left join fetch i.vehicle")
+    List<TransportListing> getAllTransportListing();
 
 }

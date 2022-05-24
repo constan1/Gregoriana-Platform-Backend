@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface ConsumerInquiryRepository extends JpaRepository<ConsumersInquiries,Long> {
 
-    @Query("select c from Consumers_Inquiries c where c.trackingNumber =:trackingNumber")
+    @Query("select c from Consumers_Inquiries c left join fetch c.transportListing t left join fetch t.vehicle where c.trackingNumber =:trackingNumber")
     List<ConsumersInquiries> getAllInquiriesForTrackingNumber(@Param("trackingNumber") String trackingNumber);
 
     @Modifying
@@ -23,15 +23,9 @@ public interface ConsumerInquiryRepository extends JpaRepository<ConsumersInquir
     @Query("delete from Consumers_Inquiries d where d.trackingNumber =:trackingNumber")
     void deleteConsumerInquiryByTrNum(@Param("trackingNumber") String trackingNum);
 
-    @Query("select c from Consumers_Inquiries c where c.trackingNumber =:trackingNumber")
-    ConsumersInquiries getConsumerInquiry(@Param("trackingNumber") String trackingNumber);
 
-    @Query("select c from Consumers_Inquiries c where c.trackingNumber =:trackingNumber and c.transportListing.email =:email")
+    @Query("select c from Consumers_Inquiries c  left join fetch c.transportListing t left join fetch t.vehicle where c.trackingNumber =:trackingNumber and c.transportListing.email =:email")
     ConsumersInquiries checkConsumerInquiry(@Param("trackingNumber") String trackingNum, @Param("email") String email);
-
-
-    @Query("select c from Consumers_Inquiries c where c.transportListing.email =:email")
-    List<ConsumersInquiries> checkConsumerInquiryExists(@Param("email") String email);
 
 
     @Modifying

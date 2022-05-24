@@ -16,15 +16,15 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<TransportRequests,Long> {
 
-    @Query("select t from Transport_Requests t where t.authID =:authID")
+    @Query("select t from Transport_Requests t left join fetch  t.stops s left join fetch s.dropOffs left join fetch  t.addOn where t.authID =:authID")
     List<TransportRequests> getRequestForClient(@Param("authID")String authID);
 
-    @Query("select t from Transport_Requests t where t.trackingNumber =:trackingNum")
+    @Query("select t from Transport_Requests t left join fetch t.stops s left join  fetch s.dropOffs left join fetch t.addOn where t.trackingNumber =:trackingNum")
      TransportRequests getTransportRequestByTrackingNumber(@Param("trackingNum") String trackNum);
 
 
 
-    @Query("select t from Transport_Requests t where t.status =:pending")
+    @Query("select t from Transport_Requests t  left join fetch t.stops s left join fetch s.dropOffs left join fetch t.addOn where t.status =:pending")
     List<TransportRequests> getRequestForMarket(@Param("pending")String pending);
 
 

@@ -64,7 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
                 consumerInquiryRepository.deleteConsumersInquiriesByEmail(email);
                 transporterListingRepository.delete(transportListing_.get());
 
-                return "Your listing has been deleted as well as your inquiries.Customers will not see your listing on any " +
+                return "Success: Your listing has been deleted as well as your inquiries.Customers will not see your listing on any " +
                         "active or pending orders";
 
             }
@@ -78,6 +78,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
     }
+
 
     @Override
     public String createRequest(TransportRequests transportRequests) throws ObjectOptimisticLockingFailureException{
@@ -175,10 +176,10 @@ public class CustomerServiceImpl implements CustomerService {
 
             Optional<TransportListing> transportListing_ = Optional.ofNullable(transporterListingRepository.getTransportersListing(transportInquiries.getEmail()));
 
-            Optional<TransportInquiries> transportInquiries1 = Optional.ofNullable(transportInquiriesRepository.getTrackingInquiry(transportInquiries.getReferenceTrackingNumber()));
+            Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.checkConsumerInquiry(transportInquiries.getReferenceTrackingNumber(),transportInquiries.getEmail()));
             //check whether this inquiry already exists
 
-            if (transportRequests.isPresent() && transportListing_.isPresent() && Objects.equals(transportRequests.get().getStatus(), "pending") && transportInquiries1.isEmpty()) {
+            if (transportRequests.isPresent() && transportListing_.isPresent() && Objects.equals(transportRequests.get().getStatus(), "pending") && consumersInquiries.isPresent()) {
                 customerRepository.updateRequestStatus(transportInquiries.getReferenceTrackingNumber(), "Active");
                 transportInquiriesRepository.save(transportInquiries);
                 return "Order active: Transporter notified";
@@ -205,7 +206,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<TransportListing> getAllTransportListings() {
-        return transporterListingRepository.findAll();
+        return transporterListingRepository.getAllTransportListing();
     }
 
     @Override
@@ -221,13 +222,12 @@ public class CustomerServiceImpl implements CustomerService {
 
         try {
             Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackNum));
-            Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.getConsumerInquiry(trackNum));
 
-            transportRequests.ifPresent(customerRepository::delete);
-
-            if (consumersInquiries.isPresent()) {
+            if(transportRequests.isPresent()){
+                customerRepository.delete(transportRequests.get());
                 consumerInquiryRepository.deleteConsumerInquiryByTrNum(trackNum);
             }
+
         } catch (Exception e){
             return e.getMessage();
         }
@@ -262,14 +262,13 @@ public class CustomerServiceImpl implements CustomerService {
 
             Optional<TransportInquiries> transportInquiries = Optional.ofNullable(transportInquiriesRepository.getTrackingInquiry(trackingNumber));
             Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackingNumber));
-            Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.getConsumerInquiry(trackingNumber));
 
 
             //After customer signs for items.
 
             //Optimistic Locking
 
-            if (transportInquiries.isPresent() && transportRequests.isPresent() && consumersInquiries.isPresent()) {
+            if (transportInquiries.isPresent() && transportRequests.isPresent()) {
 
                 Timestamp ts = new Timestamp(System.currentTimeMillis());
                 Date date = new Date(ts.getTime());
@@ -282,7 +281,7 @@ public class CustomerServiceImpl implements CustomerService {
 
                 customerRepository.delete(transportRequests.get());
                 transportInquiriesRepository.deleteTransportInquiriesFromTrackingNum(trackingNumber);
-                consumerInquiryRepository.delete(consumersInquiries.get());
+                consumerInquiryRepository.deleteConsumerInquiryByTrNum(trackingNumber);
 
 
                 // Pass the Request-History entity to Logging-Service - Circuit Breakers.
