@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface ConsumerInquiryRepository extends JpaRepository<ConsumersInquiries,Long> {
 
-    @Query("select c from Consumers_Inquiries c left join fetch c.transportListing t left join fetch t.vehicle where c.trackingNumber =:trackingNumber")
+    @Query("select distinct c from Consumers_Inquiries c left join fetch c.transportListing t left join fetch t.vehicle where c.trackingNumber =:trackingNumber")
     List<ConsumersInquiries> getAllInquiriesForTrackingNumber(@Param("trackingNumber") String trackingNumber);
 
     @Modifying
@@ -24,7 +24,7 @@ public interface ConsumerInquiryRepository extends JpaRepository<ConsumersInquir
     void deleteConsumerInquiryByTrNum(@Param("trackingNumber") String trackingNum);
 
 
-    @Query("select c from Consumers_Inquiries c  left join fetch c.transportListing t left join fetch t.vehicle where c.trackingNumber =:trackingNumber and c.transportListing.email =:email")
+    @Query("select distinct c from Consumers_Inquiries c  left join fetch c.transportListing t left join fetch t.vehicle where c.trackingNumber =:trackingNumber and c.transportListing.email =:email")
     ConsumersInquiries checkConsumerInquiry(@Param("trackingNumber") String trackingNum, @Param("email") String email);
 
 

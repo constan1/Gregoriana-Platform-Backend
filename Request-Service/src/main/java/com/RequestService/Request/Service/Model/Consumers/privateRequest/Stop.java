@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -39,6 +41,7 @@ public class Stop {
     private String photoUrl;
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name ="drop_off_id")
     private List<DropOffs> dropOffs;
 
 

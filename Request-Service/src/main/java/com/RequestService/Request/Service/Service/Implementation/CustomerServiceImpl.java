@@ -140,13 +140,12 @@ public class CustomerServiceImpl implements CustomerService {
 
             Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(inquiriesDTO.getTrackingNum()));
 
-            Optional<ConsumersInquiries> consumersInquiries_ = Optional.ofNullable(consumerInquiryRepository.checkConsumerInquiry(inquiriesDTO.getTrackingNum(),inquiriesDTO.getEmail()));
 
 
 
             //check whether request hasn't been updated to "active"
             if (TransportListing.isPresent() && transportRequests.isPresent()) {
-                if (Objects.equals(transportRequests.get().getStatus(), "pending") && consumersInquiries_.isEmpty()) {
+                if (Objects.equals(transportRequests.get().getStatus(), "pending")) {
                     Timestamp ts = new Timestamp(System.currentTimeMillis());
                     Date date = new Date(ts.getTime());
                     ConsumersInquiries consumersInquiries = new ConsumersInquiries();
@@ -172,14 +171,14 @@ public class CustomerServiceImpl implements CustomerService {
     public String transporterActiveInquiry(TransportInquiries transportInquiries) throws ObjectOptimisticLockingFailureException{
 
         try {
-            Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(transportInquiries.getReferenceTrackingNumber()));
+
 
             Optional<TransportListing> transportListing_ = Optional.ofNullable(transporterListingRepository.getTransportersListing(transportInquiries.getEmail()));
 
             Optional<ConsumersInquiries> consumersInquiries = Optional.ofNullable(consumerInquiryRepository.checkConsumerInquiry(transportInquiries.getReferenceTrackingNumber(),transportInquiries.getEmail()));
             //check whether this inquiry already exists
 
-            if (transportRequests.isPresent() && transportListing_.isPresent() && Objects.equals(transportRequests.get().getStatus(), "pending") && consumersInquiries.isPresent()) {
+            if ( consumersInquiries.isPresent() && transportListing_.isPresent()) {
                 customerRepository.updateRequestStatus(transportInquiries.getReferenceTrackingNumber(), "Active");
                 transportInquiriesRepository.save(transportInquiries);
                 return "Order active: Transporter notified";
@@ -215,25 +214,24 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String  deleteTransportRequest(String trackNum) throws ObjectOptimisticLockingFailureException{
+    public String  deleteTransportRequest(String trackNum) throws ObjectOptimisticLockingFailureException {
 
 
         //Optimistic locking
 
         try {
-            Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackNum));
 
-            if(transportRequests.isPresent()){
-                customerRepository.delete(transportRequests.get());
+
+                customerRepository.delete(Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackNum)).get());
                 consumerInquiryRepository.deleteConsumerInquiryByTrNum(trackNum);
+
+
+            } catch(Exception e){
+                return "Error: " + e.getMessage();
             }
 
-        } catch (Exception e){
-            return e.getMessage();
+            return "Success";
         }
-
-        return "Success";
-    }
 
     @Override
     public String updateRequestStatus(String trackingNumber, String status) throws ObjectOptimisticLockingFailureException{

@@ -7,11 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.OptimisticLockType;
-import org.hibernate.annotations.OptimisticLocking;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity(name="Transport_Requests")
@@ -42,6 +43,7 @@ public class TransportRequests {
     private Date dateStamp;
 
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+
     @JoinColumn(name ="stop_id")
     private Stop stops;
 
@@ -52,7 +54,7 @@ public class TransportRequests {
     private String status;
 
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumn(name ="addOn")
+    @JoinColumn(name ="addOn_id")
     private AddOn addOn;
 
 
