@@ -37,6 +37,9 @@ public class Vehicle {
     @Column(name = "licensePlate")
     private String license_plate;
 
+    @Column(name = "vehicle_ownership_photo")
+    private String ownership_url;
+
     @Column(name = "first_photo")
     private String first_photo_url;
 
