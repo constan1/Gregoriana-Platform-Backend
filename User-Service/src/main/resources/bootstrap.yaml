@@ -3,20 +3,13 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8888
-    vault:
-      host: "${HOSTNAME}.vault"
-      port: 8200
-      scheme: http
-      authentication: TOKEN
-      token: ${VAULT_TOKEN}
-      application-name: user-service
-      kv:
-        enabled: true
   rabbitmq:
     host: "${HOSTNAME}.rabbit"
     port: 5672
     username: ${RABBIT_USERNAME}
     password: ${RABBIT_PASSWORD}
-
-vault:
-  keyValue: ${keyValue}"
+  datasource:
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+encryp:
+  password: ${ePassword}

@@ -9,5 +9,10 @@
       "name": "vault.keyValue",
       "type": "java.lang.String",
       "description": "Description for vault.keyValue."
+    },
+    {
+      "name": "encryp.password",
+      "type": "java.lang.String",
+      "description": "encryption password."
     }
   ] }

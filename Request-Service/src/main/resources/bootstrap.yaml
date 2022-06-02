@@ -3,14 +3,7 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8888
-    vault:
-      host: "${HOSTNAME}.vault"
-      port: 8200
-      scheme: http
-      authentication: TOKEN
-      token: ${VAULT_TOKEN}
-      application-name: request-service
-      kv:
-        enabled: true
-
+  datasource:
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
