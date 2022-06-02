@@ -62,7 +62,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<repository>constan1/service-registry</repository>
+					<repository>constan1/gregoryana-service-discovery</repository>
 					<tag>${project.version}</tag>
 					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 				</configuration>
