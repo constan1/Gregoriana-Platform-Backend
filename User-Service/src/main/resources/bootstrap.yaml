@@ -9,8 +9,14 @@ spring:
       scheme: http
       authentication: TOKEN
       token: ${VAULT_TOKEN}
-      application-name: request-service
+      application-name: user-service
       kv:
         enabled: true
+  rabbitmq:
+    host: "${HOSTNAME}.rabbit"
+    port: 5672
+    username: ${RABBIT_USERNAME}
+    password: ${RABBIT_PASSWORD}
 
-
+vault:
+  keyValue: ${keyValue}
