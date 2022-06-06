@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: Mobile-Api-Gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/v1/user/transporter/client/**
+        - id: request-service
+          uri: lb://request-service
+          predicates:
+            - Path=/v1/transporter-request/**
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: eureka-0
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+server:
+  port: 8181
