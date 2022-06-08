@@ -1,0 +1,37 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mobile-gateway-app
+  labels:
+    app: mobile-gateway-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mobile-gateway-app
+  template:
+    metadata:
+      labels:
+        app: mobile-gateway-app
+    spec:
+      containers:
+        - name: mobile-gateway-app
+          image: constan1/gregoryana-mobile-gateway:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8181
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mobile-gateway-svc
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8181
+      protocol: TCP
+  selector:
+    app: mobile-gateway-app

@@ -2,7 +2,7 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: http://localhost:8888
+      uri: http://config-server-svc:8888
   rabbitmq:
     host: "${HOSTNAME}.rabbit"
     port: 5672

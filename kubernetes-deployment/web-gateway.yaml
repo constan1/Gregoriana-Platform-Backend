@@ -1,0 +1,37 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-gateway-app
+  labels:
+    app: web-gateway-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-gateway-app
+  template:
+    metadata:
+      labels:
+        app: web-gateway-app
+    spec:
+      containers:
+        - name: web-gateway-app
+          image: constan1/gregoryana-web-gateway:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8180
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-gateway-svc
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8180
+      protocol: TCP
+  selector:
+    app: web-gateway-app

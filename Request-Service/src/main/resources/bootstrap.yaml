@@ -2,8 +2,7 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: http://localhost:8888
+      uri: http://config-server-svc:8888
   datasource:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-

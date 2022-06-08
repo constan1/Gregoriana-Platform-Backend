@@ -1,0 +1,25 @@
+server:
+  port: 8888
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/constan1/Microservices-Gregoriana-Configserver
+          clone-on-start: true
+          username: constan1
+          password: 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
+  application:
+    name: configuration-server
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: eureka-0
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+

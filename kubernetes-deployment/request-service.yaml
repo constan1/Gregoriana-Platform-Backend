@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: request-service-app
+  labels:
+    app: request-service-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app : request-service-app
+  template:
+    metadata:
+      labels:
+        app: request-service-app
+    spec:
+      containers:
+        - name: request-service-app
+          image: constan1/gregoryana-request-service:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9001
+          env:
+            - name: DB_USERNAME
+              value: "postgres"
+            - name: DB_PASSWORD
+              value: "Tool321652919"
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name:  request-service-svc
+spec:
+  selector:
+    app:  request-service-app
+  ports:
+    - port:  80
+      targetPort:  9001
