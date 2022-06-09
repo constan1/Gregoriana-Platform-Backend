@@ -22,7 +22,7 @@ public class UserTransporterResource {
     private final TransporterService transporterService;
 
 
-    @CacheEvict(value="transporter_profile", allEntries = true,beforeInvocation = true)
+
     @PostMapping("/client")
     @ResponseStatus(HttpStatus.CREATED)
     public void createTransporterClient(@RequestBody TransporterClient transporterClient) throws Exception {
@@ -31,8 +31,8 @@ public class UserTransporterResource {
         transporterService.Save_TransporterClient(transporterClient);
     }
 
-    @Cacheable("transporter_profile")
-    @RequestMapping(value = "/client/{authID}", method = RequestMethod.GET)
+
+    @GetMapping("/client/{authID}")
     @ResponseStatus(HttpStatus.OK)
     public  TransporterClient  getTransporter(@PathVariable("authID") String authID) throws Exception {
 
@@ -41,41 +41,35 @@ public class UserTransporterResource {
     }
 
 
-    @CacheEvict(value="transporter_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updateAddress")
     @ResponseStatus(HttpStatus.OK)
     public void updateTransporterAddress(@RequestBody TransporterAddressDTO transporterAddressDTO) throws Exception {
 
-        transporterService.updateAddress(transporterAddressDTO
-                .getAddress(),transporterAddressDTO.getAuthID());
+        transporterService.updateAddress(transporterAddressDTO.getAddress(),transporterAddressDTO.getAuthID());
 
     }
-    @CacheEvict(value="transporter_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updatePhotoUrl")
     @ResponseStatus(HttpStatus.OK)
     public void updateTransporterPhotoUrl(@RequestBody PhotoDTO photoDTO){
 
         transporterService.updatePhotoUrl(photoDTO.getPhotoUrl(),photoDTO.getAuthID());
     }
-    @CacheEvict(value="transporter_profile", allEntries = true)
     @PutMapping("/client/updateVerified")
     @ResponseStatus(HttpStatus.OK)
     public void updateTransporterVerified(@RequestBody VerifiedDTO verifiedDTO) {
 
         transporterService.updateVerified(verifiedDTO.getVerified(),verifiedDTO.getAuthID());
     }
-    @CacheEvict(value="transporter_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updatePhone")
     @ResponseStatus(HttpStatus.OK)
     public void updateTransporterPhone(@RequestBody PhoneDTO phoneDTO){
         transporterService.updatePhone(phoneDTO.getPhone(),phoneDTO.getAuthID());
     }
 
-    @CacheEvict(value="transporter_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updateDriversLicense")
     @ResponseStatus(HttpStatus.OK)
     public void updateDriversLicense(@RequestBody LicenseDTO license) throws Exception {
-        transporterService.updateLicensePhoto(license.getDrivers_license().getDrivers_photo_url(),license.getAuthID());
+        transporterService.updateLicensePhoto(license.getDrivers_license(),license.getAuthID());
     }
 
 

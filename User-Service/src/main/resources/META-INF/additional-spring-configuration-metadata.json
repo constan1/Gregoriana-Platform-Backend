@@ -13,6 +13,6 @@
     {
       "name": "encryp.password",
       "type": "java.lang.String",
-      "description": "encryption password."
+      "description": "Description for encryp.password."
     }
   ] }

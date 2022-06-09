@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransporterAddress implements Serializable {
+public class TransporterAddress{
 
     @Id
     @Column(name = "id")

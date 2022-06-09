@@ -14,7 +14,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class PBK2 {
 
-    private static final String password = vaultConfiguration.getKeyValue();
+    private static final String password = vaultConfiguration.getPassword();
 
     public static String encrypt (String message) throws Exception{
 

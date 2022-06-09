@@ -7,11 +7,11 @@ public class vaultConfiguration {
 
     private static String ePassword;
 
-    public void setKeyValue(String keyValue) {
-        vaultConfiguration.ePassword = keyValue;
+    public void setPassword(String password) {
+        vaultConfiguration.ePassword = password;
     }
 
-    public static  String getKeyValue() {
+    public static  String getPassword() {
         return ePassword;
     }
 }

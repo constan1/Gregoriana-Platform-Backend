@@ -23,7 +23,6 @@ public class UserBusinessResource {
     private final BusinessClientService businessClientService;
 
 
-    @CacheEvict(value="Business_profile", allEntries = true,beforeInvocation = true)
     @PostMapping("/client")
     @ResponseStatus(HttpStatus.CREATED)
     public void createBusinessClient(@RequestBody BusinessClient businessClient) throws Exception {
@@ -31,21 +30,18 @@ public class UserBusinessResource {
         businessClientService.save_Business_Client(businessClient);
     }
 
-    @Cacheable("Business_profile")
     @RequestMapping(value = "/client/{authID}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public BusinessClient getBusinessClient(@PathVariable(name ="authID") String authID) throws Exception {
         return businessClientService.getBusinessClient(authID);
     }
 
-    @CacheEvict(value="Business_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updateAddress")
     @ResponseStatus(HttpStatus.OK)
     public void updateAddress(@RequestBody BusinessAddressDTO addressDTO) throws Exception {
         businessClientService.updateAddress(addressDTO.getAddress(),addressDTO.getAuthID());
     }
 
-    @CacheEvict(value="Business_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updatePhotoUrl")
     @ResponseStatus(HttpStatus.OK)
     public void updatePhoto(@RequestBody PhotoDTO photoDTO){
@@ -53,7 +49,6 @@ public class UserBusinessResource {
     }
 
 
-    @CacheEvict(value="Business_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updatePhone")
     @ResponseStatus(HttpStatus.OK)
     public void updatePhone(@RequestBody PhoneDTO phoneDTO){

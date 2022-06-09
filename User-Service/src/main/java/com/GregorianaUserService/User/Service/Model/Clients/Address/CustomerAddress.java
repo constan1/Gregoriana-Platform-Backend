@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerAddress implements Serializable {
+public class CustomerAddress {
 
     @Id
     @Column(name = "id")

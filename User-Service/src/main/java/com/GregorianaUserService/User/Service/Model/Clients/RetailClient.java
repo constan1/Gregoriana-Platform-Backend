@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RetailClient implements Serializable {
+public class RetailClient {
 
     @Id
     @Column(name = "id")

@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 @Repository
 public interface TransporterRepository extends JpaRepository<TransporterClient,String> {
 
-    @Query("select t from Transporter_Client t where t.authID =:authID")
+    @Query("select distinct t from Transporter_Client t left join fetch t.address left join fetch t.user where t.authID =:authID")
     TransporterClient getTransporter(@Param("authID") String authID);
 
     @Modifying(clearAutomatically = true)
@@ -50,7 +50,7 @@ public interface TransporterRepository extends JpaRepository<TransporterClient,S
 
     @Modifying(clearAutomatically = true)
     @Transactional
-    @Query("update Documents_Drivers_License d set d.drivers_photo_url =:driversPhoto where d.authID =:authID")
+    @Query("update Transporter_Client d set d.drivers_license =:driversPhoto where d.authID =:authID")
     void updateLicensePhoto(@Param("driversPhoto") String photo_url,@Param("authID") String authID);
 
 

@@ -1,7 +1,6 @@
 package com.GregorianaUserService.User.Service.Model.Clients;
 
 
-import com.GregorianaUserService.User.Service.Documents.License;
 import com.GregorianaUserService.User.Service.Model.Clients.Address.TransporterAddress;
 import com.GregorianaUserService.User.Service.Model.User.User;
 import lombok.AllArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 
 @Entity(name="Transporter_Client")
@@ -19,7 +17,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransporterClient implements Serializable {
+public class TransporterClient {
 
 
     @Id
@@ -48,8 +46,8 @@ public class TransporterClient implements Serializable {
     @OneToOne(cascade=CascadeType.ALL)
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private License drivers_license;
+    @Column(name="drivers_license")
+    private String drivers_license;
 
 
 

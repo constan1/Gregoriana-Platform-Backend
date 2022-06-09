@@ -21,7 +21,6 @@ public class UserRetailClientResource {
 
     private final RetailClientService retailClientService;
 
-    @CacheEvict(value="Retail_profile", allEntries = true,beforeInvocation = true)
     @PostMapping("/client")
     @ResponseStatus(HttpStatus.CREATED)
     public void createRetailClient(@RequestBody RetailClient retailClient) throws Exception {
@@ -29,21 +28,18 @@ public class UserRetailClientResource {
         retailClientService.save_Retail_Client(retailClient);
     }
 
-    @Cacheable("Retail_profile")
     @RequestMapping(value = "/client/{authID}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public RetailClient getRetailClient(@PathVariable(name ="authID") String authID) throws Exception {
         return retailClientService.getRetailClient(authID);
     }
 
-    @CacheEvict(value="Retail_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updateAddress")
     @ResponseStatus(HttpStatus.OK)
     public void updateAddress(@RequestBody CustomerAddressDTO retailClientAddress) throws Exception {
         retailClientService.updateAddress(retailClientAddress.getAddress(),retailClientAddress.getAuthID());
     }
 
-    @CacheEvict(value="Retail_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updatePhone")
     @ResponseStatus(HttpStatus.OK)
     public void updatePhone(@RequestBody PhoneDTO phoneDTO){
@@ -51,7 +47,6 @@ public class UserRetailClientResource {
         retailClientService.updatePhone(phoneDTO.getPhone(),phoneDTO.getAuthID());
     }
 
-    @CacheEvict(value="Retail_profile", allEntries = true,beforeInvocation = true)
     @PutMapping("/client/updatePhotoUrl")
     @ResponseStatus(HttpStatus.OK)
     public void updatePhotoUrl(@RequestBody PhotoDTO photoDTO){
