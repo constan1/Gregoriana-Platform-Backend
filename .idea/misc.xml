@@ -12,6 +12,12 @@
         <option value="$PROJECT_DIR$/Web-Gateway/pom.xml" />
         <option value="$PROJECT_DIR$/MobileGateway/pom.xml" />
         <option value="$PROJECT_DIR$/Mobile-Gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/Customer-Request-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/Documents-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/Address-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/Customer-Inquiry-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/Transport-Inquiry-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/Transport-Listing-Service/pom.xml" />
       </list>
     </option>
   </component>

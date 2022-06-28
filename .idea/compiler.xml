@@ -9,20 +9,30 @@
         <outputRelativeToContentRoot value="true" />
         <module name="MobileGateway" />
         <module name="Web-Gateway" />
+        <module name="Transport-Listing-Service" />
         <module name="Eureka-Server" />
         <module name="WebGateway" />
-        <module name="OrderService" />
         <module name="Config-Server" />
-        <module name="Request-Service" />
         <module name="User-Service" />
+        <module name="Documents-Service" />
+        <module name="Customer-Inquiry-Service" />
+        <module name="Address-Service" />
+        <module name="Customer-Request-Service" />
+        <module name="Transport-Inquiry-Service" />
+        <module name="OrderService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Address-Service" target="11" />
       <module name="Config-Server" target="11" />
+      <module name="Customer-Inquiry-Service" target="11" />
+      <module name="Customer-Request-Service" target="11" />
+      <module name="Documents-Service" target="11" />
       <module name="Eureka-Server" target="11" />
       <module name="MobileGateway" target="11" />
       <module name="OrderService" target="11" />
-      <module name="Request-Service" target="11" />
+      <module name="Transport-Inquiry-Service" target="11" />
+      <module name="Transport-Listing-Service" target="11" />
       <module name="User-Service" target="11" />
       <module name="Web-Gateway" target="11" />
       <module name="WebGateway" target="11" />
@@ -30,11 +40,16 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Address-Service" options="-parameters" />
       <module name="Config-Server" options="-parameters" />
+      <module name="Customer-Inquiry-Service" options="-parameters" />
+      <module name="Customer-Request-Service" options="-parameters" />
+      <module name="Documents-Service" options="-parameters" />
       <module name="Eureka-Server" options="-parameters" />
       <module name="MobileGateway" options="-parameters" />
       <module name="OrderService" options="-parameters" />
-      <module name="Request-Service" options="-parameters" />
+      <module name="Transport-Inquiry-Service" options="-parameters" />
+      <module name="Transport-Listing-Service" options="-parameters" />
       <module name="User-Service" options="-parameters" />
       <module name="Web-Gateway" options="-parameters" />
       <module name="WebGateway" options="-parameters" />
