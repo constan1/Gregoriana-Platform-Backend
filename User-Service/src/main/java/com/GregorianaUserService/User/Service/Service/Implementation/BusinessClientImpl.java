@@ -1,7 +1,6 @@
 package com.GregorianaUserService.User.Service.Service.Implementation;
 
 import com.GregorianaUserService.User.Service.AES.PBK2;
-import com.GregorianaUserService.User.Service.Model.Clients.Address.BusinessAddress;
 import com.GregorianaUserService.User.Service.Model.Clients.BusinessClient;
 import com.GregorianaUserService.User.Service.Repository.BusinessClientRepository;
 import com.GregorianaUserService.User.Service.Service.Services.BusinessClientService;
@@ -29,16 +28,7 @@ public class BusinessClientImpl implements BusinessClientService {
         businessClientRepository.updatePhone( phone,authID);
     }
 
-    @Override
-    public void updateAddress (BusinessAddress address,String authID) throws Exception{
 
-        String encryptedStreet = PBK2.encrypt(address.getStreet_address());
-        String enryptPostalCode = PBK2.encrypt(address.getPostal_code());
-
-
-        businessClientRepository.updateAddress(address.getCountry(),encryptedStreet,address.getCity(),
-                address.getProvince(),enryptPostalCode,authID);
-    }
 
     @Override
     public void save_Business_Client(BusinessClient businessClient) throws Exception {
@@ -51,25 +41,7 @@ public class BusinessClientImpl implements BusinessClientService {
     public BusinessClient getBusinessClient(String authID) throws Exception {
 
 
-
-
-        BusinessClient businessClient =  businessClientRepository.selectBusinessClient(authID);
-
-        if(businessClient != null) {
-
-
-            if (businessClient.getAddress().getStreet_address() != null) {
-                businessClient.getAddress().setStreet_address(PBK2.decrypt(businessClient.getAddress().getStreet_address()));
-            }
-            if(businessClient.getAddress().getPostal_code() !=null){
-                businessClient.getAddress().setPostal_code(PBK2.decrypt(businessClient.getAddress().getPostal_code()));
-            }
-
-        } else {
-            return null;
-        }
-
-        return businessClient;
+        return businessClientRepository.selectBusinessClient(authID);
 
     }
 }

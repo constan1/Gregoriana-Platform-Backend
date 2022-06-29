@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: address-service-app
+  labels:
+    app: address-service-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app : address-service-app
+  template:
+    metadata:
+      labels:
+        app: address-service-app
+    spec:
+      containers:
+        - name: address-service-app
+          image: constan1/gregoryana-address-service:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9004
+          env:
+            - name: DB_USERNAME
+              value: "client"
+            - name: DB_PASSWORD
+              value: "Tool73541351"
+            - name: RABBIT_USERNAME
+              value: "guest"
+            - name: RABBIT_PASSWORD
+              value: "guest"
+            - name: ePassword
+              value: "7566355151371252"
+
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name:  address-service-svc
+spec:
+  selector:
+    app: address-service-app
+  ports:
+    - port:  80
+      targetPort:  9004

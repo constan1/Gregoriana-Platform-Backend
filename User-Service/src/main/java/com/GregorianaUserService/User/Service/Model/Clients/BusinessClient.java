@@ -1,7 +1,7 @@
 package com.GregorianaUserService.User.Service.Model.Clients;
 
 
-import com.GregorianaUserService.User.Service.Model.Clients.Address.BusinessAddress;
+
 import com.GregorianaUserService.User.Service.Model.User.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,8 +38,5 @@ public class BusinessClient {
 
     @OneToOne(cascade=CascadeType.ALL)
     private User user;
-
-    @OneToOne(cascade=CascadeType.ALL)
-    private BusinessAddress address;
 
 }

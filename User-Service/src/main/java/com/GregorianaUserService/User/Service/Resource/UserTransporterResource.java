@@ -3,11 +3,8 @@ package com.GregorianaUserService.User.Service.Resource;
 
 import com.GregorianaUserService.User.Service.Model.Clients.TransporterClient;
 import com.GregorianaUserService.User.Service.Model.DTO.*;
-import com.GregorianaUserService.User.Service.Model.DTO.AddressDTO.TransporterAddressDTO;
 import com.GregorianaUserService.User.Service.Service.Services.TransporterService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,14 +37,6 @@ public class UserTransporterResource {
 
     }
 
-
-    @PutMapping("/client/updateAddress")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateTransporterAddress(@RequestBody TransporterAddressDTO transporterAddressDTO) throws Exception {
-
-        transporterService.updateAddress(transporterAddressDTO.getAddress(),transporterAddressDTO.getAuthID());
-
-    }
     @PutMapping("/client/updatePhotoUrl")
     @ResponseStatus(HttpStatus.OK)
     public void updateTransporterPhotoUrl(@RequestBody PhotoDTO photoDTO){
@@ -66,11 +55,6 @@ public class UserTransporterResource {
         transporterService.updatePhone(phoneDTO.getPhone(),phoneDTO.getAuthID());
     }
 
-    @PutMapping("/client/updateDriversLicense")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateDriversLicense(@RequestBody LicenseDTO license) throws Exception {
-        transporterService.updateLicensePhoto(license.getDrivers_license(),license.getAuthID());
-    }
 
 
 

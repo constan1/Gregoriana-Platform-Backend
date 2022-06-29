@@ -2,14 +2,10 @@ package com.GregorianaUserService.User.Service.Resource;
 
 
 import com.GregorianaUserService.User.Service.Model.Clients.RetailClient;
-import com.GregorianaUserService.User.Service.Model.DTO.AddressDTO.CustomerAddressDTO;
-import com.GregorianaUserService.User.Service.Model.DTO.ClientDTO;
 import com.GregorianaUserService.User.Service.Model.DTO.PhoneDTO;
 import com.GregorianaUserService.User.Service.Model.DTO.PhotoDTO;
 import com.GregorianaUserService.User.Service.Service.Services.RetailClientService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,12 +28,6 @@ public class UserRetailClientResource {
     @ResponseStatus(HttpStatus.OK)
     public RetailClient getRetailClient(@PathVariable(name ="authID") String authID) throws Exception {
         return retailClientService.getRetailClient(authID);
-    }
-
-    @PutMapping("/client/updateAddress")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateAddress(@RequestBody CustomerAddressDTO retailClientAddress) throws Exception {
-        retailClientService.updateAddress(retailClientAddress.getAddress(),retailClientAddress.getAuthID());
     }
 
     @PutMapping("/client/updatePhone")

@@ -5,12 +5,14 @@
       <module fileurl="file://$PROJECT_DIR$/Address-Service/Address-Service.iml" filepath="$PROJECT_DIR$/Address-Service/Address-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Config-Server/Config-Server.iml" filepath="$PROJECT_DIR$/Config-Server/Config-Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/Customer-Inquiry-Service/Customer-Inquiry-Service.iml" filepath="$PROJECT_DIR$/Customer-Inquiry-Service/Customer-Inquiry-Service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Customer-Request-Service/Customer-Request-Service.iml" filepath="$PROJECT_DIR$/Customer-Request-Service/Customer-Request-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Documents-Service/Documents-Service.iml" filepath="$PROJECT_DIR$/Documents-Service/Documents-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Eureka-Server/Eureka-Server.iml" filepath="$PROJECT_DIR$/Eureka-Server/Eureka-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Feedback-Service/Feedback-Service.iml" filepath="$PROJECT_DIR$/Feedback-Service/Feedback-Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Geo-Location-Service/Geo-Location-Service.iml" filepath="$PROJECT_DIR$/Geo-Location-Service/Geo-Location-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Gregoriana-Platform-Backend.iml" filepath="$PROJECT_DIR$/.idea/Gregoriana-Platform-Backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/Mobile-Gateway/MobileGateway.iml" filepath="$PROJECT_DIR$/Mobile-Gateway/MobileGateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/OrderService/OrderService.iml" filepath="$PROJECT_DIR$/OrderService/OrderService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Customer-Request-Service/Supplier-Request-Service.iml" filepath="$PROJECT_DIR$/Customer-Request-Service/Supplier-Request-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Transport-Inquiry-Service/Transport-Inquiry-Service.iml" filepath="$PROJECT_DIR$/Transport-Inquiry-Service/Transport-Inquiry-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Transport-Listing-Service/Transport-Listing-Service.iml" filepath="$PROJECT_DIR$/Transport-Listing-Service/Transport-Listing-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/User-Service/User-Service.iml" filepath="$PROJECT_DIR$/User-Service/User-Service.iml" />

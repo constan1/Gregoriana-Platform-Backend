@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 @Repository
 public interface TransporterRepository extends JpaRepository<TransporterClient,String> {
 
-    @Query("select distinct t from Transporter_Client t left join fetch t.address left join fetch t.user where t.authID =:authID")
+    @Query("select distinct t from Transporter_Client t left join fetch t.user where t.authID =:authID")
     TransporterClient getTransporter(@Param("authID") String authID);
 
     @Modifying(clearAutomatically = true)
@@ -36,28 +36,5 @@ public interface TransporterRepository extends JpaRepository<TransporterClient,S
     @Query("update Transporter_Client t set t.phone =:phone where  t.authID =:authID")
     void updatePhone(@Param("phone") Long phone,
                      @Param("authID") String authID);
-
-
-    @Modifying(clearAutomatically = true)
-    @Transactional
-    @Query("update Transporter_Address  a set a.City =:City, a.country =:Country, a.postal_code =:Postal_Code," +
-            " a.province =:Province, a.street_address =:Street_Address where a.authID =:authID")
-    void updateAddress(@Param("Country")String country, @Param("Street_Address")String street_address,
-                       @Param("City") String city,@Param("Province")String province, @Param("Postal_Code") String postal_Code,
-                      @Param("authID") String authID);
-
-
-
-    @Modifying(clearAutomatically = true)
-    @Transactional
-    @Query("update Transporter_Client d set d.drivers_license =:driversPhoto where d.authID =:authID")
-    void updateLicensePhoto(@Param("driversPhoto") String photo_url,@Param("authID") String authID);
-
-
-
-
-
-
-
 
 }

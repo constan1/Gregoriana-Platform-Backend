@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "encryp.password",
+      "type": "java.lang.String",
+      "description": "Description for encryp.password."
+  }
+] }

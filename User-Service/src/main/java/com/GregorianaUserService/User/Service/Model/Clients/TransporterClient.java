@@ -1,7 +1,7 @@
 package com.GregorianaUserService.User.Service.Model.Clients;
 
 
-import com.GregorianaUserService.User.Service.Model.Clients.Address.TransporterAddress;
+
 import com.GregorianaUserService.User.Service.Model.User.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,14 +40,10 @@ public class TransporterClient {
     @Column(name="Profile_Photo_Url")
     private String photo_url;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    private TransporterAddress address;
 
     @OneToOne(cascade=CascadeType.ALL)
     private User user;
 
-    @Column(name="drivers_license")
-    private String drivers_license;
 
 
 

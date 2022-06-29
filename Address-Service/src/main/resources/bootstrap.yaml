@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    config:
+      enabled: true
+      uri: http://config-server-svc:8888
+  rabbitmq:
+    host: "${HOSTNAME}.rabbit"
+    port: 5672
+    username: ${RABBIT_USERNAME}
+    password: ${RABBIT_PASSWORD}
+  datasource:
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+encryp:
+  password: ${ePassword}
