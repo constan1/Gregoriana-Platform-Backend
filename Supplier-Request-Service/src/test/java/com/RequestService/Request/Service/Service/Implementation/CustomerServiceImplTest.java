@@ -1,17 +1,11 @@
 package com.RequestService.Request.Service.Service.Implementation;
 
-import com.RequestService.Request.Service.Model.Consumers.ConsumersInquiries;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.AddOn;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.DropOffs;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.Stop;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.TransportRequests;
-import com.RequestService.Request.Service.Model.Transporters.TransportInquiries;
-import com.RequestService.Request.Service.Model.Transporters.TransportListing;
 import com.RequestService.Request.Service.Model.Transporters.Vehicle;
-import com.RequestService.Request.Service.Repository.ConsumerInquiryRepository;
 import com.RequestService.Request.Service.Repository.CustomerRepository;
-import com.RequestService.Request.Service.Repository.TransportInquiriesRepository;
-import com.RequestService.Request.Service.Repository.TransporterListingRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

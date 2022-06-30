@@ -7,21 +7,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="MobileGateway" />
         <module name="Supplier-Request-Service" />
+        <module name="Payment-Service" />
         <module name="Web-Gateway" />
         <module name="Transport-Listing-Service" />
+        <module name="Messaging-Service" />
         <module name="Eureka-Server" />
         <module name="Geo-Location-Service" />
         <module name="WebGateway" />
         <module name="Config-Server" />
         <module name="User-Service" />
         <module name="Documents-Service" />
-        <module name="Customer-Inquiry-Service" />
         <module name="Feedback-Service" />
+        <module name="Transporter-Discovery-Service" />
         <module name="Address-Service" />
         <module name="Transport-Inquiry-Service" />
         <module name="OrderService" />
+      </profile>
+      <profile name="Annotation profile for MobileGateway" enabled="true">
+        <sourceOutputDir name="../Mobile-Gateway/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../Mobile-Gateway/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="MobileGateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -32,11 +39,14 @@
       <module name="Eureka-Server" target="11" />
       <module name="Feedback-Service" target="11" />
       <module name="Geo-Location-Service" target="11" />
+      <module name="Messaging-Service" target="11" />
       <module name="MobileGateway" target="11" />
       <module name="OrderService" target="11" />
+      <module name="Payment-Service" target="1.5" />
       <module name="Supplier-Request-Service" target="11" />
       <module name="Transport-Inquiry-Service" target="11" />
       <module name="Transport-Listing-Service" target="11" />
+      <module name="Transporter-Discovery-Service" target="11" />
       <module name="User-Service" target="11" />
       <module name="Web-Gateway" target="11" />
       <module name="WebGateway" target="11" />

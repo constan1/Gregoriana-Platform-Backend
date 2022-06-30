@@ -57,6 +57,9 @@ public class TransportRequests {
     @JoinColumn(name ="addOn_id")
     private AddOn addOn;
 
+    @Column(name = "vehicle_type_needed")
+    private String vehicleTypeNeeded;
+
 
 
 

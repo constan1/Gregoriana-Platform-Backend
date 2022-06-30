@@ -15,13 +15,15 @@
         <option value="$PROJECT_DIR$/Customer-Request-Service/pom.xml" />
         <option value="$PROJECT_DIR$/Documents-Service/pom.xml" />
         <option value="$PROJECT_DIR$/Address-Service/pom.xml" />
-        <option value="$PROJECT_DIR$/Customer-Inquiry-Service/pom.xml" />
         <option value="$PROJECT_DIR$/Transport-Inquiry-Service/pom.xml" />
         <option value="$PROJECT_DIR$/Transport-Listing-Service/pom.xml" />
         <option value="$PROJECT_DIR$/Feedback/pom.xml" />
         <option value="$PROJECT_DIR$/Geo-Location/pom.xml" />
         <option value="$PROJECT_DIR$/Feedback-Service/pom.xml" />
         <option value="$PROJECT_DIR$/Geo-Location-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/Messaging-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/Transporter-Discovery-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/Payment-Service/pom.xml" />
       </list>
     </option>
   </component>
