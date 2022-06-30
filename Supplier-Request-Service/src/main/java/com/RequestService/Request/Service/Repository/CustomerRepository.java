@@ -28,10 +28,6 @@ public interface CustomerRepository extends JpaRepository<TransportRequests,Long
 
 
 
-    @Modifying(clearAutomatically = true)
-    @Transactional
-    @Query("update Transport_Requests t set t.status =:status where t.trackingNumber =:trackingNum")
-    void updateRequestStatus(@Param("trackingNum") String trackingNumber,@Param("status") String status);
 
 
 }

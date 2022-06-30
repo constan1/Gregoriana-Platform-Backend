@@ -1,6 +1,7 @@
 package com.RequestService.Request.Service.Service.Services;
 
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.TransportRequests;
+import org.springframework.data.repository.query.Param;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import java.util.List;
 
@@ -12,8 +13,7 @@ public interface CustomerService {
 
     void deleteTransportRequest(String trackNum);
 
-
-
+    TransportRequests getTransportRequestByTrackingNumber(String trackNum);
 
 
     

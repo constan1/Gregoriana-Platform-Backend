@@ -18,14 +18,14 @@ public class CustomerResource {
     private final CustomerService customerService;
 
 
-    @GetMapping("/supplier-request/customersRequest/{authID}")
+    @GetMapping("/supplierRequest/private/{authID}")
     @ResponseStatus(HttpStatus.OK)
     private List<TransportRequests> getAllCustomersRequest(@PathVariable(name="authID") String authID){
 
         return customerService.getRequestForClient(authID);
     }
 
-    @PostMapping("/supplier-request/create")
+    @PostMapping("/supplierRequest/private/create")
     @ResponseStatus(HttpStatus.CREATED)
     private String requestCreated(@RequestBody TransportRequests request) throws NoSuchAlgorithmException {
 
@@ -33,12 +33,22 @@ public class CustomerResource {
     }
 
 
-    @DeleteMapping("/supplier-request/{trackingNum}")
+    @DeleteMapping("/supplierRequest/private/{trackingNum}")
     @ResponseStatus(HttpStatus.OK)
     private void requestDeleted(@PathVariable(name = "trackingNum") String trackingNum){
 
         customerService.deleteTransportRequest(trackingNum);
     }
+
+
+    @GetMapping("/transportRequest/public/{trackingNum}")
+    @ResponseStatus(HttpStatus.OK)
+    private TransportRequests getTransportRequestByTrackingNumber(@PathVariable(name = "trackingNum") String trackingNum){
+
+        return customerService.getTransportRequestByTrackingNumber(trackingNum);
+
+    }
+
 
 
 

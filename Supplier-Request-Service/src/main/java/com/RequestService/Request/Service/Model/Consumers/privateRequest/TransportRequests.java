@@ -30,7 +30,6 @@ public class TransportRequests {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="authID")
     private String authID;
 
     @Column(name="title")
@@ -43,7 +42,6 @@ public class TransportRequests {
     private Date dateStamp;
 
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
-
     @JoinColumn(name ="stop_id")
     private Stop stops;
 
@@ -60,7 +58,8 @@ public class TransportRequests {
     @Column(name = "vehicle_type_needed")
     private String vehicleTypeNeeded;
 
-
+    @Column(name = "profile_Image")
+    private String supplier_profile; //will call the user service to obtain this. we will use circuitbreaker resiliance 4j pattern.
 
 
 
