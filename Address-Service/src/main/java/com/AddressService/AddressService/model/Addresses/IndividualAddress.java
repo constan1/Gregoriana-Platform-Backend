@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity(name="Transporter_Address")
+@Entity(name="Individual_Address")
 @Table
 @Getter
 @Setter

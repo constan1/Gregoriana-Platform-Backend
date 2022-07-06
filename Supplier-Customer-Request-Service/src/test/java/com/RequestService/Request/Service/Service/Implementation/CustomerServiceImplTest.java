@@ -61,15 +61,6 @@ public class CustomerServiceImplTest {
     }
 
 
-    @Test
-    @DisplayName("Returns all Transport Requests")
-    void customerService_getRequestForMarket_requestsReturnedSuccessfully() {
-        Mockito.when(customerRepository.getRequestForMarket("pending")).thenReturn(request_list.getTransportRequestForMarket("pending"));
-
-        Assertions.assertEquals(2,customerRepository.getRequestForMarket("pending").size());
-    }
-
-
 
 
     @Test

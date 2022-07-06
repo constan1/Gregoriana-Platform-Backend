@@ -29,10 +29,10 @@ spring:
     username: "guest"
     password: "guest"
   datasource:
-    username: "Master"
+    username: "master"
     password: "Abramelon73541351"
   application:
-    name: "document-service"
+    name: "documents-service"
 
 eureka:
   instance:

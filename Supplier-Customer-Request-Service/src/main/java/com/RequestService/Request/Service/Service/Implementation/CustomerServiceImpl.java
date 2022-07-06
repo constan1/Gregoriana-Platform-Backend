@@ -60,7 +60,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteTransportRequest(String trackNum) {
         Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackNum));
 
-        transportRequests.ifPresent(customerRepository::delete); //after deleting transport request we use circuitbreaker pattern to delete value in the Transport-Inquiry-service.
+        transportRequests.ifPresent(customerRepository::delete);
     }
 
     @Override

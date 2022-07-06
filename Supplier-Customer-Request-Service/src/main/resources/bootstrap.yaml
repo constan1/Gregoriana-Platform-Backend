@@ -9,10 +9,10 @@ spring:
     username: "guest"
     password: "guest"
   datasource:
-    username: "Master"
+    username: "master"
     password: "Aconstan3141592653"
   application:
-    name: "address-service"
+    name: "supplier-request-service"
 server:
   port: 9001
 

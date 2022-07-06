@@ -23,11 +23,6 @@ public interface CustomerRepository extends JpaRepository<TransportRequests,Long
 
 
 
-    @Query("select distinct t from Transport_Requests t  left join fetch t.stops s left join fetch s.dropOffs left join fetch t.addOn where t.status =:pending")
-    List<TransportRequests> getRequestForMarket(@Param("pending")String pending);
-
-
-
 
 
 }

@@ -22,8 +22,8 @@
         <module name="Feedback-Service" />
         <module name="Transporter-Discovery-Service" />
         <module name="Address-Service" />
-        <module name="Customer-Request-Service" />
         <module name="Transport-Inquiry-Service" />
+        <module name="Supplier-Customer-Request-Service" />
         <module name="OrderService" />
       </profile>
     </annotationProcessing>
@@ -31,7 +31,6 @@
       <module name="Address-Service" target="11" />
       <module name="Config-Server" target="11" />
       <module name="Customer-Inquiry-Service" target="11" />
-      <module name="Customer-Request-Service" target="11" />
       <module name="Documents-Service" target="11" />
       <module name="Eureka-Server" target="11" />
       <module name="Feedback-Service" target="11" />
@@ -40,6 +39,7 @@
       <module name="MobileGateway" target="11" />
       <module name="OrderService" target="11" />
       <module name="Payment-Service" target="11" />
+      <module name="Supplier-Customer-Request-Service" target="11" />
       <module name="Supplier-Request-Service" target="11" />
       <module name="Transport-Inquiry-Service" target="11" />
       <module name="Transport-Listing-Service" target="11" />
@@ -54,7 +54,6 @@
       <module name="Address-Service" options="-parameters" />
       <module name="Config-Server" options="-parameters" />
       <module name="Customer-Inquiry-Service" options="-parameters" />
-      <module name="Customer-Request-Service" options="-parameters" />
       <module name="Documents-Service" options="-parameters" />
       <module name="Eureka-Server" options="-parameters" />
       <module name="Feedback-Service" options="-parameters" />
@@ -63,6 +62,7 @@
       <module name="MobileGateway" options="-parameters" />
       <module name="OrderService" options="-parameters" />
       <module name="Payment-Service" options="-parameters" />
+      <module name="Supplier-Customer-Request-Service" options="-parameters" />
       <module name="Supplier-Request-Service" options="-parameters" />
       <module name="Transport-Inquiry-Service" options="-parameters" />
       <module name="Transport-Listing-Service" options="-parameters" />

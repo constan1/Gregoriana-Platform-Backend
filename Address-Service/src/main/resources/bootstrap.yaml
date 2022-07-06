@@ -29,7 +29,7 @@ spring:
     username: "guest"
     password: "guest"
   datasource:
-    username: "Master"
+    username: "master"
     password: "Tool321652919"
   application:
     name: "address-service"

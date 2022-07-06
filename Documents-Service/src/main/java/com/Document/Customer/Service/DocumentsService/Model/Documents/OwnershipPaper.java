@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity(name="Ownership-Image")
+@Entity(name="Ownership_Image")
 @Table
 @Getter
 @Setter
