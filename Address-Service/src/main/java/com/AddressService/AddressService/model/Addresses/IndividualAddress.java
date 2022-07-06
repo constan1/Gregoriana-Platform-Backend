@@ -8,14 +8,13 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity(name="Business_Address")
+@Entity(name="Transporter_Address")
 @Table
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class CompanyAddress {
+public class IndividualAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,20 +27,17 @@ public class CompanyAddress {
 
 
     @Column(name = "country")
-    private String company_address_country;
+    private String country;
 
     @Column(name = "province")
-    private String company_address_province;
+    private String province;
 
     @Column(name = "city")
-    private String company_address_city;
+    private String city;
 
     @Column(name = "street_address")
-    private String company_address_street;
+    private String street;
 
     @Column(name = "postal_code")
-    private String company_address_postalCode;
-
-
-
+    private String postalCode;
 }

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: transport-listing-service
+    name: transport-discovery-service
 
 eureka:
   instance:

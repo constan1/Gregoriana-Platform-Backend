@@ -1,16 +1,46 @@
+
+#For deployment-testing
+#spring:
+#  cloud:
+#    config:
+#      enabled: true
+#      uri: http://config-server-svc:8888
+#  rabbitmq:
+#    host: "${HOSTNAME}.rabbit"
+#    port: 5672
+#    username: ${RABBIT_USERNAME}
+#    password: ${RABBIT_PASSWORD}
+#  datasource:
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+#
+#encryp:
+#  password: ${ePassword}
+
+
 spring:
   cloud:
     config:
       enabled: true
-      uri: http://config-server-svc:8888
+      uri: "http://localhost:8888"
   rabbitmq:
-    host: "${HOSTNAME}.rabbit"
+    host: "localhost"
     port: 5672
-    username: ${RABBIT_USERNAME}
-    password: ${RABBIT_PASSWORD}
+    username: "guest"
+    password: "guest"
   datasource:
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: "Master"
+    password: "Tool321652919"
+  application:
+    name: "address-service"
+server:
+  port: 9004
+
+eureka:
+  instance:
+    instance-id: "${spring.application.name}:${random.uuid}"
+    prefer-ip-address: true
+    hostname: "localhost"
 
 encryp:
-  password: ${ePassword}
+  password: "7566355151371252"

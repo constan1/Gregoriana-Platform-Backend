@@ -22,9 +22,9 @@ spec:
             - containerPort: 9003
           env:
             - name: DB_USERNAME
-              value: "client"
+              value: "documents_client"
             - name: DB_PASSWORD
-              value: "Tool73541351"
+              value: "LostInSpace1993"
             - name: RABBIT_USERNAME
               value: "guest"
             - name: RABBIT_PASSWORD

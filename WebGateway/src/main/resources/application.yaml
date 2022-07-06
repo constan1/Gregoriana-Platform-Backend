@@ -1,3 +1,5 @@
+
+
 spring:
   application:
     name: Web-Api-Gateway
@@ -11,22 +13,47 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/v1/user/**
+            - Path=/v1/user/business/**
+            - Path=/v1/user/retail/**
         - id: request-service
           uri: lb://request-service
           predicates:
-            - Path=/v1/customer-request/**
+            - Path=/v1/supplierRequest/**
+        - id: address-service
+          uri: lb://address-service
+          predicates:
+            - Path=/v1/companyAddress/**
+        - id: transport-inquiry-service
+          uri: lb://transport-inquiry-service
+          predicates:
+            - Path=/v1/transporter-inquiry/**
+        - id: transport-listing-service
+          uri: lb://transport-listing-service
+          predicates:
+            - Path=/v1/transport-listing/**
+        - id: transport-discovery-service
+          uri: lb://transport-discovery-service
+          predicates:
+            - Path=/v1/transport-discovery/**
     loadbalancer:
       ribbon:
         enabled: false
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#    hostname: eureka-0
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+
+
 eureka:
   instance:
+    instance-id: "${spring.application.name}:${random.uuid}"
     prefer-ip-address: true
-    hostname: eureka-0
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+    hostname: "localhost"
+
 server:
   port: 8180

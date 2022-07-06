@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transport-discovery-service-app
+  labels:
+    app: transport-discovery-service-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app : transport-discovery-service-app
+  template:
+    metadata:
+      labels:
+        app: transport-discovery-service-app
+    spec:
+      containers:
+        - name: transport-discovery-service-app
+          image: constan1/transport-discovery-service:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9007
+
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name:  transport-discovery-service-svc
+spec:
+  selector:
+    app: transport-discovery-service-app
+  ports:
+    - port:  80
+      targetPort:  9007

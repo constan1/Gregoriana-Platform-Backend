@@ -2,7 +2,23 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: http://config-server-svc:8888
+      uri: "http://localhost:8888"
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
   datasource:
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: "Master"
+    password: "Aconstan3141592653"
+  application:
+    name: "address-service"
+server:
+  port: 9001
+
+eureka:
+  instance:
+    instance-id: "${spring.application.name}:${random.uuid}"
+    prefer-ip-address: true
+    hostname: "localhost"
+

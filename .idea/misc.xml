@@ -24,6 +24,8 @@
         <option value="$PROJECT_DIR$/Messaging-Service/pom.xml" />
         <option value="$PROJECT_DIR$/Transporter-Discovery-Service/pom.xml" />
         <option value="$PROJECT_DIR$/Payment-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/Supplier-Request-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/WebGateway/pom.xml" />
       </list>
     </option>
   </component>

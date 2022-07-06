@@ -26,4 +26,7 @@ public interface BusinessClientRepository extends JpaRepository<BusinessClient, 
     @Query("update Business_Client b set b.phone_num =:phone where b.authID =:authID")
     void updatePhone(@Param("phone") Long phone, @Param("authID") String authID);
 
+
+
+
 }

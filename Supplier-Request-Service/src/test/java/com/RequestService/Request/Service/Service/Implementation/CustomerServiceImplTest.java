@@ -4,7 +4,6 @@ import com.RequestService.Request.Service.Model.Consumers.privateRequest.AddOn;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.DropOffs;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.Stop;
 import com.RequestService.Request.Service.Model.Consumers.privateRequest.TransportRequests;
-import com.RequestService.Request.Service.Model.Transporters.Vehicle;
 import com.RequestService.Request.Service.Repository.CustomerRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -34,16 +33,6 @@ public class CustomerServiceImplTest {
 
     @Mock
     private CustomerRepository customerRepository;
-
-
-    @Mock
-    private  TransporterListingRepository transporterListingRepository;
-
-    @Mock
-    private ConsumerInquiryRepository consumerInquiryRepository;
-
-    @Mock
-    private TransportInquiriesRepository transportInquiriesRepository;
 
     static testData request_list =  new testData();
 
@@ -80,37 +69,8 @@ public class CustomerServiceImplTest {
         Assertions.assertEquals(2,customerRepository.getRequestForMarket("pending").size());
     }
 
-    @Test
-    void getAllTransportListings() {
-
-        Mockito.when(transporterListingRepository.getAllTransportListing()).thenReturn(request_list.getTransporterListing());
-
-        Assertions.assertEquals(2,transporterListingRepository.getAllTransportListing().size());
-    }
-
-    @Test
-    void getTransportersPersonalListing() {
-
-        Mockito.when(transporterListingRepository.getTransportersListing("test@hotmail.com"))
-                .thenReturn(request_list.getPersonalTransportListing("test@hotmail.com"));
-
-        Assertions.assertNotNull(transporterListingRepository.getTransportersListing("test@hotmail.com"));
-    }
-
-    @Test
-    void deleteTransportListing() {
 
 
-        Mockito.when(transporterListingRepository.getAllTransportListing())
-                .thenReturn(request_list.deleteTransportListing(request_list.getPersonalTransportListing("test@hotmail.com")));
-
-
-        transporterListingRepository.delete(request_list.getPersonalTransportListing("test@hotmail.com"));
-        Mockito.verify(transporterListingRepository, Mockito.times(1)).delete(request_list.getPersonalTransportListing("test@hotmail.com"));
-
-
-        Assertions.assertEquals(1,transporterListingRepository.getAllTransportListing().size());
-    }
 
     @Test
     void createRequest() {
@@ -132,7 +92,7 @@ public class CustomerServiceImplTest {
         AddOn addOn = new AddOn(1L,0,false);
         Stop stop_test_1 = new Stop(1L,"testStopAddress_1",2.00f,2.00f,"testDesc","testPhoto",list_dropOffs_1);
 
-        TransportRequests transportRequests_4= new TransportRequests(1L,"a3","test","1111",date,stop_test_1,"testDesiredTime","pending",addOn);
+        TransportRequests transportRequests_4= new TransportRequests(1L,"a3","test","1111",date,stop_test_1,"testDesiredTime","pending",addOn,"DEMO","url");
 
 
         //--------Add Request -------//
@@ -144,50 +104,10 @@ public class CustomerServiceImplTest {
 
     }
 
-    @Test
-    void createTransportListing() {
-        Vehicle vehicle_3 = new Vehicle(1L,"testType_2",2022,5,30,"heavy","testPlate_2","test_ownership_2","test_first_photo_2","test_second_photo_2","test_third_photo_2");
-
-        TransportListing transportListing_1 = new TransportListing("test3@hotmail.com",4168546160L,vehicle_3,10,"testDesc");
 
 
-        Mockito.when(transporterListingRepository.save(transportListing_1))
-                .thenReturn(request_list.saveTransportListing(transportListing_1));
-
-        Assertions.assertNotNull(transporterListingRepository.save(transportListing_1));
-
-    }
-
-    @Test
-    void creatConsumerInquiry() {
-        Timestamp ts_2 = new Timestamp(System.currentTimeMillis());
-        Date date_consumer = new Date(ts_2.getTime());
 
 
-        ConsumersInquiries consumersInquiries_5 = new ConsumersInquiries(3L,"1111",date_consumer,request_list.getPersonalTransportListing("test@hotmail.com"));
-
-        Mockito.when(consumerInquiryRepository.save(consumersInquiries_5))
-                .thenReturn(request_list.createConsumerInquiries(consumersInquiries_5));
-
-        Assertions.assertNotNull(consumerInquiryRepository.save(consumersInquiries_5));
-
-    }
-
-
-    @Test
-    void deleteConsumerInquiry(){
-
-        Mockito.when(consumerInquiryRepository.getAllInquiriesForTrackingNumber("4321"))
-                .thenReturn(request_list.deleteConsumerInquiriesByTrackingNumber("4321"));
-
-        consumerInquiryRepository.deleteConsumerInquiryByTrNum("4321");
-
-        Mockito.verify(consumerInquiryRepository,Mockito.times(1)).deleteConsumerInquiryByTrNum("4321");
-
-
-        Assertions.assertEquals(2,consumerInquiryRepository.getAllInquiriesForTrackingNumber("4321").size());
-
-    }
 
 
     @Test
@@ -201,34 +121,7 @@ public class CustomerServiceImplTest {
 
     }
 
-    @Test
-    void transporterActiveInquiry() {
-        TransportInquiries transportInquiries_0_0 = new TransportInquiries(1L,"test@hotmail.com","4321");
 
-        Mockito.when(transportInquiriesRepository.save(transportInquiries_0_0))
-                .thenReturn(request_list.createTransportInquiries(transportInquiries_0_0).get(1));
-
-        Assertions.assertNotNull(transportInquiriesRepository.save(transportInquiries_0_0));
-
-
-    }
-
-    @Test
-    void getAllInquiriesForTrackingNumber() {
-
-        Mockito.when(consumerInquiryRepository.getAllInquiriesForTrackingNumber("4321"))
-                .thenReturn(request_list.getConsumerInquiriesForTrackingNumber("4321"));
-
-        Assertions.assertEquals(2,consumerInquiryRepository.getAllInquiriesForTrackingNumber("4321").size());
-    }
-
-    @Test
-    void getAllTransportInquiries() {
-
-        Mockito.when(transportInquiriesRepository.getAllTransportInquiries("test_2@hotmail.com"))
-                .thenReturn(request_list.getTransportInquiriesForEmail("test_2@hotmail.com"));
-        Assertions.assertEquals(1,transportInquiriesRepository.getAllTransportInquiries("test_2@hotmail.com").size());
-    }
 
 
 

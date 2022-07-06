@@ -16,15 +16,15 @@ spec:
     spec:
       containers:
         - name: request-service-app
-          image: constan1/gregoryana-request-service:0.0.1
+          image: constan1/gregoryana-supplier-request-service:0.0.1
           imagePullPolicy: Always
           ports:
             - containerPort: 9001
           env:
             - name: DB_USERNAME
-              value: "postgres"
+              value: "request-client"
             - name: DB_PASSWORD
-              value: "Tool321652919"
+              value: "RequestTransportOnUs1993"
 
 ---
 

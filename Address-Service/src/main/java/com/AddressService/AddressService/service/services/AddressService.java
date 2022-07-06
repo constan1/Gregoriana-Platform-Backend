@@ -5,10 +5,10 @@ import com.AddressService.AddressService.model.Addresses.TransporterAddress;
 
 public interface AddressService {
 
-    void saveBusinessAddress(CompanyAddress companyAddress);
+    void saveBusinessAddress(CompanyAddress companyAddress) throws Exception;
 
     void saveTransporterAddress(TransporterAddress transporterAddress);
 
-    CompanyAddress getBusinessAddress(String authID);
+    CompanyAddress getBusinessAddress(String authID) throws Exception;
     TransporterAddress getTransporterAddress(String authID);
 }

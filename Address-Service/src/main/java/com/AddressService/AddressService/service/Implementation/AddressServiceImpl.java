@@ -1,6 +1,7 @@
 package com.AddressService.AddressService.service.Implementation;
 
 
+import com.AddressService.AddressService.AES.PBK2;
 import com.AddressService.AddressService.model.Addresses.CompanyAddress;
 import com.AddressService.AddressService.model.Addresses.TransporterAddress;
 import com.AddressService.AddressService.repository.CompanyAddressRepository;
@@ -19,7 +20,11 @@ public class AddressServiceImpl implements AddressService {
 
 
     @Override
-    public void saveBusinessAddress(CompanyAddress companyAddress) {
+    public void saveBusinessAddress(CompanyAddress companyAddress) throws Exception {
+
+        companyAddress.setCompany_address_street(PBK2.encrypt(companyAddress.getCompany_address_street()));
+
+        companyAddress.setCompany_address_postalCode(PBK2.encrypt(companyAddress.getCompany_address_postalCode()));
         companyAddressRepository.save(companyAddress);
     }
 
@@ -29,11 +34,27 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public CompanyAddress getBusinessAddress(String authID) {
+    public CompanyAddress getBusinessAddress(String authID) throws Exception {
 
-        return companyAddressRepository.getCompanyAddressByAuthID(authID);
+        CompanyAddress companyAddress = companyAddressRepository.getCompanyAddressByAuthID(authID);
 
+        if (companyAddress.getCompany_address_street() != null && companyAddress.getCompany_address_postalCode() != null) {
+            companyAddress.setCompany_address_street(PBK2.decrypt(companyAddress.getCompany_address_street()));
+            companyAddress.setCompany_address_postalCode(PBK2.decrypt(companyAddress.getCompany_address_postalCode()));
+
+            return companyAddress;
+        } else if (companyAddress.getCompany_address_street() != null) {
+            companyAddress.setCompany_address_street(PBK2.decrypt(companyAddress.getCompany_address_street()));
+
+            return companyAddress;
+        } else if (companyAddress.getCompany_address_postalCode() != null) {
+            companyAddress.setCompany_address_postalCode(PBK2.decrypt(companyAddress.getCompany_address_postalCode()));
+            return companyAddress;
+        } else {
+            return companyAddress;
+        }
     }
+
 
     @Override
     public TransporterAddress getTransporterAddress(String authID) {

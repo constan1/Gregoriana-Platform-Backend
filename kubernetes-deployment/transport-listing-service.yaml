@@ -1,36 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: address-service-app
+  name: transport-listing-service-app
   labels:
-    app: address-service-app
+    app: transport-listing-service-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app : address-service-app
+      app : transport-listing-service-app
   template:
     metadata:
       labels:
-        app: address-service-app
+        app: transport-listing-service-app
     spec:
       containers:
-        - name: address-service-app
-          image: constan1/gregoryana-address-service:0.0.1
+        - name: transport-listing-service-app
+          image: constan1/gregoryana-transport-listing-service:0.0.1
           imagePullPolicy: Always
           ports:
-            - containerPort: 9004
+            - containerPort: 9006
           env:
             - name: DB_USERNAME
-              value: "address_client"
+              value: "transport_listing_client"
             - name: DB_PASSWORD
-              value: "systemichydrogen44"
+              value: "MyBirthdayIsin191173541351"
             - name: RABBIT_USERNAME
               value: "guest"
             - name: RABBIT_PASSWORD
               value: "guest"
-            - name: ePassword
-              value: "7566355151371252"
 
 
 ---
@@ -38,10 +36,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name:  address-service-svc
+  name:  transport-listing-service-svc
 spec:
   selector:
-    app: address-service-app
+    app: transport-listing-service-app
   ports:
     - port:  80
-      targetPort:  9004
+      targetPort:  9006

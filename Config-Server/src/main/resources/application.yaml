@@ -13,13 +13,18 @@ spring:
   application:
     name: configuration-server
 
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#    hostname: eureka-0
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+
 eureka:
   instance:
+    instance-id: "${spring.application.name}:${random.uuid}"
     prefer-ip-address: true
-    hostname: eureka-0
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
-
+    hostname: "localhost"
