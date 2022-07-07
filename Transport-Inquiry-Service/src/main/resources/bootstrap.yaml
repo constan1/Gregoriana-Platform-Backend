@@ -15,8 +15,8 @@ spring:
       enabled: true
       uri: "http://localhost:8888"
   datasource:
-    username: "master"
-    password: "Labridor3141592654"
+    username: "inquiry_client"
+    password: "TallGlassIsHere3141592654"
   application:
     name: transport-inquiry-service
 server:

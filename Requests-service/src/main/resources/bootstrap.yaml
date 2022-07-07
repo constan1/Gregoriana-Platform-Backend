@@ -9,8 +9,8 @@ spring:
     username: "guest"
     password: "guest"
   datasource:
-    username: "master"
-    password: "Aconstan3141592653"
+    username: "request-client"
+    password: "RequestTransportOnUs1993"
   application:
     name: "request-service"
 server:
