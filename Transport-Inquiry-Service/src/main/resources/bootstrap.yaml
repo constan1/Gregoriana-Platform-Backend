@@ -15,7 +15,9 @@ spring:
       enabled: true
       uri: "http://localhost:8888"
   datasource:
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: "master"
+    password: "Labridor3141592654"
+  application:
+    name: transport-inquiry-service
 server:
   port: 9005

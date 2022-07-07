@@ -1,8 +1,22 @@
+#spring:
+#  cloud:
+#    config:
+#      enabled: true
+#      uri: http://config-server-svc:8888
+#  datasource:
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+
+
 spring:
   cloud:
     config:
       enabled: true
-      uri: http://config-server-svc:8888
+      uri: "http://localhost:8888"
   datasource:
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: "master"
+    password: "Tool73541351"
+  application:
+    name: transport-listing-service
+server:
+  port: 9006

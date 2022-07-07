@@ -64,10 +64,6 @@ public class TransportListing {
     @Column(name="description",length = 140)
     private String listing_description;
 
-    @Column(name = "rating")
-    private float Rating;
-
-
 
 
 }
