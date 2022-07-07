@@ -19,6 +19,7 @@
         <module name="Config-Server" />
         <module name="User-Service" />
         <module name="Documents-Service" />
+        <module name="requests-service" />
         <module name="Feedback-Service" />
         <module name="Transporter-Discovery-Service" />
         <module name="Address-Service" />
@@ -39,6 +40,8 @@
       <module name="MobileGateway" target="11" />
       <module name="OrderService" target="11" />
       <module name="Payment-Service" target="11" />
+      <module name="Request-Service" target="11" />
+      <module name="requests-service" target="11" />
       <module name="Supplier-Customer-Request-Service" target="11" />
       <module name="Supplier-Request-Service" target="11" />
       <module name="Transport-Inquiry-Service" target="11" />
@@ -62,6 +65,7 @@
       <module name="MobileGateway" options="-parameters" />
       <module name="OrderService" options="-parameters" />
       <module name="Payment-Service" options="-parameters" />
+      <module name="Request-Service" options="-parameters" />
       <module name="Supplier-Customer-Request-Service" options="-parameters" />
       <module name="Supplier-Request-Service" options="-parameters" />
       <module name="Transport-Inquiry-Service" options="-parameters" />
@@ -70,6 +74,7 @@
       <module name="User-Service" options="-parameters" />
       <module name="Web-Gateway" options="-parameters" />
       <module name="WebGateway" options="-parameters" />
+      <module name="requests-service" options="-parameters" />
     </option>
   </component>
 </project>
