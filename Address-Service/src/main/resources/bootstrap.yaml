@@ -29,8 +29,8 @@ spring:
     username: "guest"
     password: "guest"
   datasource:
-    username: "master"
-    password: "Tool321652919"
+    username: "address_client"
+    password: "systemichydrogen44"
   application:
     name: "address-service"
 server:
