@@ -1,4 +1,4 @@
-package com.TransportListingService.TransportListingService.model;
+package com.FeedbackRatingService.Feedback.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,10 @@ import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 
 import javax.persistence.*;
+import java.util.List;
 
-@Entity(name="Transport_Listing")
-@Table(name="transportListing")
+@Entity(name="Feedback_Transport_Listing")
+@Table(name="Feedback_Transport_Listing")
 @OptimisticLocking(type = OptimisticLockType.DIRTY)
 @DynamicUpdate
 @Getter
@@ -19,17 +20,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
-//This will be used as metadata for hypertrak devices
-public class TransportListing {
+public class publicTransportListing {
     @Id
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "authID")
-    private String authID;
-
     @Column(name = "email")
     private String email;
+
+    @Column(name = "transporters_profile_pic_url")
+    private String profile_pic_url;
 
     @Column(name= "phoneNumber")
     private Long phoneNumber;
@@ -38,9 +38,15 @@ public class TransportListing {
     @JoinColumn(name ="vehicles_id")
     private vehicles vehicle;
 
-    @Column(name="description",length = 140)
-    private String listing_description;
+    @Column(name = "status_avaible")
+    private boolean status_available;
 
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name ="comment_id")
+    private List<feedback> comments;
+
+    @Column(name= "numberOfRates")
+    private Integer numberOfRates;
 
 
 }
