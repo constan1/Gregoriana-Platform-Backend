@@ -49,9 +49,9 @@ public class testData {
         Stop stop_test_1 = new Stop(1L,"testStopAddress_1",2.00f,2.00f,"testDesc","testPhoto",list_dropOffs_1);
         Stop stop_test_2 = new Stop(1L,"testStopAddress_2",2.00f,2.00f,"testDesc","testPhoto",list_dropOffs_2);
 
-        TransportRequests  transportRequests_1= new TransportRequests(1l,"a1","test","4321",date,stop_test_1,"testDesiredTime","pending",addOn,"DEMO","url");
-        TransportRequests  transportRequests_2= new TransportRequests(2l,"a2","test","555",date,stop_test_2,"testDesiredTime","active",addOn,"DEMO","url");
-        TransportRequests  transportRequests_3= new TransportRequests(3l,"a1","test","1234",date,stop_test_2,"testDesiredTime","pending",addOn,"DEMO","url");
+        TransportRequests  transportRequests_1= new TransportRequests(1l,"a1","test","4321",date,stop_test_1,"testDesiredTime","pending",addOn,"DEMO");
+        TransportRequests  transportRequests_2= new TransportRequests(2l,"a2","test","555",date,stop_test_2,"testDesiredTime","active",addOn,"DEMO");
+        TransportRequests  transportRequests_3= new TransportRequests(3l,"a1","test","1234",date,stop_test_2,"testDesiredTime","pending",addOn,"DEMO");
 
         transportRequestslist.add(transportRequests_1);
         transportRequestslist.add(transportRequests_2);

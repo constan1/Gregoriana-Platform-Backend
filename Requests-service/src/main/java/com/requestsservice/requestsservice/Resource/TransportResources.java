@@ -1,5 +1,6 @@
 package com.requestsservice.requestsservice.Resource;
 
+import com.requestsservice.requestsservice.Model.DTO.publicTransportRequestsDTO;
 import com.requestsservice.requestsservice.Model.TransportRequests;
 import com.requestsservice.requestsservice.Service.Services.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class TransportResources {
     private final CustomerService customerService;
     @GetMapping("public/{trackingNum}")
     @ResponseStatus(HttpStatus.OK)
-    private TransportRequests getTransportRequestByTrackingNumber(@PathVariable(name = "trackingNum") String trackingNum){
+    private publicTransportRequestsDTO getTransportRequestByTrackingNumber(@PathVariable(name = "trackingNum") String trackingNum) throws Exception{
 
         return customerService.getTransportRequestByTrackingNumber(trackingNum);
 

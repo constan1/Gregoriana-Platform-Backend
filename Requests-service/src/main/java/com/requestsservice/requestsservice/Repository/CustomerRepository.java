@@ -13,7 +13,7 @@ public interface CustomerRepository extends JpaRepository<TransportRequests,Long
     @Query("select distinct t from Transport_Requests t left join fetch  t.stops s left join fetch s.dropOffs left join fetch  t.addOn where t.authID =:authID")
     List<TransportRequests> getRequestForClient(@Param("authID")String authID);
 
-    @Query("select distinct t from Transport_Requests t left join fetch t.stops s left join  fetch s.dropOffs left join fetch t.addOn where t.trackingNumber =:trackingNum ")
+    @Query("select distinct t from Transport_Requests t left join fetch t.stops s left join fetch s.dropOffs left join fetch t.addOn where t.trackingNumber =:trackingNum ")
     TransportRequests getTransportRequestByTrackingNumber(@Param("trackingNum") String trackNum);
 
 }

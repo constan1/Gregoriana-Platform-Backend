@@ -86,7 +86,7 @@ public class CustomerServiceImplTest {
         AddOn addOn = new AddOn(1L,0,false);
         Stop stop_test_1 = new Stop(1L,"testStopAddress_1",2.00f,2.00f,"testDesc","testPhoto",list_dropOffs_1);
 
-        TransportRequests transportRequests_4= new TransportRequests(1L,"a3","test","1111",date,stop_test_1,"testDesiredTime","pending",addOn,"DEMO","url");
+        TransportRequests transportRequests_4= new TransportRequests(1L,"a3","test","1111",date,stop_test_1,"testDesiredTime","pending",addOn,"DEMO");
 
 
         //--------Add Request -------//

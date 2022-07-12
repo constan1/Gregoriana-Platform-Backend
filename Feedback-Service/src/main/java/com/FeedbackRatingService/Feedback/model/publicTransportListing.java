@@ -31,22 +31,10 @@ public class publicTransportListing {
     @Column(name = "transporters_profile_pic_url")
     private String profile_pic_url;
 
-    @Column(name= "phoneNumber")
-    private Long phoneNumber;
-
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumn(name ="vehicles_id")
-    private vehicles vehicle;
-
-    @Column(name = "status_avaible")
-    private boolean status_available;
-
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name ="comment_id")
-    private List<feedback> comments;
+    private List<feedback> feedback;
 
-    @Column(name= "numberOfRates")
-    private Integer numberOfRates;
 
 
 }

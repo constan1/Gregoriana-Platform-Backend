@@ -1,5 +1,6 @@
 package com.requestsservice.requestsservice.Service.Services;
 
+import com.requestsservice.requestsservice.Model.DTO.publicTransportRequestsDTO;
 import com.requestsservice.requestsservice.Model.TransportRequests;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
@@ -14,6 +15,6 @@ public interface CustomerService {
 
     void deleteTransportRequest(String trackNum);
 
-    TransportRequests getTransportRequestByTrackingNumber(String trackNum);
+    publicTransportRequestsDTO getTransportRequestByTrackingNumber(String trackNum);
 
 }

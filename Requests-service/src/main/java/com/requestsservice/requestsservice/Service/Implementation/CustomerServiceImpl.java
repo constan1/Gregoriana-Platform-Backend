@@ -1,5 +1,6 @@
 package com.requestsservice.requestsservice.Service.Implementation;
 
+import com.requestsservice.requestsservice.Model.DTO.publicTransportRequestsDTO;
 import com.requestsservice.requestsservice.Model.TransportRequests;
 import com.requestsservice.requestsservice.QuantumEntropy.entropy;
 import com.requestsservice.requestsservice.Repository.CustomerRepository;
@@ -63,11 +64,22 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public TransportRequests getTransportRequestByTrackingNumber(String trackNum) {
+    public publicTransportRequestsDTO getTransportRequestByTrackingNumber(String trackNum) {
         Optional<TransportRequests> transportRequests = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(trackNum));
 
-        return transportRequests.orElseGet(transportRequests::get);
+        publicTransportRequestsDTO publicRequests = new publicTransportRequestsDTO();
 
+        if(transportRequests.isPresent()){
+            publicRequests.setTitle(transportRequests.get().getTitle());
+            publicRequests.setTrackingNumber(transportRequests.get().getTrackingNumber());
+            publicRequests.setDateStamp(transportRequests.get().getDateStamp());
+            publicRequests.setStops(transportRequests.get().getStops());
+            publicRequests.setDesired_time_arrival(transportRequests.get().getDesired_time_arrival());
+            publicRequests.setAddOn(transportRequests.get().getAddOn());
+            publicRequests.setVehicleTypeNeeded(transportRequests.get().getVehicleTypeNeeded());
+            return publicRequests;
+        }
+        return  null;
     }
 
 }

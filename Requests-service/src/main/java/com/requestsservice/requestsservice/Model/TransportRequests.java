@@ -55,9 +55,6 @@ public class TransportRequests {
     @Column(name = "vehicle_type_needed")
     private String vehicleTypeNeeded;
 
-    @Column(name = "profile_Image")
-    private String supplier_profile; //will call the user service to obtain this. we will use circuitbreaker resiliance 4j pattern.
-
 
 
 }

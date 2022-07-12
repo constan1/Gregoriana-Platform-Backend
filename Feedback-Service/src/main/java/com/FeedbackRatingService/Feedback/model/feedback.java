@@ -27,9 +27,6 @@ public class feedback {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name ="rating")
     private float rating;
 

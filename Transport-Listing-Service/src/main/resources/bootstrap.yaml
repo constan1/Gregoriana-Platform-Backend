@@ -14,8 +14,8 @@ spring:
       enabled: true
       uri: "http://localhost:8888"
   datasource:
-    username: "transport_listing_client"
-    password: "MyBirthdayIsin191173541351"
+    username: "master"
+    password: "Tool73541351"
   application:
     name: transport-listing-service
 server:
