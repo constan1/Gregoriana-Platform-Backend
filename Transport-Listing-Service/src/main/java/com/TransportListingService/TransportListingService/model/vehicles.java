@@ -8,10 +8,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity(name="vehicles")
@@ -26,7 +23,14 @@ public class vehicles {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "authID")
+    private String authID;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "type")
     private String vehicle_type;

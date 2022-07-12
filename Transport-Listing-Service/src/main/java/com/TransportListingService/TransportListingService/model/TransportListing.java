@@ -24,6 +24,7 @@ import java.util.Date;
 public class TransportListing {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "authID")
@@ -40,8 +41,10 @@ public class TransportListing {
     @Column(name = "unavailableUntil")
     private Date unavailableUntil;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToOne
     @JoinColumn(name ="vehicles_id")
     private vehicles vehicle;
+
+
 
 }
