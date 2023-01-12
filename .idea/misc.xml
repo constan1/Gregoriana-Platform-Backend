@@ -7,7 +7,6 @@
         <option value="$PROJECT_DIR$/Eureka-Server/pom.xml" />
         <option value="$PROJECT_DIR$/Gateway/pom.xml" />
         <option value="$PROJECT_DIR$/User-Service/pom.xml" />
-        <option value="$PROJECT_DIR$/OrderService/pom.xml" />
         <option value="$PROJECT_DIR$/Web-Gateway/pom.xml" />
         <option value="$PROJECT_DIR$/MobileGateway/pom.xml" />
         <option value="$PROJECT_DIR$/Mobile-Gateway/pom.xml" />
@@ -27,6 +26,7 @@
         <option value="$PROJECT_DIR$/WebGateway/pom.xml" />
         <option value="$PROJECT_DIR$/Supplier-Customer-Request-Service/pom.xml" />
         <option value="$PROJECT_DIR$/Requests-service/pom.xml" />
+        <option value="$PROJECT_DIR$/TripService/pom.xml" />
       </list>
     </option>
   </component>

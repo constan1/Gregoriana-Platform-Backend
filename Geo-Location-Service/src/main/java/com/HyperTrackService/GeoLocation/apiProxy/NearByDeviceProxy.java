@@ -1,6 +1,5 @@
 package com.HyperTrackService.GeoLocation.apiProxy;
 
-import com.HyperTrackService.GeoLocation.Model.Device;
 import com.HyperTrackService.GeoLocation.config.FeignClientConfig;
 import com.HyperTrackService.GeoLocation.Model.Nearby;
 import com.HyperTrackService.GeoLocation.DTO.NearbyDTO;
@@ -8,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 
-@FeignClient(name = "nearby-api", configuration = FeignClientConfig.class, url = "https://v3.api.hypertrack.com/nearby")
+@FeignClient(name = "nearby-api", configuration = FeignClientConfig.class, url = "https://v3.api.hypertrack.com/nearby/v3")
 public interface NearByDeviceProxy {
 
     @RequestMapping(method = RequestMethod.POST)

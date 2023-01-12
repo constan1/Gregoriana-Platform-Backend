@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="TripService" />
         <module name="MobileGateway" />
         <module name="Supplier-Request-Service" />
         <module name="Payment-Service" />
@@ -25,7 +26,6 @@
         <module name="Address-Service" />
         <module name="Transport-Inquiry-Service" />
         <module name="Supplier-Customer-Request-Service" />
-        <module name="OrderService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -47,6 +47,7 @@
       <module name="Transport-Inquiry-Service" target="11" />
       <module name="Transport-Listing-Service" target="11" />
       <module name="Transporter-Discovery-Service" target="11" />
+      <module name="TripService" target="11" />
       <module name="User-Service" target="11" />
       <module name="Web-Gateway" target="11" />
       <module name="WebGateway" target="11" />
@@ -71,6 +72,7 @@
       <module name="Transport-Inquiry-Service" options="-parameters" />
       <module name="Transport-Listing-Service" options="-parameters" />
       <module name="Transporter-Discovery-Service" options="-parameters" />
+      <module name="TripService" options="-parameters" />
       <module name="User-Service" options="-parameters" />
       <module name="Web-Gateway" options="-parameters" />
       <module name="WebGateway" options="-parameters" />

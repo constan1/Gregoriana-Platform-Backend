@@ -11,13 +11,13 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/Gregoriana-Platform-Backend.iml" filepath="$PROJECT_DIR$/.idea/Gregoriana-Platform-Backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/Messaging-Service/Messaging-Service.iml" filepath="$PROJECT_DIR$/Messaging-Service/Messaging-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/MobileGateway/MobileGateway.iml" filepath="$PROJECT_DIR$/MobileGateway/MobileGateway.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OrderService/OrderService.iml" filepath="$PROJECT_DIR$/OrderService/OrderService.iml" />
       <module fileurl="file://$PROJECT_DIR$/Payment-Service/Payment-Service.iml" filepath="$PROJECT_DIR$/Payment-Service/Payment-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Request-Service/Supplier-Customer-Request-Service.iml" filepath="$PROJECT_DIR$/Request-Service/Supplier-Customer-Request-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Customer-Request-Service/Supplier-Request-Service.iml" filepath="$PROJECT_DIR$/Customer-Request-Service/Supplier-Request-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Transport-Inquiry-Service/Transport-Inquiry-Service.iml" filepath="$PROJECT_DIR$/Transport-Inquiry-Service/Transport-Inquiry-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Transport-Listing-Service/Transport-Listing-Service.iml" filepath="$PROJECT_DIR$/Transport-Listing-Service/Transport-Listing-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Transporter-Discovery-Service/Transporter-Discovery-Service.iml" filepath="$PROJECT_DIR$/Transporter-Discovery-Service/Transporter-Discovery-Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TripService/TripService.iml" filepath="$PROJECT_DIR$/TripService/TripService.iml" />
       <module fileurl="file://$PROJECT_DIR$/User-Service/User-Service.iml" filepath="$PROJECT_DIR$/User-Service/User-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/WebGateway/Web-Gateway.iml" filepath="$PROJECT_DIR$/WebGateway/Web-Gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/WebGateway/WebGateway.iml" filepath="$PROJECT_DIR$/WebGateway/WebGateway.iml" />

@@ -38,6 +38,8 @@ public class Stop {
     @Column(name ="photoUrl")
     private String photoUrl;
 
+
+
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name ="drop_off_id")
     private List<DropOffs> dropOffs;

@@ -29,14 +29,17 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.getRequestForClient(authID);
     }
 
+    //return transport request obejct instead of string after successful database insertion.
     @Override
     public String createRequest(TransportRequests transportRequests) throws ObjectOptimisticLockingFailureException {
 
+        String returnTRackingNum;
 
         try {
 
 
             String entropyTrNum = entropy.getEntropy_();
+            returnTRackingNum = entropyTrNum;
 
             Optional<TransportRequests> transportRequestsNum = Optional.ofNullable(customerRepository.getTransportRequestByTrackingNumber(entropyTrNum));
 
@@ -53,7 +56,9 @@ public class CustomerServiceImpl implements CustomerService {
             return e.getMessage();
         }
 
-        return "Success";
+        return returnTRackingNum;
+
+
     }
 
     @Override

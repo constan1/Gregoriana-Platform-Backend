@@ -30,5 +30,6 @@ public class DropOffs {
     @Column(name ="drop_Address_Long")
     private Float dropAddressLong;
 
-
+    //add Estimated_Distance field
+    //add Estimated_Arrival Time Field
 }

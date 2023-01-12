@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class Nearby {
 
-    private ArrayList<Data_> data;
+    private ArrayList<Data_> drivers;
 
 
 }

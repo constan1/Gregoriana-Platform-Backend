@@ -9,11 +9,10 @@ import java.io.Serializable;
 public class Data_{
 
 
-    private DeviceMeta metadata;
-
-    private Float duration;
-
+    private Device device;
     private Float distance;
+
+
 
 
 
